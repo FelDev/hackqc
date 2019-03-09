@@ -23,6 +23,7 @@ export default {
   },
   data(){
     return {
+      subjectsOpen:false,
       menu:[
         {
           label: 'Accueil',
@@ -46,6 +47,7 @@ export default {
   computed: {
     ...mapGetters({
       open: 'Menu/open',
+      subjects: 'Informations/sections',
     }),
   },
   mounted(){
@@ -78,10 +80,28 @@ export default {
           class="item"
           v-for="item in menu"
           :key="item.route">
+          <div
+            v-if="item.route === 'information'"
+            tag="div"
+            :to="{name: `${item.route}`}"
+            class="subjects">
+            <p class="link" v-html="item.label" @click.prevent="subjectsOpen = !subjectsOpen" />
+            <ul class="list" :data-open="subjectsOpen">
+              <li class="item"
+                v-for="subject in subjects"
+                :key="`info-${subject.slug}`">
+                <router-link
+                  class="link sublink"
+                  :to="{name: `${item.route}`, params:{slug:subject.slug}}"
+                  v-text="subject.label" />
+              </li>
+            </ul>
+          </div>
           <router-link
+            v-else
             :to="{name: `${item.route}`}"
             class="link"
-            v-html="item.label"
+            v-text="item.label"
           />
         </li>
       </ul>
@@ -129,11 +149,29 @@ export default {
     .list
       flexbox(column, $align: center, $justify: space-between)
       // min-height 200px
-      max-height 200px
-      height 50%
+      // max-height 200px
+      // height 50%
+      >.item
+        text-align center
+        padding 1em 0
       // >.item:not(:first-child)
       //   margin-top 1em
     //
+  .subjects
+    .list
+      height 0px
+      overflow hidden
+      transition height 0.4s ease-in-out
+      &[data-open]
+        height auto
+
+    .item
+      padding 0.5em 0
+      &:first-child
+        margin-top 0.5em
+      &:last-of-type
+        padding-bottom 0
+
   .logo
     size 40px
 
