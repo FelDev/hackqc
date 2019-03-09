@@ -1,0 +1,15 @@
+vertical-padding($padding = $kff-h-default-space, $use-vw = false)
+  if $use-vw
+    rule-ratio-vw('padding-top', $padding)
+    rule-ratio-vw('padding-bottom', $padding)
+  else
+    padding-top unit($padding, 'px')
+    padding-bottom unit($padding, 'px')
+
+horizontal-padding($padding = $kff-w-default-space, $use-vw = false)
+  if $use-vw
+    rule-ratio-vw('padding-left', $padding)
+    rule-ratio-vw('padding-right', $padding)
+  else
+    padding-left unit($padding, 'px')
+    padding-right unit($padding, 'px')

@@ -1,0 +1,18 @@
+/** jeet debug mode (add bg in all sub items) */
+debug(
+  $bg = black,
+  $color = red,
+  $important = false)
+    
+  if $important
+    &,
+    *
+      color $color !important // @stylint ignore
+      border-color $color !important // @stylint ignore
+      background-color rgba($bg, 5%) !important // @stylint ignore
+  else
+    &,
+    *
+      color $color
+      border-color $color
+      background-color rgba($bg, 5%)

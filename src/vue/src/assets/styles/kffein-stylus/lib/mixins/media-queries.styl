@@ -1,0 +1,40 @@
+// extend rupture 
+not-desktop()
+  +below(rupture.desktop-cutoff - 1)
+    {block}
+
+tablet-portrait-and-below()
+  +below($kff-mq-tablet-portrait)
+    {block}
+
+tablet-and-below()
+  +below($kff-mq-tablet)
+    {block}
+
+tablet-only()
+  +between($kff-mq-tablet-portrait, $kff-mq-tablet)
+    {block}
+
+/**
+ * create a rule within media queries
+ * @params {string} prop - our props
+ * @params {value|array} values - if array, will use ([0:desktop, 1:tablet, 2:phone]) or ([0:desktop, 1:phone]) 
+ */
+responsive-prop($prop, $values)
+  if length($values) > 2
+    +desktop()
+      {$prop} $values[0]
+    +tablet()
+      {$prop} $values[1]
+    +mobile()
+      {$prop} $values[2]
+
+  else if length($values) > 1
+    +desktop()
+      {$prop} $values[0]
+    +not-desktop()
+      {$prop} $values[1]
+  
+  else
+    {$prop} $values
+    

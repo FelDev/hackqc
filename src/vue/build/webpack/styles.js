@@ -83,9 +83,9 @@ export default function (opts = {}) {
         options: {
           stylus: {
             import: [ // inject our settings stylus + libs
-              `${WebpackHelper.DIRS.NODE_MODULES}kffein-stylus/lib/vars/index`,
+              `${WebpackHelper.DIRS.ASSETS}styles/kffein-stylus/lib/vars/index`,
               `${WebpackHelper.DIRS.ASSETS}styles/settings/index`,
-              `${WebpackHelper.DIRS.NODE_MODULES}kffein-stylus/index`,
+              `${WebpackHelper.DIRS.ASSETS}styles/kffein-stylus/index`,
             ],
             use: [
               require('rupture')(), // eslint-disable-line global-require
