@@ -69,14 +69,8 @@ export default {
         if (isEmpty(data)) return;
 
         let bounds = new this.google.maps.LatLngBounds();
-/*
-        const calisse = data.map(singleData => ({ //TODO put that in Information.js
-          lat: parseFloat(singleData.LATITUDE),
-          lng: parseFloat(singleData.LONGITUDE)
-        }));*/
-        const calisse = data.map(singleData => ({ lat: singleData.properties.coordonnee_y, lng: singleData.properties.coordonnee_x }))
 
-        this.markers = calisse.map(singleData => {
+        this.markers = data.map(singleData => {
           bounds.extend(
             new this.google.maps.LatLng(singleData.lat, singleData.lng)
           );
