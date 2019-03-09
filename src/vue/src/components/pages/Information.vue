@@ -48,16 +48,18 @@ export default {
 <template>
   <main class="PageInfoSingle">
     <section id="top">
-      <h1
-        v-text="page.title"
-        class="title" />
-      <UiPicture
-        class="picture"
-        :src="page.image"
-      />
-      <p v-text="page.description">
-        
-      </p>
+      <header class="header">
+        <UiPicture
+          class="picture"
+          :src="page.image"
+          cover="cover"
+          :full="true" 
+          :overlay="true" />
+        <h1
+          v-text="page.title"
+          class="title" />
+      </header>
+      <div class="content" v-html="page.description" />
     </section>
     <section id="middle">
       <div class="d3Graph">
@@ -82,8 +84,37 @@ export default {
 </template>
 
 <style lang="stylus" scoped>
+
+  .header
+    ratio-box(16/9)
+    position relative
+    .title
+      absolute bottom 20px left 20px
+      f-style(title, h1)
+      z-index 10
+
+  .content
+    padding 20px
+    line-height 1.4
+    >>> ul
+      list-style outside disc
+      margin-left 20px
+    >>> h2
+      f-style(title, h2)
+      margin-top 20px
+    >>> h3
+      f-style(title, h3)
+      margin-top 10px
+    >>> a
+      display inline-block
+      margin-top 20px
+      border 2px solid red
+      color red
+      padding 10px 20px
+
   #top
-    background #456
+    background white
+
   #middle
     background #112
     display flex
@@ -96,9 +127,6 @@ export default {
       border-radius 1em
   #bottom
     background #123
-  .picture
-    // ratio-box(16/9)
-    width 50%
 
   /**
    * TABLE OF CONTENT
