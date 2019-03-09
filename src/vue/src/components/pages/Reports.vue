@@ -7,12 +7,15 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker';
+//taken from https://github.com/alessiomaffeis/vue-picture-input
+import PictureInput from 'vue-picture-input'
 import moment from 'moment';
 
 export default {
   name: "sectionReport",
   components: {
-    Datepicker
+    Datepicker,
+    PictureInput
   },
  
   props: {},
@@ -26,15 +29,22 @@ export default {
         description: "",
         location : {}
       },
-      sent : false
+      sent : false,
+      fileSubmitted : false
     };
   },
   mounted() {},
   methods: {
     submit: function (){
-      //todo do something with the data here
       this.sent = true;
-     console.log(this.report)
+      const input = JSON.stringify(this.report)
+      localStorage.setItem('input',input)
+      console.log(localStorage.getItem('input'))
+    
+    },
+    photoSubmitted : function(){
+      this.fileSubmitted = true
+      console.log("it happend")
     } 
   }
 };
@@ -85,7 +95,9 @@ export default {
         <input type="text" v-model="report.description" >
       </div>
       <div class="camera">
-        //TODO: GET ACCES TO PEOPLES PHONE PHOTOS LIBRARY
+        <input type="file" name="myFile" 
+       v-on:change="photoSubmitted()">
+        <div v-if="fileSubmitted" class="fas fa-check">Votre photo à été enregistré avec succès</div>
       </div>
       <button v-on:click="submit()">Envoyé</button>
       <div v-if="sent">Merci beaucoup de votre collaboration pour le projet  _____ ,
@@ -96,6 +108,10 @@ export default {
 </template>
 
 <style lang="stylus" scoped>
+
+input[type='file'] {
+  color: transparent;
+}
 
   /**
   * TABLE OF CONTENT

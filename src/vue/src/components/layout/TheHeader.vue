@@ -69,7 +69,7 @@ export default {
         <LogoSvg />
       </router-link>
 
-      <router-link class="report" v-text="'Signaler'" :to="{name: `reports`}" />
+      <router-link  v-on:click="$store.dispatch('Menu/TOGGLE')" class="report" v-text="'Signaler'" :to="{name: `reports`}" />
     </div>
     
     <nav class="menu" :data-open="open">
