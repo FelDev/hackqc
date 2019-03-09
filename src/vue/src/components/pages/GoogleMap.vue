@@ -61,19 +61,17 @@ export default {
     this.geolocate();
     //this.$watch("google", watev => console.log(watev));
     this.$watch(
-      function() {
+      ()=> {
         if (!this.google) return [];
         return this.donnee;
       },
       data => {
         if (isEmpty(data)) return;
-        var bounds = new this.google.maps.LatLngBounds();
+        let bounds = new this.google.maps.LatLngBounds();
         this.markers = data
           .filter(info => info.NOM_ARROND === '"Le Plateau-Mont-Royal"')
-          .map(function(punaiseInfo) {
-            console.log(punaiseInfo.LATITUDE, punaiseInfo.LONGITUDE);
-
-            bounds.extends(
+          .map((punaiseInfo) => {
+            bounds.extend(
               new this.google.maps.LatLng(
                 punaiseInfo.LATITUDE,
                 punaiseInfo.LONGITUDE
@@ -94,6 +92,7 @@ export default {
           });
 
         this.$refs.mapRef.$mapPromise.then(map => {
+          console.log({bounds})
           map.fitBounds(bounds);
         });
       },
