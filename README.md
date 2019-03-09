@@ -1,9 +1,8 @@
-
-![alt text](https://brand.kffein.com/logo_full.png)
+# slHackers
 
 # Master Starter Kit
 
-Main stack for KFFEIN projects
+Main stack for ~~KFFEIN~~ slHackers projects
 
 ## Stack description
 
