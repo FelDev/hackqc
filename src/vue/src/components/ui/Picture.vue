@@ -244,9 +244,7 @@ export default {
       content ''
       absolute 0
       z-index 2
-      background-image linear-gradient( to top, rgba(white, 0.5) 10%, rgba(white, 0) )
-  [data-full]
-    absolute 0
+      background-color rgba($c-black, 0.3)
 
   /* ===DEBUG=== */
 

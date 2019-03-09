@@ -1,19 +1,34 @@
 {
   "contact": {
-    "name": "slHackers",
-    "address1": "84 rue Dalhousie", 
-    "address2": "table 14",
-    "city": "Québec", 
+    "name": "KFFEIN",
+    "address1": "7240 Waverly", 
+    "address2": "#212",
+    "city": "Montréal", 
     "state": "QC",
-    "postalCode": "G1K 8M5",
-    "phone": "1-418-123-4567",
-    "email": "contact@slhackers.com"
+    "postalCode": "H2R 2Y8",
+    "phone": "1-514-292-6212",
+    "email": "contact@kffein.com"
   },
   "socials": [
     {
       "name": "Github",
-      "url": "https://github.com/Mesieu/hackqc",
+      "url": "https://github.com/kffein",
       "icon": "github"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/kffein/",
+      "icon": "instagram"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://facebook.com/kffein",
+      "icon": "facebook-f"
+    },
+    {
+      "name": "Linkedin",
+      "url": "https://linkedin.com/company/kffein",
+      "icon": "linkedin-in"
     }
   ],
   "navigation": {

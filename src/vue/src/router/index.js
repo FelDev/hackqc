@@ -22,9 +22,13 @@ import Home from 'components/pages/Home';
 
 const About = () => import(/* webpackChunkName: "pages-about" */ 'components/pages/About');
 const FourOFour = () => import(/* webpackChunkName: "pages-404" */ 'components/pages/FourOFour');
+const Informations = () => import(/* webpackChunkName: "pages-informations" */ 'components/pages/Informations');
 const Reports = () => import(/* webpackChunkName: "pages-reports" */ 'components/pages/Reports');
 const GoogleMap = () => import(/* webpackChunkName: "pages-reports" */ 'components/pages/GoogleMap');
-const Information = () => import(/* webpackChunkName: "pages-Information" */ 'components/pages/Information');
+const Information = {
+  collection: () => import(/* webpackChunkName: "pages-Information" */ 'components/pages/Information/Collection'),
+  single: () => import(/* webpackChunkName: "pages-Information" */ 'components/pages/Information/Single'),
+};
 
 Vue.use(VueRouter);
 
@@ -39,8 +43,14 @@ function getComponentById(id) {
       return Home;
     case 'about':
       return About;
+    case 'informations':
+      return Informations;
+    // Information
+    case 'information':
+      return Information.collection;
     case 'subject':
-      return Information;
+      return Information.single;
+
     case 'reports':
       return Reports;
     case 'map':

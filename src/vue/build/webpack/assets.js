@@ -31,8 +31,8 @@ export default {
               removeTags: true,
               removingTags: ['title', 'desc'],
               warnTags: ['defs', 'style'],
-              classPrefix: false,
-              idPrefix: false,
+              classPrefix: true,
+              idPrefix: true,
             },
           },
           {

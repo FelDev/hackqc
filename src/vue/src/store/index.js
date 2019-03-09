@@ -20,7 +20,6 @@ import Interface from './modules/Interface';
 import Menu from './modules/Menu';
 import ScrollMagic from './modules/Scrollmagic';
 import Global from './modules/Global';
-import Informations from './modules/Informations';
 
 Vue.use(Vuex);
 
@@ -33,7 +32,6 @@ const Store = new Vuex.Store({
     Menu,
     ScrollMagic,
     Global,
-    Informations,
   },
 });
 export default Store;

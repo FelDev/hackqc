@@ -9,14 +9,14 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 //taken from https://github.com/alessiomaffeis/vue-picture-input
-// import PictureInput from 'vue-picture-input'
+import PictureInput from 'vue-picture-input'
 import moment from 'moment';
 
 export default {
   name: "sectionReport",
   components: {
     Datepicker,
-    // PictureInput
+    PictureInput
   },
  
   props: {},
@@ -28,23 +28,13 @@ export default {
         date : moment().format('L'),
         criticite : 1,
         description: "",
-        position : {
-          lat: '',
-          lng : ''
-        },
-        infoCitoyen: {
-          email :'',
-          emailConf: '',
-          nom : '',
-          telephone: ''
-        }
+        location : {}
       },
       sent : false,
       fileSubmitted : false,
       center: { lat: 45.508, lng: -73.587 },
       useCustomLocation : false,
-      hasSetLocation : false,
-      suivit: false
+      hasSetLocation : false
     };
   },
   mounted() {},
@@ -52,10 +42,13 @@ export default {
     submit: function (){
       this.sent = true;
       const input = JSON.stringify(this.report)
-      localStorage.setItem('input',input)    
+      localStorage.setItem('input',input)
+      console.log(localStorage.getItem('input'))
+    
     },
     photoSubmitted : function(){
       this.fileSubmitted = true
+      console.log("it happend")
     },
     setLocation : function(bool){
       if(bool){
@@ -65,22 +58,15 @@ export default {
          this.useCustomLocation = true;
          this.hasSetLocation = false;
       }
-    },
-    addMarker: function (event){
-      this.report.position.lat = event.latLng.lat()
-      this.report.position.lng = event.latLng.lng()
-      this.hasSetLocation = true;
-      console.log(this.report)
-    },
+    }
   }
 };
 </script>
 
 <template>
   <div class="sectionReport">
-    <h1>Signaler</h1>
-    <h2></h2>
-    <div v-if="!sent" class="formContainer">
+    <h1>Report</h1>
+    <div class="formContainer">
       <div class="categorie">
         <label>Catégorie de l'incident</label>
         <select v-model="report.categorie">
@@ -119,16 +105,11 @@ export default {
         <button v-on:click="setLocation(true)">Position courante</button>
         <button v-on:click="setLocation(false)">Ajouter une localisation</button>
          <div v-if="hasSetLocation">Position Enregistrée</div>
-         <gmap-map v-if="useCustomLocation" :center="center" :zoom="12" style="width:100%;  height: 400px;" :options="{disableDefaultUI:true}" 
-                :clickable="true"
-                :draggable="true"
-                @click="addMarker">
-                <GmapMarker
-                  :key="1"
-                  :position="report.position"
-                  v-if="hasSetLocation"
-                />
-        </gmap-map>
+         <gmap-map v-if="useCustomLocation" :center="center" :zoom="12" style="width:100%;  height: 400px;" :options="{disableDefaultUI:true}" :position="report.position"
+    :clickable="true"
+    :draggable="true"
+    @click="center=report.position">
+           </gmap-map>
       </div>
       <div class="description">
         <span>Informations supplémentaires</span>
@@ -139,56 +120,18 @@ export default {
        v-on:change="photoSubmitted()">
         <div v-if="fileSubmitted" class="fas fa-check">Votre photo à été enregistré avec succès</div>
       </div>
-      <div class="date">
-        <label for="checkbox" >Je veux un suivi sur mon incidence</label>
-        <input type="checkbox" id="checkbox" v-model="suivit">
+      <button v-on:click="submit()">Envoyé</button>
+      <div v-if="sent">Merci beaucoup de votre collaboration pour le projet  _____ ,
+        Votre information est importante pour nous!
       </div>
-        <div v-if="suivit" class="suivit" >
-          <div class="nom">
-            <span>Votre Nom</span>
-            <input type="text" v-model="report.infoCitoyen.nom" >
-          </div>
-          <div class="email">
-            <span>Votre Email</span>
-            <input type="text" v-model="report.infoCitoyen.email" >
-          </div>
-          <div class="emailconf">
-            <span>Votre Email (Confirmation)</span>
-            <input type="text" v-model="report.infoCitoyen.emailConf" >
-          </div>
-          <div class="telephone">
-            <span>Votre Telephone</span>
-            <input type="text" v-model="report.infoCitoyen.telephone" >
-          </div>
-        </div>
-      </div>
-      <button v-if="!sent" class="btn" v-on:click="submit()">Envoyé</button>
-      <div v-if="sent">Merci beaucoup de votre collaboration! Vos élus sont impatient de lire vos messages. En attendant vous pouvez aller
-        faire un tour sur le site de portail de données québec!
-      <router-link class="logo" :to="{name: `home`}">
-        <button class="btn">Retour au menu principal</button>
-      </router-link>
-
-        
-      </div>
-      
-      </div>
-   
+    </div>
+  </div>
 </template>
 
 <style lang="stylus" scoped>
 
 input[type='file'] {
   color: transparent;
-}
-
-h1 {
-  color: red;
-  font-size: 5em;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: bold;
-  text-align: left;
-
 }
 
   /**
