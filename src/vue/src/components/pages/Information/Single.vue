@@ -9,7 +9,7 @@
 // import UiPicture from 'components/ui/Picture';
 // import PageBuilder from 'components/builder';
 // import Store from './store';
-import UiPicture from 'components/ui/picture';
+import UiPicture from 'components/ui/Picture';
 
 export default {
   name: 'PageInfoSingle',
