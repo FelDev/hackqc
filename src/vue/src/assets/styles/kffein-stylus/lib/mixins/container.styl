@@ -1,0 +1,11 @@
+// container
+container($width = $kff-w-max)
+  max-width $width
+  margin-left auto
+  margin-right auto
+  +below($width + (2 * $kff-w-safe-margin))
+    max-width 'calc(100% - %s)' % unit(2 * $kff-w-safe-margin, 'px')
+  +below($kff-mq-tablet)
+    max-width 'calc(100% - %spx)' % (2 * $kff-w-safe-margin-tablet)
+  +below($kff-mq-phone)
+    max-width 'calc(100% - %spx)' % (2 * $kff-w-safe-margin-mobile)

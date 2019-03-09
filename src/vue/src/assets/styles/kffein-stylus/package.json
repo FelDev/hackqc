@@ -1,0 +1,15 @@
+{
+  "name": "kffein-stylus",
+  "version": "0.1.6",
+  "description": "Some KFFEIN Magic for Stylus",
+  "homepage": "https://kffein.com",
+  "author": {
+    "name": "KFFEIN",
+    "email": "contact@kffein.com",
+    "url": "https://kffein.com"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "private": true
+}

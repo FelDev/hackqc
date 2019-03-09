@@ -1,0 +1,45 @@
+/*
+  ===WIDTH===
+*/
+$kff-w-max = 1280px // use to determine container max width
+$kff-w-basis = 1440px // photoshop size, use to calc ratio
+
+/*
+  ===MARGIN===
+*/
+$kff-w-safe-margin = 100 // minimum horizontal margin for container on desktop device, if width is 100% (ie width < $kff-w-max)
+$kff-w-safe-margin-tablet = 50 // minimum horizontal margin for container on tablet device
+$kff-w-safe-margin-mobile = 25  // minimum horizontal margin for container on mobile device
+/*
+  ===SPACES===
+*/
+$kff-h-default-space = 20 // default height size use in vertical-margin() and vertical-padding()
+$kff-w-default-space = 20 // default width size use in horizontal-margin() and horizontal-padding()
+
+/*
+  ===ALIGNS===
+*/
+$kff-w-gutter-desktop = 100px
+$kff-w-gutter-mobile = 12px
+
+/*
+  ===MEDIA QUERIES===
+*/
+$kff-mq-phone = 600px
+$kff-mq-tablet-portrait = 768px
+$kff-mq-tablet = 1024px
+$kff-mq-desktop = 1280px
+$kff-mq-show-burger = $kff-mq-tablet
+rupture.desktop-cutoff = $kff-mq-desktop
+rupture.mobile-cutoff = $kff-mq-phone
+
+/*
+  ===ANIMATIONS===
+*/
+$kff-ease-default = easing('out-expo')
+$kff-duration-default = 0.4s
+
+/*
+  ===FONTS===
+*/
+$kff-fz-base    = 10px // use in body tag to make 1 rem = 10px, and also use to calc responsive font

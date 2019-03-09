@@ -1,0 +1,12 @@
+gutters(
+  $gutter-desktop = $kff-w-gutter-desktop,
+  $gutter-mobile = $kff-w-gutter-mobile)
+  
+  width calc('100% - ' + $gutter-desktop)
+  center-margin()
+  max-width $kff-w-max - $gutter-desktop
+  +below($kff-w-max)
+    width calc('100% - ' + calc-ratio-vw($gutter-desktop))
+  +mobile()
+    width calc('100% - ' + $gutter-mobile)
+    max-width auto
