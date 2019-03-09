@@ -7,6 +7,7 @@ import { argv } from 'yargs';
 // helpers
 import WebpackHelper from './_helper';
 import assetsConfig from './assets';
+import { log } from 'util';
 
 const {
   ENV, DIRS, PATHS, HASH,
@@ -48,6 +49,7 @@ const config = {
       vendors: `${DIRS.SRC}vendors`,
       utils: `${DIRS.SRC}utils`,
       components: `${DIRS.SRC}components`,
+      db: `${DIRS.ROOT}src/db`,
 
       // to work with gsap, scrollmagic and our pro plugins
       gsapPro: `${DIRS.SRC}vendors/gsap`,
