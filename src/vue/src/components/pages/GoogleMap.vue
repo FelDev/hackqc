@@ -9,7 +9,7 @@
       <br>
     </div>
     <br>
-    <gmap-map :center="center" :zoom="12" style="width:100%;  height: 400px;">
+    <gmap-map ref="mapRef" :center="center" :zoom="12" style="width:100%;  height: 400px;">
       <gmap-cluster>
         <gmap-marker
           :key="index"
@@ -26,20 +26,24 @@
 <script src="vue-google-maps.js"></script>
 
 <script>
-import {isEmpty} from 'lodash'
+import { isEmpty } from "lodash";
 import GmapCluster from "vue2-google-maps/dist/components/cluster";
-// import punaises from "db/data/punaises/punaises.json";
-// console.log({punaises});
+import { gmapApi } from "vue2-google-maps";
 
 export default {
   name: "GoogleMap",
   components: {
     GmapCluster
   },
-  props:{
-    donnee:{
-      type:Array,
-      default(){return {}}
+  computed: {
+    google: gmapApi
+  },
+  props: {
+    donnee: {
+      type: Array,
+      default() {
+        return {};
+      }
     }
   },
   data() {
@@ -55,26 +59,46 @@ export default {
 
   mounted() {
     this.geolocate();
+    //this.$watch("google", watev => console.log(watev));
+    this.$watch(
+      function() {
+        if (!this.google) return [];
+        return this.donnee;
+      },
+      data => {
+        if (isEmpty(data)) return;
+        var bounds = new this.google.maps.LatLngBounds();
+        this.markers = data
+          .filter(info => info.NOM_ARROND === '"Le Plateau-Mont-Royal"')
+          .map(function(punaiseInfo) {
+            console.log(punaiseInfo.LATITUDE, punaiseInfo.LONGITUDE);
 
-    console.log(' donnee ', this.donnee);
-    
-    this.$watch('donnee', data=>{
-      if(isEmpty(data)) return
-      this.markers = data.map(function(punaiseInfo) {
-        return {
-          exerminationAmount: punaiseInfo.NBR_EXTERMIN,
-          date: {
-            declaration: punaiseInfo.DATE_DECLARATION,
-            startExermination: punaiseInfo.DATE_DEBUTTRAIT,
-            endExermination: punaiseInfo.DATE_FINTRAIT
-          },
-          position: {
-            lat: parseFloat(punaiseInfo.LATITUDE),
-            lng: parseFloat(punaiseInfo.LONGITUDE)
-          }
-        };
-      });
-    },{ immediate:true})
+            bounds.extends(
+              new this.google.maps.LatLng(
+                punaiseInfo.LATITUDE,
+                punaiseInfo.LONGITUDE
+              )
+            );
+            return {
+              exerminationAmount: punaiseInfo.NBR_EXTERMIN,
+              date: {
+                declaration: punaiseInfo.DATE_DECLARATION,
+                startExermination: punaiseInfo.DATE_DEBUTTRAIT,
+                endExermination: punaiseInfo.DATE_FINTRAIT
+              },
+              position: {
+                lat: parseFloat(punaiseInfo.LATITUDE),
+                lng: parseFloat(punaiseInfo.LONGITUDE)
+              }
+            };
+          });
+
+        this.$refs.mapRef.$mapPromise.then(map => {
+          map.fitBounds(bounds);
+        });
+      },
+      { immediate: true }
+    );
   },
 
   methods: {
