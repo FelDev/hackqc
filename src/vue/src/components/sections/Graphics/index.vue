@@ -32,22 +32,20 @@ export default {
       },
       slides: [
         {
+          slug: 'punaises',
           title: 'Slide A',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at consequat purus, eu fringilla eros. Fusce quis tortor nunc. Nullam semper vestibulum interdum. Vivamus cursus libero eu erat egestas.',
           image: `https://picsum.photos/800/600?image=${Math.floor(Math.random()*100)}`
         },
         {
+          slug: 'inondations',
           title: 'Slide B',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at consequat purus, eu fringilla eros. Fusce quis tortor nunc. Nullam semper vestibulum interdum. Vivamus cursus libero eu erat egestas.',
           image: `https://picsum.photos/800/600?image=${Math.floor(Math.random()*100)}`
         },
         {
+          slug: 'secheresse',
           title: 'Slide C',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at consequat purus, eu fringilla eros. Fusce quis tortor nunc. Nullam semper vestibulum interdum. Vivamus cursus libero eu erat egestas.',
-          image: `https://picsum.photos/800/600?image=${Math.floor(Math.random()*100)}`
-        },
-        {
-          title: 'Slide D',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at consequat purus, eu fringilla eros. Fusce quis tortor nunc. Nullam semper vestibulum interdum. Vivamus cursus libero eu erat egestas.',
           image: `https://picsum.photos/800/600?image=${Math.floor(Math.random()*100)}`
         },
