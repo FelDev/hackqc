@@ -123,6 +123,7 @@
     "vue": "^2.6.7",
     "vue-meta": "^1.5.6",
     "vue-router": "^3.0.1",
+    "vue2-google-maps": "^0.10.6",
     "vuex": "^3.0.1",
     "youtube-player": "^5.5.1"
   }

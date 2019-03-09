@@ -24,6 +24,7 @@ const About = () => import(/* webpackChunkName: "pages-about" */ 'components/pag
 const FourOFour = () => import(/* webpackChunkName: "pages-404" */ 'components/pages/FourOFour');
 const Informations = () => import(/* webpackChunkName: "pages-informations" */ 'components/pages/Informations');
 const Reports = () => import(/* webpackChunkName: "pages-reports" */ 'components/pages/Reports');
+const GoogleMap = () => import(/* webpackChunkName: "pages-reports" */ 'components/pages/GoogleMap');
 const Information = {
   collection: () => import(/* webpackChunkName: "pages-Information" */ 'components/pages/Information/Collection'),
   single: () => import(/* webpackChunkName: "pages-Information" */ 'components/pages/Information/Single'),
@@ -52,6 +53,8 @@ function getComponentById(id) {
 
     case 'reports':
       return Reports;
+    case 'map':
+      return GoogleMap;
     case '404':
     default:
       return FourOFour;
