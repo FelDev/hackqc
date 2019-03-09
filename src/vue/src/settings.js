@@ -9,7 +9,7 @@ import { merge } from 'lodash';
 
 const settings = {
   /** @argument {Array} locales - list of all supported locales, in order - may be `fr-ca`, `en-us` or just `en` */
-  locales: ['en', 'fr'],
+  locales: ['fr'],
 
   /** @argument {Boolean} reloadOnSwitchLangue - if false, be sur to update all your datas */
   reloadOnSwitchLangue: true,

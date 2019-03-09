@@ -8,13 +8,11 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import LogoSvg from 'assets/svg/logo.svg?vue';
-import LangSwitcher from 'components/misc/LangSwitcher';
 
 export default {
   name: 'TheHeader',
   components: {
     LogoSvg,
-    LangSwitcher,
   },
   props: {
     state: {
@@ -22,13 +20,31 @@ export default {
       default: false,
     },
   },
+  data(){
+    return {
+      menu:[
+        {
+          label: 'Accueil',
+          route: 'home',
+        },
+        {
+          label: 'Informations',
+          route: 'information',
+        },
+        {
+          label: 'A-propos',
+          route: 'about',
+        },
+        {
+          label: 'Signaler',
+          route: 'reports',
+        },
+      ]
+    }
+  },
   computed: {
     ...mapGetters({
       open: 'Menu/open',
-      menu: 'Global/menu',
-    }),
-    ...mapState('I18n', {
-      locale: ({ locale }) => locale,
     }),
   },
 };
@@ -38,24 +54,22 @@ export default {
   <header class="TheHeader">
     <div class="_container">
       <div class="header-block">
-        <router-link :to="{name: `home.${locale}`}">
+        <router-link :to="{name: `home`}">
           <LogoSvg class="logo" />
         </router-link>
         <nav>
           <ul>
             <li
-              v-for="item in menu.primary"
-              :key="item.slug"
-            >
+              v-for="item in menu"
+              :key="item.route">
               <router-link
-                :to="item.url"
+                :to="{name: `${item.route}`}"
                 class="link"
-                v-html="item.name"
+                v-html="item.label"
               />
             </li>
           </ul>
         </nav>
-        <LangSwitcher />
       </div>
     </div>
   </header>

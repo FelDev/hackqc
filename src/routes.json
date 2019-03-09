@@ -2,56 +2,37 @@
   {
     "id": "home",
     "urls": {
-      "en": "home",
       "fr": "accueil"
-    },
-    "meta":{
-      "type": "single",
-      "api": "/pages/homepage"
     }
   },
   {
-    "id": "demo",
+    "id": "about",
     "urls": {
-      "en": "demo",
-      "fr": "demo"
-    },
-    "meta":{
-      "type": "single",
-      "api": "/pages/demo"
+      "fr": "a-propos"
     }
   },
   {
-    "id": "news",
+    "id": "information",
     "urls": {
-      "en": "news",
-      "fr": "nouvelles"
-    },
-    "meta":{
-      "type": "single",
-      "api": "/pages/news"
+      "fr": "informations"
     }
   },
   {
-    "id": "article",
+    "id": "subject",
     "urls": {
-      "en": "news/:slug",
-      "fr": "nouvelles/:slug"
-    },
-    "meta":{
-      "type": "channel",
-      "api": "/article/:slug"
+      "fr": "informations/:slug"
+    }
+  },
+  {
+    "id": "reports",
+    "urls": {
+      "fr": "signaler"
     }
   },
   {
     "id": "404",
     "urls": {
-      "en": "404",
       "fr": "404"
-    },
-    "meta":{
-      "type": "single",
-      "api": "/pages/404"
     }
   }
 ]
