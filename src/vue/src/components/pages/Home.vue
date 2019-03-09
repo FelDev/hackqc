@@ -26,7 +26,7 @@ export default {
 
 <template>
   <main class="PageHome">
-    <SectionStatus :title="'coucou'"/>
+    <SectionStatus :title="'Alertes'"/>
     <SectionGraphics />
     <SectionMap />
     <SectionAbout />
