@@ -36,25 +36,30 @@ export default {
       data => {
         if (isEmpty(data)) return;
 
-        this.chartData = [["Date", "Amount"]];
+        this.chartData = [["Date", "Amount", "Moyenne"]];
         const mergedData = {};
+        var average = 0;
 
         data.forEach(singleData => {
-          if (singleData.amount !== "") {
+          if (!isNaN(singleData.amount)) {
             if (mergedData[singleData.date]) {
               mergedData[singleData.date] += singleData.amount;
             } else {
               mergedData[singleData.date] = singleData.amount;
             }
+
+            average += singleData.amount;
           }
         });
 
+        average /= 31;
+
         for (var date in mergedData) {
           if (mergedData.hasOwnProperty(date)) {
-            this.chartData.push([date, mergedData[date]]);
+            this.chartData.push([date, mergedData[date], average]);
           }
         }
-        
+
         this.chartOptions = {
           curveType: "function",
         };
