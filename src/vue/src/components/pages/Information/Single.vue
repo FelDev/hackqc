@@ -36,8 +36,6 @@ export default {
      */
     slug: {
       handler(slug) {
-        console.log({slug});
-        
         if (!slug) { }
         this.$store.dispatch('Informations/LOAD', slug);
       },

@@ -9,14 +9,14 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 //taken from https://github.com/alessiomaffeis/vue-picture-input
-import PictureInput from 'vue-picture-input'
+// import PictureInput from 'vue-picture-input'
 import moment from 'moment';
 
 export default {
   name: "sectionReport",
   components: {
     Datepicker,
-    PictureInput
+    // PictureInput
   },
  
   props: {},

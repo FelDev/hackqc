@@ -13,6 +13,20 @@ export default {
     return {
       data: [],
       page: {},
+      sections: [
+        {
+          slug: 'punaises',
+          label: 'Punaises de lit',
+        },
+        {
+          slug: 'inondations',
+          label: 'Inondations',
+        },
+        {
+          slug: 'secheresse',
+          label: 'Secheresse',
+        },
+      ],
     };
   },
   mutations: {
@@ -49,5 +63,6 @@ export default {
   getters: {
     page: ({ page }) => page,
     data: ({ data }) => data,
+    sections: ({ sections }) => sections,
   },
 };
