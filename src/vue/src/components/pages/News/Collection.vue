@@ -7,26 +7,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import UiPicture from 'components/ui/picture';
 import Store from './store';
 import NewsCard from './Card';
 
 export default {
   name: 'PageNewsCollection',
   components: {
-    NewsCard,
+    UiPicture,
   },
   computed: {
-    ...mapGetters({
-      entries: 'News/entries',
-    }),
-  },
-  /** register news store if needed and load page */
-  beforeCreate() {
-    if (!this.$store.state.News) {
-      this.$store.registerModule('News', Store);
-    }
-    const api = this.$store.state.News.apis.collection;
-    this.$store.dispatch('News/LOAD', api);
   },
 };
 </script>
@@ -34,30 +24,27 @@ export default {
 <template>
   <div class="PageNewsCollection _container">
     <h1
-      v-t="'PAGE_NEWS.title'"
+      v-t="'title'"
       class="title" />
-    <ul class="list">
-      <li
-        v-for="article in entries"
-        :key="`article-${article.slug}`"
-        class="item">
-        <NewsCard v-bind="article" />
-      </li>
-    </ul>
+    <UiPicture :src="$t('image')"/>
+    <section>
+      <h1
+        v-t="'mapsTitle'"
+        class="title" />
+    </section>
   </div>
 </template>
 
 <i18n>
 {
   "fr": {
-    "PAGE_NEWS":{
-      "title": "Toutes les nouvelles"
-    }
+      "title": "Toutes les nouvelles",
+      "image": "https://static.actu.fr/uploads/2018/10/punaises-de-lit.jpg",
+      "mapsTitle":"Votre region"
   },
   "en": {
-    "PAGE_NEWS":{
-      "title": "All news"
-    }
+      "title": "All news",
+      "image": "https://static.actu.fr/uploads/2018/10/punaises-de-lit.jpg"
   }
 }
 </i18n>
@@ -76,6 +63,7 @@ export default {
     padding-bottom 1em
     f-style(title, h1)
     vertical-padding()
+    text-align center
 
   .list
     flexbox(row, $align: stretch, $wrap:wrap)
