@@ -55,10 +55,6 @@ export default {
     LOAD({ commit, state }, slug) {
       switch (slug) {
         case 'punaises':
-          // import('db/data/punaises/page').then(({ default: data }) => {
-          //   console.log({ data });
-          //   commit('SET_PAGE_DATA', data);
-          // });
           commit('SET_PAGE_DATA', find(state.sections, { slug }));
           import('db/data/punaises/punaises.json').then(({ default: data }) => {
             commit('SET_DATA', data.map(singleData => ({
@@ -66,11 +62,22 @@ export default {
               lng: parseFloat(singleData.LONGITUDE),
             })));
           });
+
           break;
         case 'inondations':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          // import('db/data/punaises/punaises.json').then(({ default: data }) => {
+          //   commit('SET_DATA', data);
+          // });
           import('db/data/inondations/inondations.json').then(({ default: data }) => {
             commit('SET_DATA', data.features.map(singleData => ({ lat: singleData.geometry.coordinates[1], lng: singleData.geometry.coordinates[0] })));
           });
+          break;
+        case 'secheresse':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          // import('db/data/punaises/punaises.json').then(({ default: data }) => {
+          //   commit('SET_DATA', data);
+          // });
           break;
         default:
           console.log('WRONG SLUG', slug);
