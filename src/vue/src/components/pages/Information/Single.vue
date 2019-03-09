@@ -36,8 +36,6 @@ export default {
      */
     slug: {
       handler(slug) {
-        console.log({slug});
-        
         if (!slug) { }
         this.$store.dispatch('Informations/LOAD', slug);
       },
@@ -55,7 +53,7 @@ export default {
         class="title" />
       <UiPicture
         class="picture"
-        :src="page.imageDev"
+        :src="page.image"
       />
       <p v-text="page.description">
         

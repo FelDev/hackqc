@@ -11,13 +11,13 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'SubjectCard',
   components: { UiPicture },
-  props: ['title', 'image', 'description'],
+  props: ['title', 'image', 'shortDescription', 'slug'],
   data(){
     return {}
   },
   computed:{
     ...mapGetters({
-      device: 'Interface/device',
+      isDesktop: 'Interface/isDesktop',
     }),
   },
   mounted() {},
@@ -26,8 +26,9 @@ export default {
 </script>
 
 <template>
-  <article class="SubjectCard">
-    <template v-if="device.type === 'desktop'">
+  <router-link tag="article" class="SubjectCard"
+    :to="{name:'subject', params:{slug}}">
+    <template v-if="isDesktop">
       <header>
         <h3 class="title" v-text="title" />
       </header>
@@ -40,14 +41,15 @@ export default {
       <UiPicture class="picture" :src="image" cover="cover"/>
       <div class="content">
         <h3 class="title" v-text="title" />
-        <p class="description" v-text="description"/>
+        <p class="description" v-text="shortDescription"/>
       </div>
     </template>
-  </article>
+  </router-link>
 </template>
 
 <style lang="stylus" scoped>
   .SubjectCard
+    cursor pointer
     box-sizing border-box
     flexbox(column)
     background-color white
