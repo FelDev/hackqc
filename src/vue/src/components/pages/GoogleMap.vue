@@ -70,16 +70,12 @@ export default {
 
         let bounds = new this.google.maps.LatLngBounds();
 
-        this.markers = data.map(singleData => {
+        this.markers = data;
+        
+        this.markers.forEach(marker => {
           bounds.extend(
-            new this.google.maps.LatLng(singleData.lat, singleData.lng)
+            new this.google.maps.LatLng(marker.position.lat, marker.position.lng)
           );
-          return {
-            position: {
-              lat: singleData.lat,
-              lng: singleData.lng
-            }
-          };
         });
 
         this.$refs.mapRef.$mapPromise.then(map => {
