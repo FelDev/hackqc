@@ -25,15 +25,17 @@ export default {
         criticite : 1,
         description: "",
         location : {}
-      }
+      },
+      sent : false
     };
   },
   mounted() {},
   methods: {
-    submit: function (event) {
-      console.log("supyal")
-    }
-
+    submit: function (){
+      //todo do something with the data here
+      this.sent = true;
+     console.log(this.report)
+    } 
   }
 };
 </script>
@@ -76,14 +78,19 @@ export default {
           <label for="two">5</label>
       </div>
       <div class="googlemaps">
-        GOOGLE MAPS HERE!
+        //TODO : GET ACCES TO USERS LOCATION -> GOOGLE MAPS
       </div>
       <div class="description">
         <span>Informations supplémentaires</span>
         <input type="text" v-model="report.description" >
       </div>
-      <button v-on:click="submit">Envoyé</button>
-      {{report}}
+      <div class="camera">
+        //TODO: GET ACCES TO PEOPLES PHONE PHOTOS LIBRARY
+      </div>
+      <button v-on:click="submit()">Envoyé</button>
+      <div v-if="sent">Merci beaucoup de votre collaboration pour le projet  _____ ,
+        Votre information est importante pour nous!
+      </div>
     </div>
   </div>
 </template>
