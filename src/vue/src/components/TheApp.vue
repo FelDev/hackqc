@@ -6,23 +6,23 @@
 </docs>
 
 <script>
-import { mapGetters } from 'vuex';
-import TheHeader from 'components/layout/TheHeader';
-import TheFooter from 'components/layout/TheFooter';
-import TheLoader from 'components/TheLoader';
+import { mapGetters } from "vuex";
+import TheHeader from "components/layout/TheHeader";
+import TheFooter from "components/layout/TheFooter";
+import TheLoader from "components/TheLoader";
 
 export default {
-  name: 'TheApp',
+  name: "TheApp",
   components: {
     TheHeader,
     TheFooter,
-    TheLoader,
+    TheLoader
   },
   computed: {
     ...mapGetters({
-      loaded: 'Loader/loaded',
-      viewport: 'Interface/viewport',
-      scrollable: 'Interface/scrollable',
+      loaded: "Loader/loaded",
+      viewport: "Interface/viewport",
+      scrollable: "Interface/scrollable"
     }),
     dynamicStyles() {
       /* Usefull to:
@@ -51,12 +51,12 @@ export default {
           --viewport-height: ${this.viewport.height}px;
         }
       `;
-    },
+    }
   },
   created() {
     // init our interface (viewport etc)
-    this.$store.dispatch('Interface/INIT');
-  },
+    this.$store.dispatch("Interface/INIT");
+  }
 };
 </script>
 
@@ -65,27 +65,109 @@ export default {
     id="App"
     :data-debug-mode="$root.debug"
     :data-scrollable="scrollable.toString()"
-    class="_fullViewport">
-
-    <div
-      v-if="loaded"
-      class="app">
-      <TheHeader />
+    class="_fullViewport"
+  >
+    <div v-if="loaded" class="app">
+      <TheHeader/>
       <main class="page">
-        <router-view v-if="loaded" />
+        <router-view v-if="loaded"/>
       </main>
-      <TheFooter />
+      <TheFooter/>
     </div>
 
     <TheLoader v-if="!loaded"/>
-    <component
-      :is="'style'"
-      v-html="dynamicStyles"/>
+    <component :is="'style'" v-html="dynamicStyles"/>
   </div>
 </template>
 
 <style lang="stylus" scoped>
-  /**
+      
+        
+                        
+
+                               
+       
+
+        
+                                  
+                                                    
+                                                    
+                                             
+
+                
+                 
+               
+              
+              
+              
+    
+             
+                   
+                              
+                                     
+                                         
+       
+                     
+                    
+                                                                       
+                                                                   
+        
+              
+                       
+                        
+                         
+                           
+         
+                        
+                             
+                                          
+                                            
+         
+                         
+                                          
+         
+                         
+                                            
+         
+               
+                                                     
+                                                       
+         
+        
+      
+    
+             
+                                        
+                                           
+    
+  
+         
+
+          
+      
+            
+                                  
+                                            
+                          
+
+        
+                   
+                  
+                   
+                         
+                                     
+             
+                   
+          
+
+                               
+              
+                   
+                              
+        
+           
+
+                            /**
    * =LAYOUT
    * =DEBUG
    */
@@ -93,6 +175,4 @@ export default {
   /* ===LAYOUT=== */
 
   /* ===DEBUG=== */
-
-
 </style>
