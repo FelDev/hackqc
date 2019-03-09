@@ -80,7 +80,7 @@ export default {
   <div class="sectionReport">
     <h1>Signaler</h1>
     <h2></h2>
-    <div class="formContainer">
+    <div v-if="!sent" class="formContainer">
       <div class="categorie">
         <label>Catégorie de l'incident</label>
         <select v-model="report.categorie">
@@ -162,10 +162,16 @@ export default {
           </div>
         </div>
       </div>
-      <button v-on:click="submit()">Envoyé</button>
+      <button v-if="!sent" class="btn" v-on:click="submit()">Envoyé</button>
       <div v-if="sent">Merci beaucoup de votre collaboration! Vos élus sont impatient de lire vos messages. En attendant vous pouvez aller
         faire un tour sur le site de portail de données québec!
+      <router-link class="logo" :to="{name: `home`}">
+        <button class="btn">Retour au menu principal</button>
+      </router-link>
+
+        
       </div>
+      
       </div>
    
 </template>
