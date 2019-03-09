@@ -4,6 +4,7 @@
 
 @author Nicolas Husson <hello@nusson.ninja>
 </docs>
+<script src="vue-google-maps.js"></script>
 
 <script>
 import Datepicker from 'vuejs-datepicker';
@@ -30,7 +31,10 @@ export default {
         location : {}
       },
       sent : false,
-      fileSubmitted : false
+      fileSubmitted : false,
+      center: { lat: 45.508, lng: -73.587 },
+      useCustomLocation : false,
+      hasSetLocation : false
     };
   },
   mounted() {},
@@ -45,7 +49,16 @@ export default {
     photoSubmitted : function(){
       this.fileSubmitted = true
       console.log("it happend")
-    } 
+    },
+    setLocation : function(bool){
+      if(bool){
+        this.useCustomLocation = false;
+        this.hasSetLocation = true;
+      }else{
+         this.useCustomLocation = true;
+         this.hasSetLocation = false;
+      }
+    }
   }
 };
 </script>
@@ -88,7 +101,15 @@ export default {
           <label for="two">5</label>
       </div>
       <div class="googlemaps">
-        //TODO : GET ACCES TO USERS LOCATION -> GOOGLE MAPS
+        <label>Position de l'incident</label><br>
+        <button v-on:click="setLocation(true)">Position courante</button>
+        <button v-on:click="setLocation(false)">Ajouter une localisation</button>
+         <div v-if="hasSetLocation">Position Enregistrée</div>
+         <gmap-map v-if="useCustomLocation" :center="center" :zoom="12" style="width:100%;  height: 400px;" :options="{disableDefaultUI:true}" :position="report.position"
+    :clickable="true"
+    :draggable="true"
+    @click="center=report.position">
+           </gmap-map>
       </div>
       <div class="description">
         <span>Informations supplémentaires</span>
