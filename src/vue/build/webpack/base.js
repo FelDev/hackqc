@@ -15,9 +15,6 @@ const {
 
 const PORT = argv.port || 3000;
 
-console.log(`${DIRS.ROOT}db`);
-console.log(DIRS);
-
 const config = {
   /**
    * @param {Object} entry - Which entry file(s) you need to process

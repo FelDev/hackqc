@@ -30,31 +30,12 @@ export default {
           // },
         }
       },
-      slides: [
-        {
-          slug: 'punaises',
-          title: 'Slide A',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at consequat purus, eu fringilla eros. Fusce quis tortor nunc. Nullam semper vestibulum interdum. Vivamus cursus libero eu erat egestas.',
-          image: `https://picsum.photos/800/600?image=${Math.floor(Math.random()*100)}`
-        },
-        {
-          slug: 'inondations',
-          title: 'Slide B',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at consequat purus, eu fringilla eros. Fusce quis tortor nunc. Nullam semper vestibulum interdum. Vivamus cursus libero eu erat egestas.',
-          image: `https://picsum.photos/800/600?image=${Math.floor(Math.random()*100)}`
-        },
-        {
-          slug: 'secheresse',
-          title: 'Slide C',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at consequat purus, eu fringilla eros. Fusce quis tortor nunc. Nullam semper vestibulum interdum. Vivamus cursus libero eu erat egestas.',
-          image: `https://picsum.photos/800/600?image=${Math.floor(Math.random()*100)}`
-        },
-      ]
     }
   },
   computed:{
     ...mapGetters({
       device: 'Interface/device',
+      sections: 'Informations/sections',
     }),
   },
   mounted() {
@@ -124,7 +105,7 @@ export default {
       <ul ref="SwiperWrapper" class="swiper-wrapper">
           <!-- Slides -->
           <SubjectCard
-            v-for="(slide, index) in slides"
+            v-for="(slide, index) in sections"
             :key="`slide-${index}`"
             v-bind="slide"
             ref="Slide" class="swiper-slide" />

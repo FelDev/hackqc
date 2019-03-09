@@ -7,24 +7,32 @@
 // import { get, each, set } from 'lodash';
 // import data from 'db/data/informations.json';
 
+import { find } from 'lodash';
+import punaises from 'db/data/punaises/page';
+import inondations from 'db/data/inondations/page';
+import secheresses from 'db/data/secheresses/page';
+
 export default {
   namespaced: true,
   state() {
     return {
-      data: {},
+      data: [],
       page: {},
       sections: [
         {
           slug: 'punaises',
           label: 'Punaises de lit',
+          ...punaises,
         },
         {
           slug: 'inondations',
           label: 'Inondations',
+          ...inondations,
         },
         {
           slug: 'secheresse',
           label: 'Secheresse',
+          ...secheresses,
         },
       ],
     };
@@ -44,15 +52,25 @@ export default {
      * @param {VuexAction} store - action's store
      * @param {String} locale - @todo use this for api... somehow
      */
-    LOAD({ commit }, slug) {
+    LOAD({ commit, state }, slug) {
       switch (slug) {
         case 'punaises':
-          import('db/data/punaises/page.json').then(({ default: data }) => {
-            commit('SET_PAGE_DATA', data);
-          });
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
           import('db/data/punaises/punaises.json').then(({ default: data }) => {
             commit('SET_DATA', data);
           });
+        break;
+        case 'inondations':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          // import('db/data/punaises/punaises.json').then(({ default: data }) => {
+          //   commit('SET_DATA', data);
+          // });
+        break;
+        case 'secheresse':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          // import('db/data/punaises/punaises.json').then(({ default: data }) => {
+          //   commit('SET_DATA', data);
+          // });
         break;
         default:
           console.log('WRONG SLUG', slug);

@@ -26,13 +26,21 @@
 <script src="vue-google-maps.js"></script>
 
 <script>
+import {isEmpty} from 'lodash'
 import GmapCluster from "vue2-google-maps/dist/components/cluster";
-import punaises from "../../../../db/data/punaises/punaises.json";
+// import punaises from "db/data/punaises/punaises.json";
+// console.log({punaises});
 
 export default {
   name: "GoogleMap",
   components: {
     GmapCluster
+  },
+  props:{
+    donnee:{
+      type:Array,
+      default(){return {}}
+    }
   },
   data() {
     return {
@@ -48,20 +56,25 @@ export default {
   mounted() {
     this.geolocate();
 
-    this.markers = punaises.map(function(punaiseInfo) {
-      return {
-        exerminationAmount: punaiseInfo.NBR_EXTERMIN,
-        date: {
-          declaration: punaiseInfo.DATE_DECLARATION,
-          startExermination: punaiseInfo.DATE_DEBUTTRAIT,
-          endExermination: punaiseInfo.DATE_FINTRAIT
-        },
-        position: {
-          lat: parseFloat(punaiseInfo.LATITUDE),
-          lng: parseFloat(punaiseInfo.LONGITUDE)
-        }
-      };
-    });
+    console.log(' donnee ', this.donnee);
+    
+    this.$watch('donnee', data=>{
+      if(isEmpty(data)) return
+      this.markers = data.map(function(punaiseInfo) {
+        return {
+          exerminationAmount: punaiseInfo.NBR_EXTERMIN,
+          date: {
+            declaration: punaiseInfo.DATE_DECLARATION,
+            startExermination: punaiseInfo.DATE_DEBUTTRAIT,
+            endExermination: punaiseInfo.DATE_FINTRAIT
+          },
+          position: {
+            lat: parseFloat(punaiseInfo.LATITUDE),
+            lng: parseFloat(punaiseInfo.LONGITUDE)
+          }
+        };
+      });
+    },{ immediate:true})
   },
 
   methods: {

@@ -21,6 +21,7 @@ export default {
     GoogleMap,
   },
   computed: {
+    // Check in src/store/modules/Informations
     ...mapGetters({
       data: 'Informations/data',
       page: 'Informations/page',
@@ -48,13 +49,13 @@ export default {
   <main class="PageInfoSingle">
     <section id="top">
       <h1
-        v-t="page.title"
+        v-text="page.title"
         class="title" />
       <UiPicture
         class="picture"
-        :src="$t(page.imageDev)"
+        :src="page.image"
       />
-      <p v-t="page.description">
+      <p v-text="page.description">
         
       </p>
     </section>
@@ -63,15 +64,15 @@ export default {
          <!-- TODO: inclure un graph d3.js -->
       </div>
       <h1
-        v-t="'statsTitle'"
+        v-text="'statsTitle'"
         class="title" />
     </section>
     <section id="bottom">
       <h1
-        v-t="'mapTitle'"
+        v-text="'mapTitle'"
         class="title" />
       <div class="map">
-         <GoogleMap/>
+        <GoogleMap :donnee="data"/>
       </div>
     </section>
     <a :href="page.contact">Mais quoi faire ?!</a>
