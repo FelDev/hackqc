@@ -21,6 +21,7 @@ export default {
     GoogleMap,
   },
   computed: {
+    // Check in src/store/modules/Informations
     ...mapGetters({
       data: 'Informations/data',
       page: 'Informations/page',
