@@ -11,8 +11,7 @@
 // import Store from './store';
 import UiPicture from 'components/ui/Picture';
 import GoogleMap from 'components/pages/GoogleMap';
-
-import data from '../../../../../db/data/informations.json';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'PageInfoSingle',
@@ -22,14 +21,13 @@ export default {
     GoogleMap,
   },
   computed: {
+    // Check in src/store/modules/Informations
+    ...mapGetters({
+      data: 'Informations/data',
+      page: 'Informations/page',
+    }),
     slug() {
       return this.$route.params.slug;
-    },
-    /**
-     * @argument {Object} article - our entry datas
-     */
-    entry() {
-      // return this.$store.getters['News/getEntryBySlug'](this.slug);
     },
   },
   watch: {
@@ -38,23 +36,14 @@ export default {
      */
     slug: {
       handler(slug) {
+        console.log({slug});
+        
         if (!slug) { }
-        // this.$store.dispatch('News/LOAD_SINGLE', slug);
+        this.$store.dispatch('Informations/LOAD', slug);
       },
       immediate: true,
     },
   },
-  data(){
-    return {
-      data: data.filter(singleData => singleData.name === this.$route.params.slug)[0]
-    }
-  }
-  // /** register news store if needed - load datas on slug change */
-  // beforeCreate() {
-  //   if (!this.$store.state.News) {
-  //     this.$store.registerModule('News', Store);
-  //   }
-  // },
 };
 </script>
 
@@ -62,13 +51,13 @@ export default {
   <main class="PageInfoSingle">
     <section id="top">
       <h1
-        v-t="data.title"
+        v-t="page.title"
         class="title" />
       <UiPicture
         class="picture"
-        :src="$t(data.imageDev)"
+        :src="$t(page.imageDev)"
       />
-      <p v-t="data.description">
+      <p v-t="page.description">
         
       </p>
     </section>
@@ -88,7 +77,7 @@ export default {
          <GoogleMap/>
       </div>
     </section>
-    <a :href="data.contact">Mais quoi faire ?!</a>
+    <a :href="page.contact">Mais quoi faire ?!</a>
 
 
   </main>
