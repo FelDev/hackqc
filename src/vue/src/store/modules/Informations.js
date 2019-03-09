@@ -58,6 +58,8 @@ export default {
           commit('SET_PAGE_DATA', find(state.sections, { slug }));
           import('db/data/punaises/punaises.json').then(({ default: data }) => {
             commit('SET_DATA', data.map(singleData => ({
+              amount: parseInt(singleData.NBR_EXTERMIN, 10) || 0,
+              date: new Date(singleData.DATE_DECLARATION).getDate(),
               position:
               {
                 lat: parseFloat(singleData.LATITUDE),
@@ -73,7 +75,11 @@ export default {
           //   commit('SET_DATA', data);
           // });
           import('db/data/inondations/inondations.json').then(({ default: data }) => {
-            commit('SET_DATA', data.features.map(singleData => ({ position: { lat: singleData.geometry.coordinates[1], lng: singleData.geometry.coordinates[0] } })));
+            commit('SET_DATA', data.features.map(singleData => ({
+              amount: 1,
+              date: new Date(singleData.properties.date_observation).getDate(),
+              position: { lat: singleData.geometry.coordinates[1], lng: singleData.geometry.coordinates[0] },
+            })));
           });
           break;
         case 'secheresse':
