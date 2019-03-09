@@ -1,18 +1,22 @@
-<doc>
+<docs>
 # sectionReport
 > 
 
 @author Nicolas Husson <hello@nusson.ninja>
-</doc>
+</docs>
+<script src="vue-google-maps.js"></script>
 
 <script>
 import Datepicker from 'vuejs-datepicker';
+//taken from https://github.com/alessiomaffeis/vue-picture-input
+import PictureInput from 'vue-picture-input'
 import moment from 'moment';
 
 export default {
   name: "sectionReport",
   components: {
-    Datepicker
+    Datepicker,
+    PictureInput
   },
  
   props: {},
@@ -26,16 +30,35 @@ export default {
         description: "",
         location : {}
       },
-      sent : false
+      sent : false,
+      fileSubmitted : false,
+      center: { lat: 45.508, lng: -73.587 },
+      useCustomLocation : false,
+      hasSetLocation : false
     };
   },
   mounted() {},
   methods: {
     submit: function (){
-      //todo do something with the data here
       this.sent = true;
-     console.log(this.report)
-    } 
+      const input = JSON.stringify(this.report)
+      localStorage.setItem('input',input)
+      console.log(localStorage.getItem('input'))
+    
+    },
+    photoSubmitted : function(){
+      this.fileSubmitted = true
+      console.log("it happend")
+    },
+    setLocation : function(bool){
+      if(bool){
+        this.useCustomLocation = false;
+        this.hasSetLocation = true;
+      }else{
+         this.useCustomLocation = true;
+         this.hasSetLocation = false;
+      }
+    }
   }
 };
 </script>
@@ -78,14 +101,24 @@ export default {
           <label for="two">5</label>
       </div>
       <div class="googlemaps">
-        //TODO : GET ACCES TO USERS LOCATION -> GOOGLE MAPS
+        <label>Position de l'incident</label><br>
+        <button v-on:click="setLocation(true)">Position courante</button>
+        <button v-on:click="setLocation(false)">Ajouter une localisation</button>
+         <div v-if="hasSetLocation">Position Enregistrée</div>
+         <gmap-map v-if="useCustomLocation" :center="center" :zoom="12" style="width:100%;  height: 400px;" :options="{disableDefaultUI:true}" :position="report.position"
+    :clickable="true"
+    :draggable="true"
+    @click="center=report.position">
+           </gmap-map>
       </div>
       <div class="description">
         <span>Informations supplémentaires</span>
         <input type="text" v-model="report.description" >
       </div>
       <div class="camera">
-        //TODO: GET ACCES TO PEOPLES PHONE PHOTOS LIBRARY
+        <input type="file" name="myFile" 
+       v-on:change="photoSubmitted()">
+        <div v-if="fileSubmitted" class="fas fa-check">Votre photo à été enregistré avec succès</div>
       </div>
       <button v-on:click="submit()">Envoyé</button>
       <div v-if="sent">Merci beaucoup de votre collaboration pour le projet  _____ ,
@@ -96,6 +129,10 @@ export default {
 </template>
 
 <style lang="stylus" scoped>
+
+input[type='file'] {
+  color: transparent;
+}
 
   /**
   * TABLE OF CONTENT
