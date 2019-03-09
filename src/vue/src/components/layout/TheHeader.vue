@@ -47,31 +47,45 @@ export default {
       open: 'Menu/open',
     }),
   },
+  mounted(){
+    window.t = this
+    this.$router.beforeEach((to, from, next)=>{
+      this.$store.dispatch('Menu/CLOSE')
+      next()
+    })
+  }
 };
 </script>
 
 <template>
   <header class="TheHeader">
-    <div class="_container">
-      <div class="header-block">
-        <router-link :to="{name: `home`}">
-          <LogoSvg class="logo" />
-        </router-link>
-        <nav>
-          <ul>
-            <li
-              v-for="item in menu"
-              :key="item.route">
-              <router-link
-                :to="{name: `${item.route}`}"
-                class="link"
-                v-html="item.label"
-              />
-            </li>
-          </ul>
-        </nav>
-      </div>
+    <div class="navBar">
+      <button
+        class="burger"
+        @click.prevent="$store.dispatch('Menu/TOGGLE')"
+        v-html="open.toString()"/>
+
+      <router-link class="logo" :to="{name: `home`}">
+        <LogoSvg />
+      </router-link>
+
+      <router-link class="report" v-text="'Signaler'" :to="{name: `reports`}" />
     </div>
+    
+    <nav class="menu" :data-open="open">
+      <ul class="list">
+        <li
+          class="item"
+          v-for="item in menu"
+          :key="item.route">
+          <router-link
+            :to="{name: `${item.route}`}"
+            class="link"
+            v-html="item.label"
+          />
+        </li>
+      </ul>
+    </nav>
   </header>
 </template>
 
@@ -86,24 +100,37 @@ export default {
 
   //  ===LAYOUT===
   .TheHeader
-    vertical-padding(10)
+    fixed top left right
+    height 50px
 
-  .header-block
+
+  .navBar
     flexbox($align: center, $justify: space-between)
+    padding 0.5em 2em
+    background-color white
+    box-shadow: 1px 0px 10px #888888;
+    position relative
+    z-index $z-navbar
 
-  .logo
-    width 50px
-    stroke $c-white
-    stroke-width 10px
-
-  ul
-    flexbox()
-
-  .link
-    padding 8px
-    margin-left 8px
-
-  //  ===DEBUG===
-  [data-debug-mode="true"] .TheHeader
+  .menu
+    fixed top left bottom
+    height 100%
+    flexbox(column, $justify: center)
+    padding 20px
+    background-color white
+    z-index $z-menu
+    transition('transform', 0.4s)
+    transform translateX(-100%)
+    &[data-open]
+      transform translateX(0%)
+    .list
+      flexbox(column, $align: center, $justify: space-between)
+      // min-height 200px
+      max-height 200px
+      height 50%
+      // >.item:not(:first-child)
+      //   margin-top 1em
     //
+  .logo
+    size 40px
 </style>
