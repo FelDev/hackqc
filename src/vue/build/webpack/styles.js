@@ -45,10 +45,10 @@ export default function (opts = {}) {
     {
       test: /\.css$/,
       use: cssLoaders,
-      include: [
-        WebpackHelper.DIRS.SRC,
-        ...options.includeCSSPaths,
-      ],
+      // include: [
+      //   WebpackHelper.DIRS.SRC,
+      //   ...options.includeCSSPaths,
+      // ],
     },
     // stylus
     (({ stylus }) => {
