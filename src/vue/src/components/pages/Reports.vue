@@ -1,9 +1,9 @@
-<doc>
+<docs>
 # sectionReport
 > 
 
 @author Nicolas Husson <hello@nusson.ninja>
-</doc>
+</docs>
 
 <script>
 import Datepicker from 'vuejs-datepicker';
