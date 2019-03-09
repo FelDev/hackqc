@@ -38,6 +38,7 @@ module.exports = {
     // remove after https://github.com/babel/babel-eslint/issues/530 fix",
     "template-curly-spacing": "off",
     "indent": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "func-names": "off"
   }
 }

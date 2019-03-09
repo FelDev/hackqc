@@ -1,0 +1,10 @@
+// Give size in px, according to PSD (based on $kff-w-basis  width)
+// @return only a value in vw
+calc-ratio-vw($size)
+  (remove-unit($size) / remove-unit($kff-w-basis)) * 100 * 1vw
+
+// compute that rule in vw for screen < $kff-w-basis 
+rule-ratio-vw($prop, $size)
+  {$prop}: unit($size, 'px')
+  +below($kff-w-max)
+    {$prop}: calc-ratio-vw($size)

@@ -101,7 +101,8 @@ export default {
   //  ===LAYOUT===
   .TheHeader
     fixed top left right
-    height 50px
+    height $h-header
+    z-index $z-header
 
 
   .navBar

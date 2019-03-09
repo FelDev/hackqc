@@ -1,0 +1,41 @@
+/** easy flexbox */
+flexbox(
+  $type = null,
+  $direction = null,
+  $justify = null,
+  $align = null,
+  $wrap = null)
+  
+  display flex
+
+  if $type is 'row'
+    justify-content space-between
+    align-items center
+  
+  if $type is 'row-full-height'
+    justify-content space-between
+    align-items stretch
+
+  if $type is 'column'
+    flex-direction column
+    justify-content space-between
+    align-items stretch
+
+  if $type is 'center'
+    justify-content center
+    align-items center
+
+  if $type is 'center-vertical'
+    justify-content center
+    align-items center
+    flex-direction column
+
+  // utils to quick override styles
+  if $direction
+    flex-direction $direction
+  if $justify
+    justify-content $justify
+  if $align
+    align-items $align
+  if $wrap
+    flex-wrap $wrap
