@@ -61,38 +61,34 @@ export default {
     this.geolocate();
     //this.$watch("google", watev => console.log(watev));
     this.$watch(
-      ()=> {
+      () => {
         if (!this.google) return [];
         return this.donnee;
       },
       data => {
         if (isEmpty(data)) return;
+
         let bounds = new this.google.maps.LatLngBounds();
-        this.markers = data
-          .filter(info => info.NOM_ARROND === '"Le Plateau-Mont-Royal"')
-          .map((punaiseInfo) => {
-            bounds.extend(
-              new this.google.maps.LatLng(
-                punaiseInfo.LATITUDE,
-                punaiseInfo.LONGITUDE
-              )
-            );
-            return {
-              exerminationAmount: punaiseInfo.NBR_EXTERMIN,
-              date: {
-                declaration: punaiseInfo.DATE_DECLARATION,
-                startExermination: punaiseInfo.DATE_DEBUTTRAIT,
-                endExermination: punaiseInfo.DATE_FINTRAIT
-              },
-              position: {
-                lat: parseFloat(punaiseInfo.LATITUDE),
-                lng: parseFloat(punaiseInfo.LONGITUDE)
-              }
-            };
-          });
+/*
+        const calisse = data.map(singleData => ({ //TODO put that in Information.js
+          lat: parseFloat(singleData.LATITUDE),
+          lng: parseFloat(singleData.LONGITUDE)
+        }));*/
+        const calisse = data.map(singleData => ({ lat: singleData.properties.coordonnee_y, lng: singleData.properties.coordonnee_x }))
+
+        this.markers = calisse.map(singleData => {
+          bounds.extend(
+            new this.google.maps.LatLng(singleData.lat, singleData.lng)
+          );
+          return {
+            position: {
+              lat: singleData.lat,
+              lng: singleData.lng
+            }
+          };
+        });
 
         this.$refs.mapRef.$mapPromise.then(map => {
-          console.log({bounds})
           map.fitBounds(bounds);
         });
       },

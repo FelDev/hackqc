@@ -39,10 +39,16 @@ export default {
           import('db/data/punaises/punaises.json').then(({ default: data }) => {
             commit('SET_DATA', data);
           });
-        break;
+          break;
+        case 'inondations':
+          import('db/data/inondations/inondations.json').then(({ default: data }) => {
+            console.log(data);
+            commit('SET_DATA', data.features);
+          });
+          break;
         default:
           console.log('WRONG SLUG', slug);
-        break;
+          break;
       }
     },
   },
