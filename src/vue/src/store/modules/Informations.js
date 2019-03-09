@@ -7,10 +7,8 @@
 // import { get, each, set } from 'lodash';
 // import data from 'db/data/informations.json';
 
-import { find } from 'lodash';
-import punaises from 'db/data/punaises/page';
-import inondations from 'db/data/inondations/page';
-import secheresses from 'db/data/secheresses/page';
+import { find, map } from 'lodash';
+import Informations from 'db/data/informations';
 
 export default {
   namespaced: true,
@@ -18,23 +16,7 @@ export default {
     return {
       data: [],
       page: {},
-      sections: [
-        {
-          slug: 'punaises',
-          label: 'Punaises de lit',
-          ...punaises,
-        },
-        {
-          slug: 'inondations',
-          label: 'Inondations',
-          ...inondations,
-        },
-        {
-          slug: 'secheresse',
-          label: 'Secheresse',
-          ...secheresses,
-        },
-      ],
+      sections: Informations,
     };
   },
   mutations: {
@@ -53,27 +35,29 @@ export default {
      * @param {String} locale - @todo use this for api... somehow
      */
     LOAD({ commit, state }, slug) {
+      const section = find(state.sections, { slug });
+      if (!section) {
+        console.error(`WRONG SLUG "${slug}" - must be one of ${map(state.sections, s => s.slug).join(' | ')}`);
+        return;
+      }
+      commit('SET_PAGE_DATA', section);
       switch (slug) {
         case 'punaises':
-          commit('SET_PAGE_DATA', find(state.sections, { slug }));
           import('db/data/punaises/punaises.json').then(({ default: data }) => {
             commit('SET_DATA', data);
           });
         break;
         case 'inondations':
-          commit('SET_PAGE_DATA', find(state.sections, { slug }));
           // import('db/data/punaises/punaises.json').then(({ default: data }) => {
           //   commit('SET_DATA', data);
           // });
         break;
         case 'secheresse':
-          commit('SET_PAGE_DATA', find(state.sections, { slug }));
           // import('db/data/punaises/punaises.json').then(({ default: data }) => {
           //   commit('SET_DATA', data);
           // });
         break;
         default:
-          console.log('WRONG SLUG', slug);
         break;
       }
     },
