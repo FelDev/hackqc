@@ -53,7 +53,7 @@ export default {
         class="title" />
       <UiPicture
         class="picture"
-        :src="page.imageDev"
+        :src="page.image"
       />
       <p v-text="page.description">
         
