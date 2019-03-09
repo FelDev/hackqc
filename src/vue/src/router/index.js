@@ -99,10 +99,10 @@ const defaultRoutes = [
       };
     },
   },
-  {
-    path: '*',
-    redirect: { name: '404' },
-  },
+  // {
+  //   path: '*',
+  //   redirect: { name: '404' },
+  // },
 ];
 
 /**
