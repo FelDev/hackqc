@@ -74,7 +74,7 @@ export default {
         // @todo throw expression babel plugin
         // throw new Error(`invalid locale ${locale} must be one of ${settings.locales.join(',')}`);
         // console.error(`[I18n SET_LOCALE] wrong locale "${locale}" must be one of "${settings.locales.join(',')}"`);
-        router.push({ name: `404.${state.locale}` });
+        router.push({ name: '404' });
         return;
       }
       // console.log('[i18n SET_LOCALE action]', {locale, state: getters.locale, settings: settings.locales, init: state.initialized});
