@@ -74,6 +74,8 @@ export default {
         width 100%
       .content
         padding 20px
+      .title
+        margin-bottom 20px
 
     
 </style>
