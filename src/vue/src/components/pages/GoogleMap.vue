@@ -10,21 +10,30 @@
     </div>
     <br>
     <gmap-map :center="center" :zoom="12" style="width:100%;  height: 400px;">
-      <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        @click="center=m.position"
-      ></gmap-marker>
+      <gmap-cluster>
+        <gmap-marker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          @click="selectMarker(m)"
+        ></gmap-marker>
+      </gmap-cluster>
     </gmap-map>
   </div>
 </template>
 
+
+<script src="vue-google-maps.js"></script>
+
 <script>
+import GmapCluster from "vue2-google-maps/dist/components/cluster";
 import punaises from "../../../../db/data/punaises/punaises.json";
 
 export default {
   name: "GoogleMap",
+  components: {
+    GmapCluster
+  },
   data() {
     return {
       // default to Montreal to keep it simple
@@ -39,17 +48,26 @@ export default {
   mounted() {
     this.geolocate();
 
-    markers = punaises.map(function(punaiseInfo) {
+    this.markers = punaises.map(function(punaiseInfo) {
       return {
+        exerminationAmount: punaiseInfo.NBR_EXTERMIN,
+        date: {
+          declaration: punaiseInfo.DATE_DECLARATION,
+          startExermination: punaiseInfo.DATE_DEBUTTRAIT,
+          endExermination: punaiseInfo.DATE_FINTRAIT
+        },
         position: {
-          lat: punaiseInfo.LATITUDE,
-          lng: punaiseInfo.LONGITUDE
+          lat: parseFloat(punaiseInfo.LATITUDE),
+          lng: parseFloat(punaiseInfo.LONGITUDE)
         }
       };
     });
   },
 
   methods: {
+    selectMarker(marker) {
+      console.log(marker);
+    },
     // receives a place object via the autocomplete component
     setPlace(place) {
       this.currentPlace = place;
