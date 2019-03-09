@@ -51,7 +51,9 @@ export default {
     }),
   },
   mounted(){
-    window.t = this
+    this.$watch('open', (open)=>{
+      if(!open) this.subjectsOpen = false
+    })
     this.$router.beforeEach((to, from, next)=>{
       this.$store.dispatch('Menu/CLOSE')
       next()
@@ -71,7 +73,8 @@ export default {
         <LogoSvg />
       </router-link>
 
-      <router-link class="report" v-text="'Signaler'" :to="{name: `reports`}" />
+      <router-link class="report" v-text="'Signaler'"
+      :to="{name: `reports`}" />
     </div>
     
     <nav class="menu" :data-open="open">
@@ -92,7 +95,7 @@ export default {
                 :key="`info-${subject.slug}`">
                 <router-link
                   class="link sublink"
-                  :to="{name: `${item.route}`, params:{slug:subject.slug}}"
+                  :to="{name: 'subject', params:{slug:subject.slug}}"
                   v-text="subject.label" />
               </li>
             </ul>
