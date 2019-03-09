@@ -40,7 +40,7 @@ Vue.use(Meta, {
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyDHPKoBaTNhNbCuFsE0_Qd3W-BEBzEuEQs',
+    key: 'AIzaSyD3otn89jikU6SWvl2c6MMuSw908H39iKQ',
     libraries: 'places', // necessary for places input
   },
 });
