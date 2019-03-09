@@ -9,10 +9,14 @@
 // import UiPicture from 'components/ui/Picture';
 // import PageBuilder from 'components/builder';
 // import Store from './store';
+import UiPicture from 'components/ui/picture';
 
 export default {
   name: 'PageInfoSingle',
   // components: { UiPicture, PageBuilder },
+  components: {
+    UiPicture,
+  },
   computed: {
     slug() {
       return this.$route.params.slug;
@@ -30,7 +34,7 @@ export default {
      */
     slug: {
       handler(slug) {
-        if (!slug) { return; }
+        if (!slug) { }
         // this.$store.dispatch('News/LOAD_SINGLE', slug);
       },
       immediate: true,
@@ -47,10 +51,29 @@ export default {
 
 <template>
   <main class="PageInfoSingle">
-    <h1 class="title" v-t="title" />+
-    <pre>
-      slug: {{slug}}
-    </pre>
+    <section>
+      <h1
+        v-t="title"
+        class="title" />+
+      <pre>
+        slug: {{ slug }}
+      </pre>
+      <h1>{{ slug }}</h1>
+      <UiPicture :src="$t('image')"/>
+
+    </section>
+    <section>
+      <h1
+        v-t="title"
+        class="title" />
+
+    </section>
+    <section>
+      <h1
+        v-t="title"
+        class="title" />
+    </section>
+
   </main>
 </template>
 
@@ -68,11 +91,9 @@ export default {
 
 <i18n>
 {
-  "en": {
-    "title": "1 subject"
-  },
   "fr": {
-    "title": "1 sujet"
+    "title": "1 sujet",
+    "image": "https://static.actu.fr/uploads/2018/10/punaises-de-lit.jpg"
   }
 }
 </i18n>
