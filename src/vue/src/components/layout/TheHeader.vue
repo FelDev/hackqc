@@ -52,26 +52,29 @@ export default {
 
 <template>
   <header class="TheHeader">
-    <div class="_container">
-      <div class="header-block">
-        <router-link :to="{name: `home`}">
-          <LogoSvg class="logo" />
-        </router-link>
-        <nav>
-          <ul>
-            <li
-              v-for="item in menu"
-              :key="item.route">
-              <router-link
-                :to="{name: `${item.route}`}"
-                class="link"
-                v-html="item.label"
-              />
-            </li>
-          </ul>
-        </nav>
-      </div>
+    <div class="navBar">
+      <button class="burger" />
+
+      <router-link class="logo" :to="{name: `home`}">
+        <LogoSvg />
+      </router-link>
+
+      <router-link class="report" v-text="'Signaler'" :to="{name: `reports`}" />
     </div>
+    
+    <nav class="menu">
+      <ul>
+        <li
+          v-for="item in menu"
+          :key="item.route">
+          <router-link
+            :to="{name: `${item.route}`}"
+            class="link"
+            v-html="item.label"
+          />
+        </li>
+      </ul>
+    </nav>
   </header>
 </template>
 
@@ -86,10 +89,16 @@ export default {
 
   //  ===LAYOUT===
   .TheHeader
-    vertical-padding(10)
+    fixed top left right
+    height 150px
 
-  .header-block
+  .navBar
     flexbox($align: center, $justify: space-between)
+
+  .menu
+    fixed top left bottom
+    width 50vw
+    transform translateX(-50vw)
 
   .logo
     width 50px
