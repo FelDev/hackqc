@@ -10,12 +10,16 @@
 // import PageBuilder from 'components/builder';
 // import Store from './store';
 import UiPicture from 'components/ui/picture';
+import GoogleMap from 'components/pages/GoogleMap';
+
+import data from '../../../../../db/data/informations.json';
 
 export default {
   name: 'PageInfoSingle',
   // components: { UiPicture, PageBuilder },
   components: {
     UiPicture,
+    GoogleMap,
   },
   computed: {
     slug() {
@@ -42,7 +46,7 @@ export default {
   },
   data(){
     return {
-      title:"saluyuiuiuiuiu"
+      data: data.filter(singleData => singleData.name === this.$route.params.slug)[0]
     }
   }
   // /** register news store if needed - load datas on slug change */
@@ -58,17 +62,13 @@ export default {
   <main class="PageInfoSingle">
     <section id="top">
       <h1
-        v-t="title"
+        v-t="data.title"
         class="title" />
-      <pre>
-        slug: {{ slug }}
-      </pre>
-      <h1>{{ slug }}</h1>
       <UiPicture
         class="picture"
-        :src="$t('imageDev')"
+        :src="$t(data.imageDev)"
       />
-      <p v-t="'infoPunaises'">
+      <p v-t="data.description">
         
       </p>
     </section>
@@ -85,9 +85,11 @@ export default {
         v-t="'mapTitle'"
         class="title" />
       <div class="map">
-         <!-- TODO: inclure la map-à-Marc -->
+         <GoogleMap/>
       </div>
     </section>
+    <a :href="data.contact">Mais quoi faire ?!</a>
+
 
   </main>
 </template>
@@ -125,12 +127,8 @@ export default {
 <i18n>
 {
   "fr": {
-    "title": "1 sujet",
-    "image": "https://static.actu.fr/uploads/2018/10/punaises-de-lit.jpg",
-    "imageDev": "https://i.ytimg.com/vi/sB5kkRHdnLQ/hqdefault.jpg",
     "statsTitle": "Statistiques",
-    "mapTitle": "Près de chez vous",
-    "infoPunaises": "L'appellation « punaise des lits » peut désigner plusieurs espèces d'insectes hétéroptères de la famille des Cimicidae, selon les régions du monde où le terme est employé. Exclusivement hématophages, les mâles comme les femelles piquent et sucent (durant 10 à 20 min) le sang de leur hôte, pouvant vivre sans manger jusqu’à 1 an et demi, voire 2 ans dans de bonnes conditions. Elles sont sources de fortes démangeaisons et de dermatites. \nAu début du xxie siècle, certaines espèces de punaises semblent de nouveau proliférer, y compris dans des hôtels, hôpitaux ou maisons de retraite1. Ce sont des insectes exclusivement nocturnes, mais lorsque la population augmente ils peuvent se promener même le jour. \nLa revue Nature a publié en février 2016 de premières données génomiques sur la punaise du lit, qui pourrait permettre d'affiner les méthodes de prévention et de lutte2"
+    "mapTitle": "Près de chez vous"
   }
 }
 </i18n>
