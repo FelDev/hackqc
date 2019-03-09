@@ -88,7 +88,10 @@ export default {
             tag="div"
             :to="{name: `${item.route}`}"
             class="subjects">
-            <p class="link" v-html="item.label" @click.prevent="subjectsOpen = !subjectsOpen" />
+            <div class="link" @click.prevent="subjectsOpen = !subjectsOpen">
+              <p class="label" v-html="item.label" />
+              <span class="triangle" :data-open="subjectsOpen" />
+            </div>
             <ul class="list" :data-open="subjectsOpen">
               <li class="item"
                 v-for="subject in subjects"
@@ -150,17 +153,18 @@ export default {
       transform translateX(0%)
       transition-timing-function easing('out-expo')
     .list
-      flexbox(column, $align: center, $justify: space-between)
+      flexbox(column, $justify: space-between)
       // min-height 200px
       // max-height 200px
       // height 50%
       >.item
-        text-align center
+        // text-align center
         padding 1em 0
       // >.item:not(:first-child)
       //   margin-top 1em
     //
   .subjects
+    position relative
     .list
       height 0px
       overflow hidden
@@ -174,6 +178,21 @@ export default {
         margin-top 0.5em
       &:last-of-type
         padding-bottom 0
+    
+    .link
+      flexbox(row, $justify:flex-start, $align:center)
+      .triangle
+        triangle( down, 8px, black )
+        margin-left 10px
+        position relative
+        top 2px
+        transition transform 0.4s ease-in-out
+        transform-origin center 4.5px
+        &[data-open]
+          transform rotate(180deg)
+
+  .link
+    cursor pointer
 
   .logo
     size 40px
