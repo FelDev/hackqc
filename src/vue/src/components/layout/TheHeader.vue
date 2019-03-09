@@ -8,11 +8,12 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import LogoSvg from 'assets/svg/logo.svg?vue';
+import TheBurger from 'components/misc/Burger';
 
 export default {
   name: 'TheHeader',
   components: {
-    LogoSvg,
+    LogoSvg, TheBurger
   },
   props: {
     state: {
@@ -60,10 +61,9 @@ export default {
 <template>
   <header class="TheHeader">
     <div class="navBar">
-      <button
+      <TheBurger
         class="burger"
-        @click.prevent="$store.dispatch('Menu/TOGGLE')"
-        v-html="open.toString()"/>
+        @click.native.prevent="$store.dispatch('Menu/TOGGLE')"/>
 
       <router-link class="logo" :to="{name: `home`}">
         <LogoSvg />
@@ -116,14 +116,16 @@ export default {
   .menu
     fixed top left bottom
     height 100%
+    min-width 200px
     flexbox(column, $justify: center)
     padding 20px
     background-color white
     z-index $z-menu
-    transition('transform', 0.4s)
+    transition transform 0.4s easing('in-quad')
     transform translateX(-100%)
     &[data-open]
       transform translateX(0%)
+      transition-timing-function easing('out-expo')
     .list
       flexbox(column, $align: center, $justify: space-between)
       // min-height 200px
@@ -134,4 +136,7 @@ export default {
     //
   .logo
     size 40px
+
+  .burger
+    size 20px
 </style>
