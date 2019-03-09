@@ -50,11 +50,9 @@ export default {
       }else{
         this.focus = index;
       }
-      console.log("maaaaaaaan")
     },
     deleteAlert : function(index){
       this.alertes.splice(index,1);
-      
     }
   }
 };
@@ -64,14 +62,14 @@ export default {
   <section class="SectionStatus section">
     <h1 class="title">{{title}} </h1>
       <div class="alertes list-item" v-for="(alert, index) in alertes"  :key="index" >
-        <div v-on:click="setFocus(index)">
+        <div v-on:click="setFocus(index)" class="info-container">
           <div class="icon container">
             <img v-if="alert.categorie === 'inondation'" src="./icons/water-solid.svg" class="icon">
             <img v-if="alert.categorie === 'insecte'" src="./icons/bug-solid.svg" class="icon">
             <img v-if="alert.categorie === 'secheresse'" src="./icons/sun-solid.svg" class="icon">
           </div>
           <div class="informations">
-            <b>Location :</b> {{alert.location}} <br>
+            Location : {{alert.location}} <br>
             Date d'émission : {{alert.dateDeParution}}<br>
           </div>
           <span class="description"  v-if="focus === index">
@@ -96,6 +94,8 @@ export default {
      padding : 3px
      margin-bottom: 5px
      border-radius: 10px;
+     display: flex;
+     position: relative
   }
 
   /**
@@ -111,8 +111,9 @@ export default {
   }
 
   .closeIcon{
-     display: float right;
-     size : 3em;
+     size : 2em;
+     margin-left :85%
+     position : absolute
   }
 
   //  ===LAYOUT===
