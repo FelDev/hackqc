@@ -9,7 +9,7 @@
 // import UiPicture from 'components/ui/Picture';
 // import PageBuilder from 'components/builder';
 // import Store from './store';
-import UiPicture from 'components/ui/picture';
+import UiPicture from 'components/ui/Picture';
 import GoogleMap from 'components/pages/GoogleMap';
 
 import data from '../../../../../db/data/informations.json';
