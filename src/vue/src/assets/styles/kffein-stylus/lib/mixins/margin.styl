@@ -1,0 +1,19 @@
+vertical-margin($margin = $kff-h-default-space, $use-vw = false)
+  if $use-vw
+    rule-ratio-vw('margin-top', $margin)
+    rule-ratio-vw('margin-bottom', $margin)
+  else
+    margin-top unit($margin, 'px')
+    margin-bottom unit($margin, 'px')
+
+horizontal-margin($margin = $kff-w-default-space, $use-vw = false)
+  if $use-vw
+    rule-ratio-vw('margin-left', $margin)
+    rule-ratio-vw('margin-right', $margin)
+  else
+    margin-left unit($margin, 'px')
+    margin-right unit($margin, 'px')
+
+center-margin()
+  margin-left auto
+  margin-right auto

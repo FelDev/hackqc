@@ -1,0 +1,20 @@
+// button
+button(
+  $background = black,
+  $color = white,
+  $background-hover = white,
+  $color-hover = black,
+  $border-radius = 0)
+    
+  background-color $background
+  color $color
+  border-radius $border-radius
+  display inline-block
+  transition($property: 'background-color, color')
+  text-decoration none
+  padding 12px 20px
+  
+  &:hover
+    background-color $background-hover
+    color $color-hover
+    transition($property: 'background-color, color')

@@ -18,15 +18,16 @@ import defaultLocale from 'utils/defaultLocale';
 import settings from 'src/settings';
 import routesMap from 'routes';
 
-const Home = () => import(/* webpackChunkName: "pages-home" */ 'components/pages/Home');
-const Contact = () => import(/* webpackChunkName: "pages-contact" */ 'components/pages/Contact');
+import Home from 'components/pages/Home';
+
+const About = () => import(/* webpackChunkName: "pages-about" */ 'components/pages/About');
 const FourOFour = () => import(/* webpackChunkName: "pages-404" */ 'components/pages/FourOFour');
-const News = {
-  collection: () => import(/* webpackChunkName: "pages-works" */ 'components/pages/News/Collection'),
-  single: () => import(/* webpackChunkName: "pages-works" */ 'components/pages/News/Single'),
-};
-const Tests = {
-  demo: () => import(/* webpackChunkName: "pages-tests" */ 'components/pages/Tests/Demo'),
+const Informations = () => import(/* webpackChunkName: "pages-informations" */ 'components/pages/Informations');
+const Reports = () => import(/* webpackChunkName: "pages-reports" */ 'components/pages/Reports');
+const GoogleMap = () => import(/* webpackChunkName: "pages-reports" */ 'components/pages/GoogleMap');
+const Information = {
+  collection: () => import(/* webpackChunkName: "pages-Information" */ 'components/pages/Information/Collection'),
+  single: () => import(/* webpackChunkName: "pages-Information" */ 'components/pages/Information/Single'),
 };
 
 Vue.use(VueRouter);
@@ -40,17 +41,20 @@ function getComponentById(id) {
   switch (id) {
     case 'home':
       return Home;
-    case 'contact':
-      return Contact;
-    // News
-    case 'news':
-      return News.collection;
-    case 'article':
-      return News.single;
+    case 'about':
+      return About;
+    case 'informations':
+      return Informations;
+    // Information
+    case 'information':
+      return Information.collection;
+    case 'subject':
+      return Information.single;
 
-    case 'demo':
-      return Tests.demo;
-
+    case 'reports':
+      return Reports;
+    case 'map':
+      return GoogleMap;
     case '404':
     default:
       return FourOFour;
@@ -69,18 +73,18 @@ const defaultRoutes = [
       const { locale } = params;
       if (indexOf(settings.locales, locale) < 0) {
         return {
-          name: `404.${ defaultLocale }`,
+          name: '404',
         };
       }
 
       return {
-        name: `home.${ locale }`,
+        name: 'home',
       };
     },
   },
   {
     path: '/',
-    redirect: { name: `home.${ defaultLocale }` },
+    redirect: { name: 'home' },
   },
   {
     path: '/:locale/*',
@@ -91,14 +95,14 @@ const defaultRoutes = [
         locale = defaultLocale;
       }
       return {
-        name: `404.${ locale }`,
+        name: '404',
       };
     },
   },
-  {
-    path: '*',
-    redirect: { name: `404.${ defaultLocale }` },
-  },
+  // {
+  //   path: '*',
+  //   redirect: { name: '404' },
+  // },
 ];
 
 /**
@@ -116,7 +120,7 @@ const routes = without(flatten(
       }
       // finaly, this is ONE route
       return {
-        name: `${id}.${locale}`,
+        name: `${id}`,
         path: `/${locale}/${url}`,
         // mix lots of useful metas
         meta: assign({}, meta, {

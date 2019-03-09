@@ -24,6 +24,7 @@ import Meta from 'vue-meta';
 import 'utils/plugins/Modernizr';
 import FontAwesome from 'utils/plugins/FontAwesome';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import * as VueGoogleMaps from 'vue2-google-maps';
 import i18n from 'plugins/i18n';
 import App from 'components/TheApp';
 
@@ -35,6 +36,13 @@ if (module.hot) {
 
 Vue.use(Meta, {
   keyName: 'head',
+});
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyD3otn89jikU6SWvl2c6MMuSw908H39iKQ',
+    libraries: 'places', // necessary for places input
+  },
 });
 
 // Font Awesome
