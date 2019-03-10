@@ -92,7 +92,7 @@ export default {
 
   <div class="sectionReport">
     <h1 v-if="!sent">Signaler</h1>
-    <h2></h2>
+    <hr>
     <div v-if="!sent" class="formContainer">
       <div class="categorie">
         <div class="subCatFlex">
@@ -236,7 +236,7 @@ export default {
     justify-content space-between
     flex-direction column
   h1
-    color: $c-alizarin-crimson
+    color: $c-h1color
     font-size: 5em
     font-family: "Times New Roman", Times, serif
     font-weight: bold
@@ -257,11 +257,11 @@ export default {
 
   select
     background: $c-inputColor
-    border-radius: 1em
+    border-radius: 0.75em
     border 2px solid darken($c-inputColor, 10%)
     text-align-last: center
     box-shadow: 0 0 black
-    color: #FFF
+    color: #101010
     padding: 0.4em
     font-weight: bold
     font-size 1.1em
@@ -304,7 +304,7 @@ export default {
     height: 15px;
     border-radius: 5px;
     background: #d3d3d3;
-    background-image: linear-gradient(90deg, rgba(14,249,21,1) 0%, rgba(255,0,0,1) 100%);
+    background-image: linear-gradient(90deg, rgba(34,249,41,1) 0%, rgba(255,20,20,1) 100%);
     outline: none;
     -webkit-transition: .2s;
     transition: opacity .2s;
@@ -336,10 +336,10 @@ export default {
   .dateInput, .funkyInput
     background: $c-inputColor
     width: 100%
-    border-radius: 1em
+    border-radius: 0.75em
     border 2px solid darken($c-inputColor, 10%)
     padding: 0.4em
-    color: #fff
+    color: #101010
     text-align: center
     font-weight: bold
     font-size: 1.1em
