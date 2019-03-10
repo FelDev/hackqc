@@ -26,8 +26,6 @@ import { GChart } from "vue-google-charts";
 import Vue from 'vue';
 import Trend from 'vuetrend';
 
-console.log('moment', moment);
-
 Vue.use(Trend);
 
 export default {
@@ -63,6 +61,7 @@ export default {
           y:[]
         }
       }
+      
       const someDates = [first(this.chartDates)]
 
       const middle = Math.round((this.chartDates.length - 1) / 2)
@@ -72,7 +71,7 @@ export default {
       someDates.push(last(this.chartDates))
       return {
         x: someDates,
-        y: [first(this.chartData), last(this.chartData)],
+        y: [max(this.chartData), min(this.chartData)],
       }
     }
   },
@@ -82,9 +81,12 @@ export default {
         return this.donnee;
       },
       data => {
-        if (isEmpty(data)) return;
+        if (isEmpty(data)) return [];
         
-        const mergedData = {};
+        this.chartData = []
+        this.chartDates = []
+        this.chartOptions = {}
+        const mergedData = [];
         var average = 0;
         var dataCount = 0;
 
@@ -93,7 +95,7 @@ export default {
             var newDate = new Date(singleData.date);
             newDate.setHours(0, 0, 0, 0);
             if (newDate >= new Date(this.minDate) && newDate <= new Date(this.maxDate)) {
-              const niceDate = moment(newDate).format('DD/MM')
+              const niceDate = moment(newDate).format('DD/MM/YYYY')
               if (mergedData[niceDate]) {
                 mergedData[niceDate] += singleData.amount;
               } else {
@@ -138,7 +140,7 @@ export default {
     padding-bottom 20px
   
   .chart
-    padding-left 20px
+    padding-left 10px
 
   .axis
     font-size 1rem
@@ -149,10 +151,10 @@ export default {
       text-align right
       &:before
         content ''
-        absolute top left 25px bottom
+        absolute top left 15px bottom -4px
         border-right 1px solid #2c3e50
       .data
-        width 20px
+        width 10px
     &.-x
       absolute bottom left right
       flexbox(row, $justify:space-between)
@@ -161,7 +163,7 @@ export default {
       text-align center
       &:before
         content ''
-        absolute right -5% left 0px bottom 26px
+        absolute right -5% left -11px bottom 23px
         border-top 1px solid #2c3e50
       .data
         height 20px
