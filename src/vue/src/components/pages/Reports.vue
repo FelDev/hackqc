@@ -45,7 +45,7 @@ export default {
       center: { lat: 45.508, lng: -73.587 },
       useCustomLocation : false,
       hasSetLocation : false,
-      suivit: false
+      suivit: "oui"
     };
   },
   mounted() {},
@@ -211,6 +211,10 @@ export default {
   .expand-enter, .expand-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
+
+  .sectionReport
+    padding 1em
+
   .subCat, .subCatFlex
     margin-top: 1em;
   .subCatFlex  
