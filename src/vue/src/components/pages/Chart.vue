@@ -1,20 +1,8 @@
 <template>
   <div class="component">
-    <pre>
-      {{debug}}
-    </pre>
-    <!-- <pre>
-      {{dateRangeMs}}
-      {{(dateRangeMs/SECOND_TO_DAYS)}}
-      {{(dateRangeMs/SECOND_TO_WEEK)}}
-      {{(dateRangeMs/SECOND_TO_MONTH)}}
-      {{(dateRangeMs/SECOND_TO_YEAR)}}
-      {{(dateRangeMs/timeRange)}}
-
-    </pre> -->
     <header class="header">
       <h3 class="title">Tendances</h3>
-      <p class="dates" v-text="`du ${formatUnixDate(firstDate)} au ${formatUnixDate(lastDate)}`" />
+      <p class="dates" v-text="`du ${selectedRange.from} au ${selectedRange.to}`" />
     </header>
     <div class="TheChart">
       <ul class="axis -y">
@@ -49,7 +37,6 @@
 <script>
 import { isEmpty, min, max, first, last, map, filter } from "lodash";
 import moment from 'moment'
-// import { GChart } from "vue-google-charts";
 import Vue from 'vue';
 import Trend from 'vuetrend';
 import {mapGetters} from 'vuex'
@@ -64,9 +51,6 @@ const SECOND_TO_YEAR = (SECOND_TO_DAYS*365)
 window.moment = moment
 export default {
   name: "Chart",
-  // components: {
-  //   GChart
-  // },
   props: {
     minDate: null,
     maxDate: null,
@@ -75,7 +59,7 @@ export default {
       default() {
         return {};
       }
-    }
+    },
   },
   data() {
     return {
@@ -84,12 +68,16 @@ export default {
       SECOND_TO_MONTH,
       SECOND_TO_YEAR,
       cursorWrapperWidth:0,
-      timeRange:SECOND_TO_DAYS,
+      timeRange:SECOND_TO_WEEK,
       datas:[],
       selectedDate: null,
       chartData: [],
       chartDates: [],
-      chartOptions: {}
+      chartOptions: {},
+      selectedRange:{
+        from:null,
+        to:null,
+      }
     };
   },
   computed:{
@@ -97,16 +85,13 @@ export default {
       viewport: 'Interface/viewport'
     }),
     cursorWidth(){
-      
-      const a = this.cursorWrapperWidth / (this.dateRangeMs/this.timeRange)
-      console.log(this.cursorWrapperWidth, this.dateRangeMs, this.timeRange, (this.dateRangeMs/this.timeRange), a);
-      return a
+      return this.cursorWrapperWidth / (this.dateRangeMs/this.timeRange)
     },
     firstDate(){
-      return min(this.chartDates || [])
+      return min(this.chartDates)
     },
     lastDate(){
-      return max(this.chartDates || [])
+      return max(this.chartDates)
     },
     axis(){
       let empty = isEmpty(this.chartData)
@@ -122,18 +107,10 @@ export default {
         moment.unix(this.firstDate.toString()).add(this.convertPercentToMs(0.25, 's')),
         moment.unix(this.firstDate.toString()).add(this.convertPercentToMs(0.5, 's')),
         moment.unix(this.firstDate.toString()).add(this.convertPercentToMs(0.75, 's')),
-        moment.unix(this.lastDate.toString()),
-      ]//, date=>moment.unix(date).format('DD/MM/YY')
-
-      // const middle = moment.unix(this.firstDate).add(this.convertPercentToMs(0.5))
-      // someDates.push(this.chartDates[middle])
-      // someDates.push(this.chartDates[Math.round(middle/2)])
-      // someDates.push(this.chartDates[Math.round(middle + (middle/2))])
-      // someDates.push(last(this.chartDates))
+        moment.unix(this.lastDate.toString())
+      ]
       return {
-        // x: [this.convertPercentToMs(0, 's'), this.convertPercentToMs(0.5, 's'), this.convertPercentToMs(1, 's')],\
-        x:map(someDates, date=>date.format('DD/MM/YY')),
-        // x: someDates,
+        x: map(someDates, date=>date.format('DD/MM/YY')),
         y: [max(this.chartData), min(this.chartData)],
       }
     },
@@ -141,78 +118,21 @@ export default {
       if(this.chartDates.length < 2) return 0
       return last(this.chartDates) - first(this.chartDates)
     },
-    debug(){
-      const diff = this.lastDate-this.firstDate;
-
-      return {
-        first:this.firstDate,
-        last:this.lastDate,
-        diff,
-        dateRangeMs:this.dateRangeMs,
-        w:diff/SECOND_TO_WEEK,
-        m:diff/SECOND_TO_MONTH,
-        d:diff/SECOND_TO_DAYS,
-        y:diff/SECOND_TO_YEAR,
-        CURRENT:(diff/this.timeRange),
-        timeRange:this.timeRange,
-        mf:this.formatUnixDate(this.firstDate),
-        me:this.formatUnixDate(this.lastDate)
-      }
-    }
   },
   mounted() {
     // const tl = new TimelineMax()
     //   .to(this.$refs.Cursor, 1, {x:(this.viewport.width-60)})
     this.$watch('viewport', ({width})=>{
       if(!width) return
-      console.log({width});
       this.cursorWrapperWidth = width - 40
     }, {immediate:true})
 
-    const draggable = Draggable.create(this.$refs.Cursor, {
-      type:"x",
-      edgeResistance:0.65,
-      bounds:this.$refs.CursorWrapper,
-      lockAxis:true,
-      throwProps:true,
-      snap: {
-        x: function(endValue) {
-          return Math.round(endValue / gridWidth) * gridWidth;
-        },
-        y: function(endValue) {
-          return Math.round(endValue / gridHeight) * gridHeight;
-        }
-      },
-      // onDrag:(event)=>{
-      //   let {x} = draggable[0]
-      //   if(x>this.cursorWrapperWidth){
-      //     x = this.cursorWrapperWidth
-      //   }else if(x<0){
-      //     x = 0
-      //   }
-      //   const msPeriode = (this.dateRangeMs/this.timeRange)
-      //   // console.log({event, draggable})
-      //   console.log({x, cursorWrapperWidth:this.cursorWrapperWidth, cursorWidth:this.cursorWidth, msPeriode, df:this.dateRangeMs});
-      //   // @todo guess witch periode is highlighted and reflect related points into the map
-      // },
-      onDragEnd:(event)=>{
-        let {x} = draggable[0]
+    this.$watch('chartDates', (chartDates)=>{
+      if(isEmpty(chartDates)) return
+      this.$nextTick(this.createDraggable.bind(this))
+    }, {immediate:true})
 
-        const percentPosition = (()=>{
-          let d = x / this.cursorWrapperWidth
-          if(d > 1) return 1
-          if(d < 0) return 0
-          return d
-        })()
-
-        const msToAdd = this.convertPercentToMs(percentPosition)
-
-        const from = moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').format('DD/MM/YY')
-        const to = moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').add(this.timeRange, 's').format('DD/MM/YY')
-        console.log({from, to})
-        // @todo guess witch periode is highlighted and reflect related points into the map
-      }
-    });
+    // updateRangeDate()
     
     this.$watch(
       () => {
@@ -273,6 +193,45 @@ export default {
     },
     convertPercentToMs(percent){
       return percent * this.dateRangeMs * 1000
+    },
+    createDraggable(){
+      let draggable = null
+      const updateRangeDate = (event)=>{
+        let {x} = draggable[0] || {x:0}
+        
+        const percentPosition = (()=>{
+          let d = x / this.cursorWrapperWidth
+          if(d > 1) return 1
+          if(d < 0) return 0
+          return d
+        })()
+
+        const msToAdd = this.convertPercentToMs(percentPosition)
+        this.selectedRange = {
+          from: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').format('DD/MM/YY'),
+          to: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').add(this.timeRange, 's').format('DD/MM/YY')
+        }
+      }
+      draggable = Draggable.create(this.$refs.Cursor, {
+        type:"x",
+        edgeResistance:0.65,
+        bounds:this.$refs.CursorWrapper,
+        lockAxis:true,
+        throwProps:true,
+        snap: {
+          x: function(endValue) {
+            return Math.round(endValue / gridWidth) * gridWidth;
+          },
+          y: function(endValue) {
+            return Math.round(endValue / gridHeight) * gridHeight;
+          }
+        },
+        onDrag:updateRangeDate.bind(this),
+        onDragInit:updateRangeDate.bind(this),
+        onDragEnd:updateRangeDate.bind(this)
+      });
+
+      this.$nextTick(updateRangeDate.bind(this))
     }
   }
 };
@@ -281,7 +240,7 @@ export default {
 <style lang="stylus" scoped>
   .cursorWrapper
     absolute top left 30px right 10px bottom
-    background-color rgba(blue, 0.2)
+    // background-color rgba(blue, 0.2)
   .cursor
     background-color rgba(red, 0.4)
     absolute top left 0 bottom
@@ -310,11 +269,12 @@ export default {
         border-right 1px solid #2c3e50
       .data
         width 10px
+        margin-left 5px
     &.-x
       absolute bottom left 30px right 10px
       flexbox(row, $justify:space-between)
       text-align center
-      background-color rgba(yellow, 0.2)
+      // background-color rgba(yellow, 0.2)
       &:before
         content ''
         absolute right left bottom 23px
@@ -340,7 +300,7 @@ export default {
   .title
     padding 20px 0px 0 10px
     margin 0
-    f-style(title, h3)
+    f-style(title, h2)
   .dates
     padding 0 0 10px 10px
     f-style()

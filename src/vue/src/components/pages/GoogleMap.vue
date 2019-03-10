@@ -55,12 +55,20 @@ export default {
     //this.$watch("google", watev => console.log(watev));
     this.$watch(
       () => {
+        
         if (!this.google) return [];
-        return this.donnee;
+        return {
+          data: this.donnee,
+          minDate:this.minDate,
+          maxDate:this.maxDate,
+        }
       },
-      data => {
+      ({data}) => {
         if (isEmpty(data)) return;
 
+        console.warn('@TODO REMOVE MARKERS HERE', this.markers, data)
+
+        let hasMarkers = false
         let bounds = new this.google.maps.LatLngBounds();
 
         this.markers = data.filter((singleData) => {
@@ -68,14 +76,17 @@ export default {
         });
         
         this.markers.forEach(marker => {
+          hasMarkers = true
           bounds.extend(
             new this.google.maps.LatLng(marker.position.lat, marker.position.lng)
           );
         });
 
-        this.$refs.mapRef.$mapPromise.then(map => {
-          map.fitBounds(bounds);
-        });
+        if(hasMarkers){
+          this.$refs.mapRef.$mapPromise.then(map => {
+            map.fitBounds(bounds);
+          });
+        }
       },
       { immediate: true }
     );

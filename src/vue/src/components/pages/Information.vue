@@ -13,6 +13,8 @@ import UiPicture from "components/ui/Picture";
 import GoogleMap from "components/pages/GoogleMap";
 import Chart from "components/pages/Chart";
 import { mapGetters } from "vuex";
+import moment from 'moment'
+import { map } from 'lodash'
 
 export default {
   name: "PageInfoSingle",
@@ -34,8 +36,14 @@ export default {
   },
   data() {
     return {
-      minDate: "2018-03-10T10:41:26",
-      maxDate: "2019-03-10T10:41:26"
+      renderMap: false,
+      dateRange: [],
+      minDateB: "2018-01-12T00:00:00-05:00",
+      maxDateB: "2018-08-12T00:00:00-04:00",
+      // minDate: "2018-03-10T10:41:26",
+      // maxDate: "2019-03-10T10:41:26"
+      minDate: "2018-01-12T10:41:26",
+      maxDate: "2019-08-12T10:41:26"
     };
   },
   watch: {
@@ -51,14 +59,24 @@ export default {
       immediate: true
     }
   },
+  mounted(){
+    this.$refs.Chart.$watch('selectedRange', (range)=>{
+      this.dateRange = map(range, date=>{
+        return moment(date, 'DD/MM/YY').format('YYYY-MM-DDTh:mm:ss')
+      })
+      // this.renderMap = false
+      // this.$nextTick(()=>{
+      //   this.renderMap = true
+      // })
+    })
+  }
 };
 </script>
 
 
 <template>
   <main class="PageInfoSingle">
-    <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
-    <GoogleMap :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
+    <GoogleMap :minDate="dateRange[0]" :maxDate="dateRange[1]" :donnee="data" v-if="dateRange"/>
     <section id="top">
       <header class="header">
         <UiPicture class="picture" :src="page.image" cover="cover" :full="true" :overlay="true"/>
@@ -66,10 +84,9 @@ export default {
       </header>
       <div class="content" v-html="page.description"/>
     </section>
-    <section id="bottom">
-      <div class="map">
-        <GoogleMap :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
-      </div>
+    <section id="bottom-no-bg">
+      <GoogleMap :minDate="dateRange[0]" :maxDate="dateRange[1]" :donnee="data" v-if="dateRange"/>
+      <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data" ref="Chart"/>
     </section>
     
     <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
@@ -77,6 +94,8 @@ export default {
 </template>
 
 <style lang="stylus" scoped>
+.PageInfoSingle
+  background-color #fff
 .header {
   ratio-box((16 / 9));
   position: relative;
@@ -147,9 +166,9 @@ export default {
 //   }
 // }
 
-#bottom {
-  background: #123;
-}
+// #bottom {
+//   background: #123;
+// }
 
 #middle {
   background: #112;
