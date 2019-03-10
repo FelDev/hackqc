@@ -79,7 +79,7 @@ export default {
     <div class="chart">Chart :
       <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
     </div>
-    <a :href="page.contact">Mais quoi faire ?!</a>
+    <a :href="page.contact">Ressources</a>
   </main>
 </template>
 
