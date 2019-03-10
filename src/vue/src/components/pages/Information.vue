@@ -76,7 +76,8 @@ export default {
         <GoogleMap :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
       </div>
     </section>
-    <div class="chart">Chart :
+    <div class="chart">
+      <h3 class="title">Chart :</h3>
       <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
     </div>
     <a :href="page.contact">Mais quoi faire ?!</a>
@@ -94,6 +95,9 @@ export default {
     z-index: 10;
   }
 }
+
+.chart >.title
+  margin-bottom 20px
 
 .content {
   padding: 20px;
