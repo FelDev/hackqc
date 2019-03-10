@@ -672,6 +672,17 @@ svg {
   padding: 55px 0 20px;
   z-index: 50;
 }
+* {
+  outline: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */ /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
 ._container {
   max-width: 1280px;
   margin-left: auto;
