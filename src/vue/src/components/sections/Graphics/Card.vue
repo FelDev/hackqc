@@ -11,7 +11,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'SubjectCard',
   components: { UiPicture },
-  props: ['title', 'image', 'description', 'slug'],
+  props: ['title', 'image', 'shortDescription', 'slug'],
   data(){
     return {}
   },
@@ -41,7 +41,7 @@ export default {
       <UiPicture class="picture" :src="image" cover="cover"/>
       <div class="content">
         <h3 class="title" v-text="title" />
-        <p class="description" v-text="description"/>
+        <p class="description" v-text="shortDescription"/>
       </div>
     </template>
   </router-link>
@@ -57,6 +57,8 @@ export default {
     .content
       flex-grow 1
       padding-top 20px
+    .title
+      f-style(title, h3)
     +desktop()
       padding 20px
       .content
@@ -74,6 +76,8 @@ export default {
         width 100%
       .content
         padding 20px
+      .title
+        margin-bottom 20px
 
     
 </style>
