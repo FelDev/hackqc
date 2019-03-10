@@ -22,7 +22,6 @@ function getLocalData(category) {
       lng: customPosition.lng,
     },
   }));
-  console.log(customPositions);
   return customPositions;
 }
 export default {
@@ -58,7 +57,6 @@ export default {
       commit('SET_PAGE_DATA', section);
 
       let dataToSet = getLocalData(slug);
-      console.log(dataToSet);
       switch (slug) {
         case 'punaises':
           import('db/data/punaises/punaises.json').then(({ default: data }) => {
@@ -70,6 +68,7 @@ export default {
                 lat: parseFloat(singleData.LATITUDE),
                 lng: parseFloat(singleData.LONGITUDE),
               },
+              predicted: singleData.predicted,
             })).concat(dataToSet);
             commit('SET_DATA', dataToSet);
           });
@@ -83,6 +82,7 @@ export default {
               amount: 1,
               date: new Date(singleData.properties.date_observation),
               position: { lat: singleData.geometry.coordinates[1], lng: singleData.geometry.coordinates[0] },
+              predicted: singleData.predicted,
             })).concat(dataToSet);
             commit('SET_DATA', dataToSet);
           });
@@ -99,6 +99,7 @@ export default {
               amount: 1,
               date: new Date(singleData.date),
               position: { lat: singleData.lat, lng: singleData.lng },
+              predicted: singleData.predicted,
             })).concat(dataToSet);
             commit('SET_DATA', dataToSet);
           });
@@ -110,6 +111,7 @@ export default {
               amount: 1,
               date: new Date(singleData.DDS_DATE_CREATION),
               position: { lat: singleData.LOC_LAT, lng: singleData.LOC_LONG },
+              predicted: singleData.predicted,
             })).concat(dataToSet);
             commit('SET_DATA', dataToSet);
           });
@@ -117,13 +119,12 @@ export default {
         case 'rats':
           commit('SET_PAGE_DATA', find(state.sections, { slug }));
           import('db/data/rats/rats.json').then(({ default: data }) => {
-            console.log(dataToSet);
             dataToSet = data.map(singleData => ({
               amount: 1,
               date: new Date(singleData.DDS_DATE_CREATION),
               position: { lat: singleData.LOC_LAT, lng: singleData.LOC_LONG },
+              predicted: singleData.predicted,
             })).concat(dataToSet);
-            console.log(dataToSet);
             commit('SET_DATA', dataToSet);
           });
           break;
@@ -134,6 +135,7 @@ export default {
               amount: 1,
               date: new Date(singleData.DDS_DATE_CREATION),
               position: { lat: singleData.LOC_LAT, lng: singleData.LOC_LONG },
+              predicted: singleData.predicted,
             })).concat(dataToSet);
             commit('SET_DATA', dataToSet);
           });
