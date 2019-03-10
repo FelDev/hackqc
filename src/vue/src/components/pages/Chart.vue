@@ -151,7 +151,15 @@ export default {
         }
       },
       onDrag:(event)=>{
-        console.log({event, draggable});
+        let {x} = draggable[0]
+        if(x>this.cursorWrapperWidth){
+          x = this.cursorWrapperWidth
+        }else if(x<0){
+          x = 0
+        }
+        const msPeriode = (this.dateDiffRange/this.timeRange)
+        // console.log({event, draggable})
+        console.log({x, cursorWrapperWidth:this.cursorWrapperWidth, cursorWidth:this.cursorWidth, msPeriode, df:this.dateDiffRange});
         // @todo guess witch periode is highlighted and reflect related points into the map
       }
     });
@@ -174,7 +182,7 @@ export default {
           if (!isNaN(singleData.amount)) {
             var newDate = new Date(singleData.date);
             newDate.setHours(0, 0, 0, 0);
-            if (newDate >= new Date(this.minDate) && newDate <= new Date(this.maxDate)) {
+            // if (newDate >= new Date(this.minDate) && newDate <= new Date(this.maxDate)) {
               const msDate = moment(newDate).format('X')
 
               if (mergedData[msDate]) {
@@ -185,7 +193,7 @@ export default {
               }
 
               average += singleData.amount;
-            }
+            // }
           }
         });
 
