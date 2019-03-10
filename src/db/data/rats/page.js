@@ -1,13 +1,22 @@
-import image from 'assets/images/bedbug.jpg'
+import image from 'assets/images/rats.jpg'
 
 export default {
-  name: "punaise",
-  title: "Les punaises de lit !",
+  name: "rats",
+  title: "Rats et souris",
   image,
-  imageDev: "https://i.ytimg.com/vi/sB5kkRHdnLQ/hqdefault.jpg",
   description: `
-    <p class="text">L'appellation « punaise des lits » peut désigner plusieurs espèces d'insectes hétéroptères de la famille des Cimicidae, selon les régions du monde où le terme est employé. Exclusivement hématophages, les mâles comme les femelles piquent et sucent (durant 10 à 20 min) le sang de leur hôte, pouvant vivre sans manger jusqu’à 1 an et demi, voire 2 ans dans de bonnes conditions. Elles sont sources de fortes démangeaisons et de dermatites. \nAu début du xxie siècle, certaines espèces de punaises semblent de nouveau proliférer, y compris dans des hôtels, hôpitaux ou maisons de retraite1. Ce sont des insectes exclusivement nocturnes, mais lorsque la population augmente ils peuvent se promener même le jour. \nLa revue Nature a publié en février 2016 de premières données génomiques sur la punaise du lit, qui pourrait permettre d'affiner les méthodes de prévention et de lutte2</p>
-    <a class="button" target="_blank" href="http://www.msss.gouv.qc.ca/professionnels/sante-environnementale/punaises-de-lit/situation-au-quebec-et-dans-le-monde/">En savoir plus</a>`,
+    <p class="text">Vivant en milieu urbain, la souris commune est reconnaissable à ses grandes oreilles et à son pelage brun clair ou gris foncé avec un ventre plus pâle. La souris sylvestre est brune ou grise et a le ventre et les pattes blanches. Elle est facilement reconnaissable par sa queue dont la face inférieure est blanche. À l'automne, la souris sylvestre envahit parfois les bâtiments qui sont situés près d'un champ ou d'un boisé.
+    <br>Les rats sont plus gros que les souris et peuvent peser jusqu'à 0,5 kg (1 lb). Le rat surmulot et le rat noir se ressemblent, mais ils n'ont pas les mêmes comportements. Le rat surmulot construit des réseaux élaborés de galeries et de terriers au niveau du sol et préfère les endroits humides comme les vides sanitaires et le périmètre des immeubles. Le rat noir est un grimpeur agile qui préfère vivre dans les arbres, les arbustes grimpants et la végétation dense. Il infeste les greniers, les charpentes ou les toits ainsi que les étages supérieurs des immeubles.
+    <br>Le choix de la méthode de lutte dépend de l'espèce de rongeurs qui posent problème. Par exemple, les pièges conçus pour les rats ne conviennent pas à la capture des souris.</p>
+    <h2>Comment se débarrasser des souris et des rats?</h2>
+    <ul>
+      <li>Rendre votre maison à l'épreuve des rongeurs</li>
+      <li>Rendre votre maison moins attrayante pour les rongeurs</li>
+      <li>Pièges</li>
+      <li>Dispositifs à ultrasons</li>
+      <li>Produits, tels que les appâts empoisonnés ou les rondenticides anticoagulants</li>
+      <li>Mesures d'hygiène tel que porter des gants, enveloppez les rats et les souris morts etc</li>
+    </ul>
+    <a class="button" target="_blank" href="https://www.canada.ca/fr/sante-canada/services/conseils-pour-controle-parasites/rats-et-souris.html">En savoir plus</a>`,
   shortDescription: "Véritable fléau en Amerique du nord, venez en apprendre plus sur ces bebettes et voir leur propagation dans votre quartier.",
-  contact: "https://www.quebec.ca/habitation-et-logement/milieu-de-vie-sain/proceder-a-l-extermination-de-punaises-de-lit/"
 }

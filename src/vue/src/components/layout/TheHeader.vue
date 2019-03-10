@@ -99,7 +99,7 @@ export default {
                 <router-link
                   class="link sublink"
                   :to="{name: 'subject', params:{slug:subject.slug}}"
-                  v-text="`- ${subject.label}`" />
+                  v-text="`- ${subject.title}`" />
               </li>
             </ul>
           </div>
@@ -170,7 +170,7 @@ export default {
       overflow hidden
       transition height 0.4s ease-in-out
       &[data-open]
-        height 85px
+        height 140px
 
     .item
       padding 0.2em 0 !important

@@ -1,13 +1,27 @@
-import image from 'assets/images/bedbug.jpg'
+import image from 'assets/images/insects.jpg'
 
 export default {
-  name: "punaise",
-  title: "Les punaises de lit !",
+  name: "insects",
+  title: "Maladies d'arbres",
   image,
-  imageDev: "https://i.ytimg.com/vi/sB5kkRHdnLQ/hqdefault.jpg",
   description: `
-    <p class="text">L'appellation « punaise des lits » peut désigner plusieurs espèces d'insectes hétéroptères de la famille des Cimicidae, selon les régions du monde où le terme est employé. Exclusivement hématophages, les mâles comme les femelles piquent et sucent (durant 10 à 20 min) le sang de leur hôte, pouvant vivre sans manger jusqu’à 1 an et demi, voire 2 ans dans de bonnes conditions. Elles sont sources de fortes démangeaisons et de dermatites. \nAu début du xxie siècle, certaines espèces de punaises semblent de nouveau proliférer, y compris dans des hôtels, hôpitaux ou maisons de retraite1. Ce sont des insectes exclusivement nocturnes, mais lorsque la population augmente ils peuvent se promener même le jour. \nLa revue Nature a publié en février 2016 de premières données génomiques sur la punaise du lit, qui pourrait permettre d'affiner les méthodes de prévention et de lutte2</p>
-    <a class="button" target="_blank" href="http://www.msss.gouv.qc.ca/professionnels/sante-environnementale/punaises-de-lit/situation-au-quebec-et-dans-le-monde/">En savoir plus</a>`,
-  shortDescription: "Véritable fléau en Amerique du nord, venez en apprendre plus sur ces bebettes et voir leur propagation dans votre quartier.",
-  contact: "https://www.quebec.ca/habitation-et-logement/milieu-de-vie-sain/proceder-a-l-extermination-de-punaises-de-lit/"
+    <p class="text">La Ville investit plusieurs centaines de milliers de dollars par année dans son programme d’entretien des arbres publics. Il y a deux volets importants dans ce programme, soit :</p>
+    <ul>
+      <li>la taille des végétaux;</li>
+      <li>la détection et le contrôle des maladies et des ravageurs.</li>
+      <li>La détection et le contrôle des maladies et des ravageurs s’effectuent selon les principes de la lutte intégrée, qui privilégie des méthodes préventives d’entretien et de détection, l’application de produits biologiques et l’utilisation minimale de pesticides.</li>
+    </ul>
+    <h2>Ce que vous pouvez faire</h2>
+    <ul>
+      <li>Lorsqu’un symptôme se présente, identifiez-en d’abord la cause (maladie, insecte, facteur abiotique).</li>
+      <li>Si les dommages ne sont pas importants ou que le ravageur n’est pas récurrent, soyez patient et tolérant.</li>
+      <li>Si vous devez vous débarrasser du ravageur, optez d’abord pour des méthodes physiques (enlèvement manuel, utilisation d’un puissant jet d’eau).</li>
+      <li>Si rien ne fonctionne, utilisez un produit à faible impact. Votre jardinerie saura vous informer sur les produits disponibles.</li>
+      <li>Signalez au personnel du 311 tout arbre présentant des symptômes de la maladie, de même que les arbres blessés ou morts.</li>
+      <li>Achetez et brûlez uniquement du bois de chauffage local.</li>
+      <li>Renseignez-vous sur l'origine de votre bois de chauffage.</li>
+      <li>Laissez les objets ou les matières provenant de la nature dans leur milieu.</li>
+    </ul>
+    <a class="button" target="_blank" href="https://www.ville.quebec.qc.ca/citoyens/propriete/arbres/arbres_entretien.aspx">En savoir plus</a>`,
+  shortDescription: "La Ville investit plusieurs centaines de milliers de dollars par année dans son programme d’entretien des arbres publics. Aidez nous a controler ces fleaux.",
 }

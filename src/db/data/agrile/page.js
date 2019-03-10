@@ -1,13 +1,12 @@
-import image from 'assets/images/bedbug.jpg'
+import image from 'assets/images/agrile.jpg'
 
 export default {
-  name: "punaise",
-  title: "Les punaises de lit !",
+  name: "agrile",
+  title: "Agrile du frêne",
   image,
-  imageDev: "https://i.ytimg.com/vi/sB5kkRHdnLQ/hqdefault.jpg",
   description: `
-    <p class="text">L'appellation « punaise des lits » peut désigner plusieurs espèces d'insectes hétéroptères de la famille des Cimicidae, selon les régions du monde où le terme est employé. Exclusivement hématophages, les mâles comme les femelles piquent et sucent (durant 10 à 20 min) le sang de leur hôte, pouvant vivre sans manger jusqu’à 1 an et demi, voire 2 ans dans de bonnes conditions. Elles sont sources de fortes démangeaisons et de dermatites. \nAu début du xxie siècle, certaines espèces de punaises semblent de nouveau proliférer, y compris dans des hôtels, hôpitaux ou maisons de retraite1. Ce sont des insectes exclusivement nocturnes, mais lorsque la population augmente ils peuvent se promener même le jour. \nLa revue Nature a publié en février 2016 de premières données génomiques sur la punaise du lit, qui pourrait permettre d'affiner les méthodes de prévention et de lutte2</p>
-    <a class="button" target="_blank" href="http://www.msss.gouv.qc.ca/professionnels/sante-environnementale/punaises-de-lit/situation-au-quebec-et-dans-le-monde/">En savoir plus</a>`,
+    <p class="text">L’agrile du frêne a été détecté pour la première fois en Amérique du Nord en 2002, mais probablement qu’il serait arrivé sur le continent au moins une dizaine d’années plus tôt. Ce coléoptère originaire de l’Asie s’est révélé hautement destructeur. Depuis son arrivée, il a détruit des millions de frênes et continue de se propager dans de nouvelles régions, causant des dommages économiques et écologiques considérables.
+    <br />Les scientifiques du Service canadien des forêts (SCF) estiment que les coûts des traitements, d’enlèvement et de remplacement des arbres affectés par l’agrile du frêne dans les municipalités canadiennes peuvent atteindre 2 milliards de dollars sur une période de 30 ans. Les importants impacts écologiques de la mortalité des frênes sur les organismes aquatiques, les oiseaux et la végétation du sous-bois attendus sont présentement à l'étude.</p>
+    <a class="button" target="_blank" href="https://www.rncan.gc.ca/forets/feux-insectes-perturbations/principaux-insectes/13378">En savoir plus</a>`,
   shortDescription: "Véritable fléau en Amerique du nord, venez en apprendre plus sur ces bebettes et voir leur propagation dans votre quartier.",
-  contact: "https://www.quebec.ca/habitation-et-logement/milieu-de-vie-sain/proceder-a-l-extermination-de-punaises-de-lit/"
 }

@@ -169,7 +169,7 @@ export default {
 
 .picture {
   // ratio-box(16/9)
-  width: 50%;
+  // width: 50%;
 }
 
 /**
