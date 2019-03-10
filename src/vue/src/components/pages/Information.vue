@@ -13,7 +13,6 @@ import UiPicture from "components/ui/Picture";
 import GoogleMap from "components/pages/GoogleMap";
 import Chart from "components/pages/Chart";
 import { mapGetters } from "vuex";
-import moment from 'moment'
 
 export default {
   name: "PageInfoSingle",
@@ -35,8 +34,8 @@ export default {
   },
   data() {
     return {
-      minDate: "2018-11-05T10:41:26",
-      maxDate: "2019-11-18T10:41:26"
+      minDate: "2018-03-10T10:41:26",
+      maxDate: "2019-03-10T10:41:26"
     };
   },
   watch: {
@@ -52,11 +51,6 @@ export default {
       immediate: true
     }
   },
-  methods:{
-    formatDate(date){
-      return moment(date).format('DD/MM/YYYY')
-    }
-  }
 };
 </script>
 
@@ -75,25 +69,13 @@ export default {
         <GoogleMap :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
       </div>
     </section>
-    <div class="chart">
-      <h3 class="title">Tendances</h3>
-      <p class="dates" v-text="`du ${formatDate(minDate)} au ${formatDate(maxDate)}`" />
-      <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
-    </div>
+    <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
+    
     <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
   </main>
 </template>
 
 <style lang="stylus" scoped>
-.chart
-  .title
-    padding 20px 0px 0 10px
-    margin 0 !important
-    f-style(title, h3)
-  .dates
-    padding 0 0 10px 10px
-    f-style()
-    font-size 1.3rem !important
 .header {
   ratio-box((16 / 9));
   position: relative;
@@ -105,9 +87,6 @@ export default {
     z-index: 10;
   }
 }
-
-.chart >.title
-  margin-bottom 20px
 
 .button{
   display: inline-block;
