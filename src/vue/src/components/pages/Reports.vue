@@ -50,10 +50,17 @@ export default {
   },
   mounted() {},
   methods: {
-    submit: function (){
+    submit: function() {
       this.sent = true;
-      const input = JSON.stringify(this.report)
-      localStorage.setItem('input',input)    
+      console.log(this.report)
+      var customPositions = JSON.parse(localStorage.getItem("addedPositions")) || [];
+      customPositions.push({
+        category: this.report.categorie,
+        date: new Date(),
+        lat: this.report.position.lat,
+        lng: this.report.position.lng
+      });
+      localStorage.setItem("addedPositions", JSON.stringify(customPositions));
     },
     photoSubmitted : function(){
       this.fileSubmitted = true
