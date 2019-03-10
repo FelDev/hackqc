@@ -68,11 +68,13 @@ export default {
             <img v-if="alert.categorie === 'insecte'" src="./icons/bug-solid.svg" class="icon">
             <img v-if="alert.categorie === 'secheresse'" src="./icons/sun-solid.svg" class="icon">
           </div>
-          <div class="informations">
+          <div class="summary" v-if="focus !== index">
             Location : {{alert.location}} <br>
             Date d'émission : {{alert.dateDeParution}}<br>
           </div>
           <span class="description"  v-if="focus === index">
+            Location : {{alert.location}} <br>
+            Date d'émission : {{alert.dateDeParution}}<br>
             Criticité:  {{alert.niveau}} <br>
             Categorie : {{alert.categorie}}<br>
             Description : {{alert.description}}
