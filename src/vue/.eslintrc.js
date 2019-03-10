@@ -31,8 +31,8 @@ module.exports = {
     'max-len': 'off',
     // allow debugger and console during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    // 'no-console': process.env.NODE_ENV === 'production' ? 'off' : 'off',
+    // 'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'off' : 'off',
     "no-param-reassign": [2, { "props": false }],
     
     // remove after https://github.com/babel/babel-eslint/issues/530 fix",

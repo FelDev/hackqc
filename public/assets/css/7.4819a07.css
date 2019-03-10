@@ -1,0 +1,232 @@
+.cursorWrapper[data-v-04b1ccd2] {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  right: 10px;
+  bottom: 0;
+}
+.cursor[data-v-04b1ccd2] {
+  background-color: rgba(255,0,0,0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  z-index: 20;
+  transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.ranges[data-v-04b1ccd2] {
+  padding: 10px 20px 20px;
+}
+.TheChart[data-v-04b1ccd2] {
+  position: relative;
+  padding-bottom: 20px;
+}
+.chart[data-v-04b1ccd2] {
+  padding-left: 20px;
+}
+.axis[data-v-04b1ccd2] {
+  font-size: 1rem;
+}
+.axis.-y[data-v-04b1ccd2] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: stretch;
+  align-items: stretch;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  height: 75%;
+  text-align: right;
+}
+.axis.-y[data-v-04b1ccd2]:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25px;
+  bottom: -4px;
+  border-right: 1px solid #2c3e50;
+}
+.axis.-y .data[data-v-04b1ccd2] {
+  width: 10px;
+}
+.axis.-x[data-v-04b1ccd2] {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: center;
+  align-items: center;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 7%;
+  text-align: center;
+}
+.axis.-x[data-v-04b1ccd2]:before {
+  content: '';
+  position: absolute;
+  right: -5%;
+  left: -1px;
+  bottom: 23px;
+  border-top: 1px solid #2c3e50;
+}
+.axis.-x .data[data-v-04b1ccd2] {
+  height: 20px;
+}
+.title[data-v-04b1ccd2] {
+  padding: 20px 0px 0 10px;
+  margin: 0;
+  font-family: 'FontTitle', Helvetica, Arial, sans-serif;
+  font-size: 1.527777777777778vw;
+}
+@media only screen and (max-width: 768px) {
+.title[data-v-04b1ccd2] {
+    font-size: 2.2rem;
+}
+}
+@media only screen and (max-width: 768px) {
+.title[data-v-04b1ccd2] {
+    font-size: 2.4rem;
+}
+}
+.dates[data-v-04b1ccd2] {
+  padding: 0 0 10px 10px;
+  font-family: 'FontText', Arial, Helvetica, sans-serif;
+  line-height: 1.25;
+  font-size: 1.6rem;
+  font-size: 1.3rem !important;
+}
+@media only screen and (max-width: 768px) {
+.dates[data-v-04b1ccd2] {
+    font-size: 1.6rem;
+}
+}
+
+.header[data-v-22be3a0a] {
+  overflow: hidden;
+  position: relative;
+  position: relative;
+}
+.header[data-v-22be3a0a]:before {
+  content: "";
+  display: block;
+  height: 0;
+  padding-top: 56.25%;
+}
+.header .title[data-v-22be3a0a] {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-family: 'FontTitle', Helvetica, Arial, sans-serif;
+  font-size: 3.472222222222222vw;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #fff;
+  z-index: 10;
+}
+@media only screen and (max-width: 768px) {
+.header .title[data-v-22be3a0a] {
+    font-size: 5rem;
+}
+}
+@media only screen and (max-width: 768px) {
+.header .title[data-v-22be3a0a] {
+    font-size: 3rem;
+}
+}
+.button[data-v-22be3a0a] {
+  display: inline-block;
+  display: inline-block;
+  margin-top: 20px;
+  border: 2px solid #f00;
+  color: #f00;
+  padding: 10px 20px;
+  background-color: #fff;
+  margin-left: 1em;
+}
+.content[data-v-22be3a0a] {
+  padding: 20px;
+  line-height: 1.4;
+}
+.content[data-v-22be3a0a] ul {
+  list-style: outside disc;
+  margin-left: 20px;
+}
+.content[data-v-22be3a0a] h2 {
+  font-family: 'FontTitle', Helvetica, Arial, sans-serif;
+  font-size: 2.777777777777778vw;
+  margin-top: 20px;
+}
+@media only screen and (max-width: 768px) {
+.content[data-v-22be3a0a] h2 {
+    font-size: 4rem;
+}
+}
+@media only screen and (max-width: 768px) {
+.content[data-v-22be3a0a] h2 {
+    font-size: 2.6rem;
+}
+}
+.content[data-v-22be3a0a] h3 {
+  font-family: 'FontTitle', Helvetica, Arial, sans-serif;
+  font-size: 1.527777777777778vw;
+  margin-top: 10px;
+}
+@media only screen and (max-width: 768px) {
+.content[data-v-22be3a0a] h3 {
+    font-size: 2.2rem;
+}
+}
+@media only screen and (max-width: 768px) {
+.content[data-v-22be3a0a] h3 {
+    font-size: 2.4rem;
+}
+}
+.content[data-v-22be3a0a] a {
+  display: inline-block;
+  margin-top: 20px;
+  border: 2px solid #f00;
+  color: #f00;
+  padding: 10px 20px;
+}
+#top[data-v-22be3a0a] {
+  background: #fff;
+}
+#bottom[data-v-22be3a0a] {
+  background: #123;
+}
+#middle[data-v-22be3a0a] {
+  background: #112;
+  display: flex;
+}
+#middle h1[data-v-22be3a0a] {
+  color: #f00;
+  -ms-flex-grow: 2;
+  flex-grow: 2;
+}
+#middle .d3Graph[data-v-22be3a0a] {
+  -ms-flex-grow: 8;
+  flex-grow: 8;
+  border: 2px solid #000;
+  border-radius: 1em;
+}
+#bottom[data-v-22be3a0a] {
+  background: #123;
+}
+/**
+ * TABLE OF CONTENT
+ * --------
+ *  - LAYOUT
+ *  - DEBUG
+ *  - NO_SCOPE
+ */
+
