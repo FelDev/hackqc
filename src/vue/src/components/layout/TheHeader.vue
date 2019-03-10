@@ -41,6 +41,10 @@ export default {
           label: 'Signaler',
           route: 'reports',
         },
+        {
+          label: 'Mon compte',
+          route: '404',
+        },
       ]
     }
   },
@@ -73,10 +77,10 @@ export default {
         <LogoSvg />
       </router-link>
 
-      <router-link class="report" v-text="'Signaler'"
-      :to="{name: `reports`}" />
+        <router-link class="report" v-text="'Signaler'"
+        :to="{name: `reports`}" />
     </div>
-    
+
     <nav class="menu" :data-open="open">
       <ul class="list">
         <li
@@ -196,7 +200,7 @@ export default {
 
   .logo
     size 40px
-
+    
   .burger
     size 20px
 </style>
