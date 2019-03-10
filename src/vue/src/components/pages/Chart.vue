@@ -118,20 +118,21 @@ export default {
       }
       
       const someDates = [
-        this.firstDate,
-        moment.unix(this.firstDate).add(this.convertPercentToMs(0.5)),
-        moment.unix(this.firstDate).add(this.convertPercentToMs(0.5)),
-        moment.unix(this.firstDate).add(this.convertPercentToMs(0.5)),
-        this.lastDate
+        moment.unix(this.firstDate.toString()),
+        moment.unix(this.firstDate.toString()).add(this.convertPercentToMs(0.25, 's')),
+        moment.unix(this.firstDate.toString()).add(this.convertPercentToMs(0.5, 's')),
+        moment.unix(this.firstDate.toString()).add(this.convertPercentToMs(0.75, 's')),
+        moment.unix(this.lastDate.toString()),
       ]//, date=>moment.unix(date).format('DD/MM/YY')
 
-      const middle = moment.unix(this.firstDate).add(this.convertPercentToMs(0.5))
-      someDates.push(this.chartDates[middle])
-      someDates.push(this.chartDates[Math.round(middle/2)])
-      someDates.push(this.chartDates[Math.round(middle + (middle/2))])
-      someDates.push(last(this.chartDates))
+      // const middle = moment.unix(this.firstDate).add(this.convertPercentToMs(0.5))
+      // someDates.push(this.chartDates[middle])
+      // someDates.push(this.chartDates[Math.round(middle/2)])
+      // someDates.push(this.chartDates[Math.round(middle + (middle/2))])
+      // someDates.push(last(this.chartDates))
       return {
-        x: map(someDates, date=>moment.unix(date).format('DD/MM/YY')),
+        // x: [this.convertPercentToMs(0, 's'), this.convertPercentToMs(0.5, 's'), this.convertPercentToMs(1, 's')],\
+        x:map(someDates, date=>date.format('DD/MM/YY')),
         // x: someDates,
         y: [max(this.chartData), min(this.chartData)],
       }
@@ -205,23 +206,9 @@ export default {
         })()
 
         const msToAdd = this.convertPercentToMs(percentPosition)
-        
 
-        const msPeriode = (this.dateRangeMs/this.timeRange)
-        // console.log({event, draggable})
-        console.log('END',{x,max,percentPosition,msPeriode, df:this.dateRangeMs});
-        const d = this.firstDate + (percentPosition*this.dateRangeMs)
-        console.log({
-          f:this.firstDate,
-          mf:this.formatUnixDate(this.firstDate),
-          d,
-          m:this.formatUnixDate(d),
-          a:moment.unix(this.firstDate).add(msToAdd, 's'),
-          b:moment.unix(this.firstDate).add(msToAdd, 's').format('DD/MM/YY'),
-        })
-
-        const from = moment.unix(this.firstDate).add(msToAdd, 's').format('DD/MM/YY')
-        const to = moment.unix(this.firstDate).add(msToAdd, 's').add(this.timeRange, 's').format('DD/MM/YY')
+        const from = moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').format('DD/MM/YY')
+        const to = moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').add(this.timeRange, 's').format('DD/MM/YY')
         console.log({from, to})
         // @todo guess witch periode is highlighted and reflect related points into the map
       }
@@ -285,7 +272,7 @@ export default {
       return moment.unix(date).format('DD/MM/YYYY')
     },
     convertPercentToMs(percent){
-      return percent * this.dateRangeMs
+      return percent * this.dateRangeMs * 1000
     }
   }
 };
@@ -294,6 +281,7 @@ export default {
 <style lang="stylus" scoped>
   .cursorWrapper
     absolute top left 30px right 10px bottom
+    background-color rgba(blue, 0.2)
   .cursor
     background-color rgba(red, 0.4)
     absolute top left 0 bottom
@@ -323,17 +311,31 @@ export default {
       .data
         width 10px
     &.-x
-      absolute bottom left right
+      absolute bottom left 30px right 10px
       flexbox(row, $justify:space-between)
-      width 90%
-      margin 0 7%
       text-align center
+      background-color rgba(yellow, 0.2)
       &:before
         content ''
-        absolute right -5% left -1px bottom 23px
+        absolute right left bottom 23px
         border-top 1px solid #2c3e50
       .data
         height 20px
+        position relative
+        &:before
+          content '|'
+          absolute top -50% left 50%
+          transform translateX(-50%)
+        &:nth-child(1)
+          transform translateX(-50%)
+        &:nth-child(2)
+          transform translateX(-25%)
+        &:nth-child(3)
+          transform translateX(0%)
+        &:nth-child(4)
+          transform translateX(25%)
+        &:nth-child(5)
+          transform translateX(50%)
         
   .title
     padding 20px 0px 0 10px
