@@ -77,7 +77,7 @@
 
         this.$store.commit('Loader/PROMISE_PUSH', preloaderPromise);
 
-        // this.faker(10)
+        // this.faker(2)
         
         Promise.all(this.promises).then(this._onPromisesComplete);
       },

@@ -21,6 +21,8 @@ export default {
   },
   beforeCreate() {
     this.$router.beforeEach((to, redirect, next) => {
+      
+      this.$store.dispatch("Interface/SCROLL_TOP");
       this.$store.commit('app/SET_FROM_ROUTE', this.$route);
       if (this.$refs.page) { this.$prevLeave = this.$refs.page.leave; }
       next();

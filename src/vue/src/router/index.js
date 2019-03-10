@@ -25,6 +25,7 @@ const FourOFour = () => import(/* webpackChunkName: "pages-404" */ 'components/p
 const Reports = () => import(/* webpackChunkName: "pages-reports" */ 'components/pages/Reports');
 const GoogleMap = () => import(/* webpackChunkName: "pages-reports" */ 'components/pages/GoogleMap');
 const Information = () => import(/* webpackChunkName: "pages-Information" */ 'components/pages/Information');
+const Portail = () => import(/* webpackChunkName: "pages-Portail" */ 'components/pages/Portail');
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,8 @@ function getComponentById(id) {
       return Reports;
     case 'map':
       return GoogleMap;
+    case 'portail':
+      return Portail;
     case '404':
     default:
       return FourOFour;
@@ -141,6 +144,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // remove all temp scenes
   store.dispatch('ScrollMagic/DESTROY_TEMP_SCENES');
+  window.scrollTo(0, 0);
 
   // retrieve locale (route's param or meta)
   const locale = get(to, 'params.locale') || get(to, 'meta.locale', defaultLocale);

@@ -13,6 +13,10 @@ import UiPicture from "components/ui/Picture";
 import GoogleMap from "components/pages/GoogleMap";
 import Chart from "components/pages/Chart";
 import { mapGetters } from "vuex";
+import moment from 'moment'
+import { map } from 'lodash'
+
+import { Scene } from 'ScrollMagic';
 
 export default {
   name: "PageInfoSingle",
@@ -32,6 +36,19 @@ export default {
       return this.$route.params.slug;
     }
   },
+  data() {
+    return {
+      isOnViewport:false,
+      renderMap: false,
+      dateRange: [],
+      minDateB: "2018-01-12T00:00:00-05:00",
+      maxDateB: "2018-08-12T00:00:00-04:00",
+      // minDate: "2018-03-10T10:41:26",
+      // maxDate: "2019-03-10T10:41:26"
+      minDate: "2018-01-12T10:41:26",
+      maxDate: "2019-08-12T10:41:26"
+    };
+  },
   watch: {
     /** watch slug from route to load datas
      * Note that we may stay on the same component within some other slug
@@ -44,6 +61,36 @@ export default {
       },
       immediate: true
     }
+  },
+  mounted(){
+    this.$refs.Chart.$watch('selectedRange', (range)=>{
+      this.dateRange = map(range, date=>{
+        return moment(date, 'DD/MM/YY').format('YYYY-MM-DDTh:mm:ss')
+      })
+      // this.renderMap = false
+      // this.$nextTick(()=>{
+      //   this.renderMap = true
+      // })
+    })
+    this.initScrollMagic()
+  },
+  methods:{
+    initScrollMagic(){
+      const scene = new Scene({
+        triggerElement: this.$refs.ChartWrapper,
+        triggerHook: 1,
+      })
+      .addIndicators()
+      .on('enter', ()=>{
+        this.isOnViewport = true
+      })
+      .on('leave', ()=>{
+        this.isOnViewport = false
+      })
+      // scene.addTo(controller);
+      this.$store.dispatch('ScrollMagic/ADD_SCENE', { scene, indicators: false });
+
+    }
   }
 };
 </script>
@@ -53,81 +100,98 @@ export default {
   <main class="PageInfoSingle">
     <section id="top">
       <header class="header">
-        <UiPicture
-          class="picture"
-          :src="page.image"
-          cover="cover"
-          :full="true" 
-          :overlay="true" />
-        <h1
-          v-text="page.title"
-          class="title" />
+        <UiPicture class="picture" :src="page.image" cover="cover" :full="true" :overlay="true"/>
+        <h1 v-text="page.title" class="title"/>
       </header>
-      <div class="content" v-html="page.description" />
+      <div class="content" v-html="page.description"/>
     </section>
-    <section id="middle">
-      <div class="d3Graph">
-        <!-- TODO: inclure un graph d3.js -->
-      </div>
-      <h1 v-text="'statsTitle'" class="title"/>
-    </section>
-    <section id="bottom">
-      <h1 v-text="'mapTitle'" class="title"/>
-      <div class="map">
-        <GoogleMap :donnee="data"/>
+    <section id="bottom-no-bg">
+      <GoogleMap :minDate="dateRange[0]" :maxDate="dateRange[1]" :donnee="data" v-if="dateRange"/>
+      <div ref="ChartWrapper">
+        <Chart :display="isOnViewport" :minDate="minDate" :maxDate="maxDate" :donnee="data" ref="Chart"/>
       </div>
     </section>
-    <div class="chart">Chart :
-      <Chart :donnee="data"/>
-    </div>
-    <a :href="page.contact">Mais quoi faire ?!</a>
+    
+    <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
   </main>
 </template>
 
 <style lang="stylus" scoped>
+.PageInfoSingle
+  background-color #fff
+.header {
+  ratio-box((16 / 9));
+  position: relative;
 
-  .header
-    ratio-box(16/9)
-    position relative
-    .title
-      absolute bottom 20px left 20px
-      f-style(title, h1)
-      z-index 10
+  .title {
+    absolute: bottom 20px left 20px;
+    f-style(title, h1);
+    background-color : #ffffff
+    z-index: 10;
+  }
+}
 
-  .content
-    padding 20px
-    line-height 1.4
-    >>> ul
-      list-style outside disc
-      margin-left 20px
-    >>> h2
-      f-style(title, h2)
-      margin-top 20px
-    >>> h3
-      f-style(title, h3)
-      margin-top 10px
-    >>> a
-      display inline-block
-      margin-top 20px
-      border 2px solid red
-      color red
-      padding 10px 20px
+.button{
+  display: inline-block;
+    display: inline-block;
+    margin-top: 20px;
+    border: 2px solid red;
+    color: red;
+    padding: 10px 20px;
+    background-color : #ffffff
+    margin-left : 1em
+}
+.content {
+  padding: 20px;
+  line-height: 1.4;
 
-  #top
-    background white
+  >>> ul {
+    list-style: outside disc;
+    margin-left: 20px;
+  }
 
-  #middle
-    background #112
-    display flex
-    h1
-      color:red
-      flex-grow 2
-    .d3Graph
-      flex-grow 8
-      border 2px solid black
-      border-radius 1em
-  #bottom
-    background #123
+  >>> h2 {
+    f-style(title, h2);
+    margin-top: 20px;
+  }
+
+  >>> h3 {
+    f-style(title, h3);
+    margin-top: 10px;
+  }
+
+  >>> a {
+    display: inline-block;
+    margin-top: 20px;
+    border: 2px solid red;
+    color: red;
+    padding: 10px 20px;
+  }
+}
+
+#top {
+  background: white;
+}
+
+// #middle {
+//   background: #112;
+//   display: flex;
+
+//   h1 {
+//     color: red;
+//     flex-grow: 2;
+//   }
+
+//   .d3Graph {
+//     flex-grow: 8;
+//     border: 2px solid black;
+//     border-radius: 1em;
+//   }
+// }
+
+// #bottom {
+//   background: #123;
+// }
 
 #middle {
   background: #112;
@@ -151,7 +215,7 @@ export default {
 
 .picture {
   // ratio-box(16/9)
-  width: 50%;
+  // width: 50%;
 }
 
 /**

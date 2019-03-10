@@ -7,13 +7,13 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import LogoSvg from 'assets/svg/logo.svg?vue';
+import logoPng from 'assets/images/logo.png';
 import TheBurger from 'components/misc/Burger';
 
 export default {
   name: 'TheHeader',
   components: {
-    LogoSvg, TheBurger
+    TheBurger
   },
   props: {
     state: {
@@ -23,6 +23,7 @@ export default {
   },
   data(){
     return {
+      ima: logoPng,
       subjectsOpen:false,
       menu:[
         {
@@ -41,6 +42,14 @@ export default {
           label: 'Signaler',
           route: 'reports',
         },
+        {
+          label: 'Mon compte',
+          route: '404',
+        },
+        {
+          label : 'Portail des villes',
+          route : 'portail'
+        }
       ]
     }
   },
@@ -48,7 +57,7 @@ export default {
     ...mapGetters({
       open: 'Menu/open',
       subjects: 'Informations/sections',
-    }),
+    })
   },
   mounted(){
     this.$watch('open', (open)=>{
@@ -59,7 +68,9 @@ export default {
       next()
     })
   }
+  
 };
+  
 </script>
 
 <template>
@@ -70,13 +81,13 @@ export default {
         @click.native.prevent="$store.dispatch('Menu/TOGGLE')"/>
 
       <router-link class="logo" :to="{name: `home`}">
-        <LogoSvg />
+        <img  class="logo" :src="ima" alt="logo"/>
       </router-link>
 
-      <router-link class="report" v-text="'Signaler'"
-      :to="{name: `reports`}" />
+        <router-link class="report" v-text="'Signaler'"
+        :to="{name: `reports`}" />
     </div>
-    
+
     <nav class="menu" :data-open="open">
       <ul class="list">
         <li
@@ -99,7 +110,7 @@ export default {
                 <router-link
                   class="link sublink"
                   :to="{name: 'subject', params:{slug:subject.slug}}"
-                  v-text="`- ${subject.label}`" />
+                  v-text="`- ${subject.title}`" />
               </li>
             </ul>
           </div>
@@ -125,6 +136,10 @@ export default {
    */
 
   //  ===LAYOUT===
+
+  .logo
+    border-radius :50%
+  
   .TheHeader
     fixed top left right
     height $h-header
@@ -170,7 +185,8 @@ export default {
       overflow hidden
       transition height 0.4s ease-in-out
       &[data-open]
-        height 85px
+        height 140px
+        height 162px
 
     .item
       padding 0.2em 0 !important
@@ -196,7 +212,7 @@ export default {
 
   .logo
     size 40px
-
+    
   .burger
     size 20px
 </style>

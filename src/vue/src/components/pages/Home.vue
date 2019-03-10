@@ -8,13 +8,10 @@
 <script>
 import SectionStatus from 'components/sections/Status';
 import SectionGraphics from 'components/sections/Graphics';
-import SectionMap from 'components/sections/Map'
-import SectionAbout from 'components/sections/About';
-import SectionReports from 'components/sections/Reports';
 
 export default {
   name: 'PageHome',
-  components: { SectionStatus, SectionGraphics, SectionMap, SectionAbout, SectionReports },
+  components: { SectionStatus, SectionGraphics },
   props: {},
   data(){
     return {}
@@ -28,9 +25,6 @@ export default {
   <main class="PageHome">
     <SectionStatus :title="'Alertes'"/>
     <SectionGraphics />
-    <SectionMap />
-    <SectionAbout />
-    <SectionReports />
   </main>
 </template>
 

@@ -1,14 +1,5 @@
 <template>
   <div>
-    <div>
-      <h2>Search and add a pin</h2>
-      <label>
-        <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-      </label>
-      <br>
-    </div>
-    <br>
     <gmap-map ref="mapRef" :center="center" :zoom="12" style="width:100%;  height: 400px;">
       <gmap-cluster>
         <gmap-marker
@@ -39,6 +30,8 @@ export default {
     google: gmapApi
   },
   props: {
+    minDate: null,
+    maxDate: null,
     donnee: {
       type: Array,
       default() {
@@ -62,25 +55,38 @@ export default {
     //this.$watch("google", watev => console.log(watev));
     this.$watch(
       () => {
+        
         if (!this.google) return [];
-        return this.donnee;
+        return {
+          data: this.donnee,
+          minDate:this.minDate,
+          maxDate:this.maxDate,
+        }
       },
-      data => {
+      ({data}) => {
         if (isEmpty(data)) return;
 
+        // console.warn('@TODO REMOVE MARKERS HERE', this.markers, data)
+
+        let hasMarkers = false
         let bounds = new this.google.maps.LatLngBounds();
 
-        this.markers = data;
+        this.markers = data.filter((singleData) => {
+          return singleData.date >= new Date(this.minDate) && singleData.date <= new Date(this.maxDate)
+        });
         
         this.markers.forEach(marker => {
+          hasMarkers = true
           bounds.extend(
             new this.google.maps.LatLng(marker.position.lat, marker.position.lng)
           );
         });
 
-        this.$refs.mapRef.$mapPromise.then(map => {
-          map.fitBounds(bounds);
-        });
+        if(hasMarkers){
+          this.$refs.mapRef.$mapPromise.then(map => {
+            map.fitBounds(bounds);
+          });
+        }
       },
       { immediate: true }
     );

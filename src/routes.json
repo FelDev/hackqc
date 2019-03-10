@@ -40,5 +40,11 @@
     "urls": {
       "fr": "404"
     }
+  },
+  {
+    "id": "portail",
+    "urls": {
+      "fr": "portail"
+    }
   }
 ]

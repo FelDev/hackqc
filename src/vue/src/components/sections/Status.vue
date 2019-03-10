@@ -21,7 +21,7 @@ export default {
      alertes : [
        {
          niveau: '2',
-         location : 'Québec',
+         location : 'Ville de Québec',
          description : "La ville de Québec à présentement émis une alerte concernant le niveau d'eau sur le bord du fleuve, yer ben frosty.",
          categorie : 'inondation',
          dateDeParution : moment().locale("fr").format('MMMM Do YYYY'),
@@ -50,11 +50,9 @@ export default {
       }else{
         this.focus = index;
       }
-      console.log("maaaaaaaan")
     },
     deleteAlert : function(index){
       this.alertes.splice(index,1);
-      
     }
   }
 };
@@ -63,21 +61,23 @@ export default {
 <template>
   <section class="SectionStatus section">
     <h1 class="title">{{title}} </h1>
-      <div class="alertes list-item" v-for="(alert, index) in alertes"  :key="index" >
-        <div v-on:click="setFocus(index)">
+      <div class="alertes list-item" v-for="(alert, index) in alertes" :key="index" v-bind:class="{ active: focus === index }" >
+        <div v-on:click="setFocus(index)" class="info-container">
           <div class="icon container">
             <img v-if="alert.categorie === 'inondation'" src="./icons/water-solid.svg" class="icon">
             <img v-if="alert.categorie === 'insecte'" src="./icons/bug-solid.svg" class="icon">
             <img v-if="alert.categorie === 'secheresse'" src="./icons/sun-solid.svg" class="icon">
+          </div><br>
+          <div class="summary" v-if="focus !== index">
+            Location: {{alert.location}} <br>
+            Date d'émission: {{alert.dateDeParution}}<br>
           </div>
-          <div class="informations">
-            <b>Location :</b> {{alert.location}} <br>
-            Date d'émission : {{alert.dateDeParution}}<br>
-          </div>
-          <span class="description"  v-if="focus === index">
+          <span class="description" v-if="focus === index">
+            Location: {{alert.location}} <br>
+            Date d'émission: {{alert.dateDeParution}}<br>
             Criticité:  {{alert.niveau}} <br>
-            Categorie : {{alert.categorie}}<br>
-            Description : {{alert.description}}
+            Categorie: {{alert.categorie}}<br>
+            Description: {{alert.description}}
           </span>
         </div>
         <div class="closeIcon" v-on:click="deleteAlert(index)">
@@ -92,11 +92,17 @@ export default {
 <style lang="stylus" scoped>
 
   .alertes{
-     border: 2px solid red;
+     border: 2px solid #ed4f3b;
      padding : 3px
      margin-bottom: 5px
      border-radius: 10px;
+     display: flex;
+     position: relative
   }
+
+.active{
+  background-color : #ffffff
+}
 
   /**
   * TABLE OF CONTENT
@@ -111,8 +117,9 @@ export default {
   }
 
   .closeIcon{
-     display: float right;
-     size : 3em;
+     size : 25px
+     margin-left :90%
+     position : absolute
   }
 
   //  ===LAYOUT===

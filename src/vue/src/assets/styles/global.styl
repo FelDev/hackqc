@@ -11,10 +11,13 @@ html
 
 body
   height 100%
+  width 100%
+  overflow-x hidden
   font-size 100%
   background $c-white
   color $c-black
-  overflow hidden
+  outline $c-alizarin-crimson
+  // overflow hidden
 
 /*
   // If you want to scroll inside a page
@@ -50,9 +53,9 @@ svg
   f-style('default')
   flexbox(column)
   height 100vh
-  overflow-x hidden
-  overflow-y scroll
-  -webkit-overflow-scrolling touch
+  // overflow-x hidden
+  // overflow-y scroll
+  // -webkit-overflow-scrolling touch
 
   &.-no-scroll
     overflow hidden
@@ -74,5 +77,5 @@ svg
     f-style(title, h1)
 
 .page
-  padding ($h-header + 20px) 0 20px
+  padding ($h-header + 5px) 0 20px
   z-index $z-page

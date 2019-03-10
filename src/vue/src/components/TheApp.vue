@@ -33,7 +33,7 @@ export default {
         ._fullViewport,
         ._fullViewportW,
         ._fullViewportH {
-          overflow: hidden;
+          // overflow: hidden;
         }
         ._fullViewport {
           position: relative;

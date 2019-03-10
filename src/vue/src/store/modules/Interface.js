@@ -152,7 +152,7 @@ export default {
 
       if (!y) return null;
 
-      const currentY = container.scrollTop; // window.scrollY
+      const currentY = window.scrollY;
       const gapY = Math.abs(y - currentY);
       const speed = (gapY * BASE_SPEED) / 1000;
 
