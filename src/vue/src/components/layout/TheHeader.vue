@@ -180,6 +180,7 @@ export default {
       transition height 0.4s ease-in-out
       &[data-open]
         height 140px
+        height 162px
 
     .item
       padding 0.2em 0 !important
