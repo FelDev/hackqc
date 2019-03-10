@@ -83,8 +83,38 @@ export default {
             })));
           });
           break;
+        case 'insects':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          import('db/data/insects/insects.json').then(({ default: data }) => {
+            commit('SET_DATA', data.map(singleData => ({
+              amount: 1,
+              date: new Date(singleData.DDS_DATE_CREATION),
+              position: { lat: singleData.LOC_LAT, lng: singleData.LOC_LONG },
+            })));
+          });
+          break;
+        case 'rats':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          import('db/data/rats/rats.json').then(({ default: data }) => {
+            commit('SET_DATA', data.map(singleData => ({
+              amount: 1,
+              date: new Date(singleData.DDS_DATE_CREATION),
+              position: { lat: singleData.LOC_LAT, lng: singleData.LOC_LONG },
+            })));
+          });
+          break;
+        case 'vermines':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          import('db/data/vermines/vermines.json').then(({ default: data }) => {
+            commit('SET_DATA', data.map(singleData => ({
+              amount: 1,
+              date: new Date(singleData.DDS_DATE_CREATION),
+              position: { lat: singleData.LOC_LAT, lng: singleData.LOC_LONG },
+            })));
+          });
+          break;
         default:
-        break;
+          break;
       }
     },
   },
