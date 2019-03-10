@@ -77,7 +77,7 @@ export default {
 
     this.$watch('data', item=>{
       let firstItemPredicted =  filter(item, data=>data.predicted)[0]
-      console.log('firstItemPredicted', firstItemPredicted);
+      // console.log('firstItemPredicted', firstItemPredicted);
       if(firstItemPredicted){
         this.predictedStartDate = moment(firstItemPredicted.date).format('X')
       }
@@ -89,7 +89,7 @@ export default {
         triggerElement: this.$refs.ChartWrapper,
         triggerHook: 1,
       })
-      .addIndicators()
+      // .addIndicators()
       .on('enter', ()=>{
         this.isOnViewport = true
       })
@@ -120,7 +120,8 @@ export default {
         <Chart :predictedStartDate="predictedStartDate" :display="isOnViewport" :minDate="minDate" :maxDate="maxDate" :donnee="data" ref="Chart"/>
       </div>
     </section>
-    <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
+    
+    <a class="button" :href="page.contact" v-text="page.helpButtonText"></a>
   </main>
 </template>
 

@@ -15,7 +15,8 @@ export default [
       <p class="text">L'appellation « punaise des lits » peut désigner plusieurs espèces d'insectes hétéroptères de la famille des Cimicidae, selon les régions du monde où le terme est employé. Exclusivement hématophages, les mâles comme les femelles piquent et sucent (durant 10 à 20 min) le sang de leur hôte, pouvant vivre sans manger jusqu’à 1 an et demi, voire 2 ans dans de bonnes conditions. Elles sont sources de fortes démangeaisons et de dermatites. \nAu début du xxie siècle, certaines espèces de punaises semblent de nouveau proliférer, y compris dans des hôtels, hôpitaux ou maisons de retraite1. Ce sont des insectes exclusivement nocturnes, mais lorsque la population augmente ils peuvent se promener même le jour. \nLa revue Nature a publié en février 2016 de premières données génomiques sur la punaise du lit, qui pourrait permettre d'affiner les méthodes de prévention et de lutte2</p>
       <a class="button" target="_blank" href="http://www.msss.gouv.qc.ca/professionnels/sante-environnementale/punaises-de-lit/situation-au-quebec-et-dans-le-monde/">En savoir plus</a>`,
     shortDescription: "Véritable fléau en Amerique du nord, venez en apprendre plus sur ces bebettes et voir leur propagation dans votre quartier.",
-    contact: "https://www.quebec.ca/habitation-et-logement/milieu-de-vie-sain/proceder-a-l-extermination-de-punaises-de-lit/"
+    contact: "https://www.quebec.ca/habitation-et-logement/milieu-de-vie-sain/proceder-a-l-extermination-de-punaises-de-lit/",
+    helpButtonText: "Ressources en cas d'infestation"
   },
   {
     slug: "agriles",
@@ -26,7 +27,8 @@ export default [
       <br />Les scientifiques du Service canadien des forêts (SCF) estiment que les coûts des traitements, d’enlèvement et de remplacement des arbres affectés par l’agrile du frêne dans les municipalités canadiennes peuvent atteindre 2 milliards de dollars sur une période de 30 ans. Les importants impacts écologiques de la mortalité des frênes sur les organismes aquatiques, les oiseaux et la végétation du sous-bois attendus sont présentement à l'étude.</p>
       <a class="button" target="_blank" href="https://www.rncan.gc.ca/forets/feux-insectes-perturbations/principaux-insectes/13378">En savoir plus</a>`,
     shortDescription: "Véritable fléau en Amerique du nord, venez en apprendre plus sur ces bebettes et voir leur propagation dans votre quartier.",
-    contact: 'https://eliteextermination.com/insectes-parasites/exterminateur-frelon/'
+    contact: 'https://eliteextermination.com/insectes-parasites/exterminateur-frelon/',
+    helpButtonText: "Ressources en cas d'infestation"
   },
   {
     slug: "insects",
@@ -52,7 +54,8 @@ export default [
       </ul>
       <a class="button" target="_blank" href="https://www.ville.quebec.qc.ca/citoyens/propriete/arbres/arbres_entretien.aspx">En savoir plus</a>`,
     shortDescription: "La Ville investit plusieurs centaines de milliers de dollars par année dans son programme d’entretien des arbres publics. Aidez nous a controler ces fleaux.",
-    contact :'http://www.arbolab.ca/fr/inspection-arbre'
+    contact :'http://www.arbolab.ca/fr/inspection-arbre',
+    helpButtonText: "Ressources en cas d'infestation"
   },
   {
     slug: "rats",
@@ -73,7 +76,8 @@ export default [
       </ul>
       <a class="button" target="_blank" href="https://www.canada.ca/fr/sante-canada/services/conseils-pour-controle-parasites/rats-et-souris.html">En savoir plus</a>`,
     shortDescription: "Véritable fléau en Amerique du nord, venez en apprendre plus sur ces bebettes et voir leur propagation dans votre quartier.",
-    contact : 'https://eliteextermination.com/insectes-parasites/extermination-rat/'
+    contact : 'https://eliteextermination.com/insectes-parasites/extermination-rat/',
+    helpButtonText: "Ressources en cas d'infestation"
   },
   {
     slug: "vermines",
@@ -85,7 +89,8 @@ export default [
       <br><br>Un logement en mauvais état d’habitabilité n’est pas automatiquement considéré comme impropre à l’habitation.</p>
       <a class="button" target="_blank" href="https://www.rdl.gouv.qc.ca/fr/le-logement/insalubrite">En savoir plus</a>`,
     shortDescription: "La gestion des espèces animales est complexe ; les interventions doivent être réfléchies, car certains gestes peuvent avoir de graves répercussions sur la faune, la flore, mais aussi les humains. Aidez nous a controler la vermine.",
-    contact: 'https://rivenordextermination.com/vermine/'
+    contact: 'https://rivenordextermination.com/vermine/',
+    helpButtonText: "Ressources en cas d'infestation"
   },
   {
     slug: "inondations",
@@ -102,7 +107,8 @@ export default [
       </ul>
       <a class="button" target="_blank" href="https://www.urgencequebec.gouv.qc.ca/Fr/situation-urgence/Pages/Inondation.aspx">En savoir plus</a>`,
     shortDescription: "Préocupé par les secheresses pres de vhez vous ?<br />Venez suivre lévolution des secheresses dans votre region et en apprendre plus sur ces preocupations",
-    contact: "https://www.quebec.ca/habitation-et-logement/milieu-de-vie-sain/proceder-a-l-extermination-de-punaises-de-lit/"
+    contact: "https://www.preparez-vous.gc.ca/cnt/rsrcs/pblctns/flds-wtd/index-fr.aspx",
+    helpButtonText: "Ressources en cas d'inondation"
   },
 
   // {
