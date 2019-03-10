@@ -11,12 +11,14 @@
       <ul class="axis -x">
         <li v-for="(item, index) in axis.x" :key="`x-${index}`" class="data" v-text="item" />
       </ul>
+      <pre>{{display}}</pre>
       <trend
         class="chart"
         ref="Trend"
         :data="chartData"
         :gradient="['#6fa8dc', '#42b983', '#2c3e50']"
         auto-draw
+        v-if="display"
         smooth>
       </trend>
       <div class="cursorWrapper" ref="CursorWrapper">
@@ -30,12 +32,15 @@
       <button class="range -week" @click.prevent="timeRange=SECOND_TO_WEEK">Semaines</button>
       <button class="range -month" @click.prevent="timeRange=SECOND_TO_MONTH">Mois</button>
       <button class="range -year" @click.prevent="timeRange=SECOND_TO_YEAR">Année</button>
+      <button class="range -year" @click.prevent="tl.play(0)">Play</button>
+      <button class="range -year" @click.prevent="tl.pause()">Pause</button>
     </div>
   </div>
 </template>
 
 <script>
-import { isEmpty, min, max, first, last, map, filter } from "lodash";
+import { isEmpty, min, max, first, last, map, filter, throttle } from "lodash";
+import {TweenMax} from 'gsap'
 import moment from 'moment'
 import Vue from 'vue';
 import Trend from 'vuetrend';
@@ -54,6 +59,7 @@ export default {
   props: {
     minDate: null,
     maxDate: null,
+    display: false,
     donnee: {
       type: Array,
       default() {
@@ -77,7 +83,9 @@ export default {
       selectedRange:{
         from:null,
         to:null,
-      }
+      },
+      draggable:null,
+      tl:null,
     };
   },
   computed:{
@@ -120,8 +128,21 @@ export default {
     },
   },
   mounted() {
-    // const tl = new TimelineMax()
-    //   .to(this.$refs.Cursor, 1, {x:(this.viewport.width-60)})
+    let a = {x:0}
+    const thr = throttle(()=>{
+      this.onUpdateRangeDate(a.x)
+    }, 10)
+    const speed = 10
+    this.tl = new TimelineMax({
+      paused:true,
+    })
+      .to(a, speed, {
+        x:(this.viewport.width-60),
+      }, 0)
+      .to(this.$refs.Cursor, speed, {
+        x:(this.viewport.width-60),
+        onUpdate:thr
+      }, 0)
     this.$watch('viewport', ({width})=>{
       if(!width) return
       this.cursorWrapperWidth = width - 40
@@ -131,6 +152,13 @@ export default {
       if(isEmpty(chartDates)) return
       this.$nextTick(this.createDraggable.bind(this))
     }, {immediate:true})
+      
+    let unwatchAutoPlay = this.$watch('display', (display)=>{
+      if(display){
+        this.tl.play(0)
+        this.$nextTick(unwatchAutoPlay.bind(this))
+      }
+    })
 
     // updateRangeDate()
     
@@ -194,25 +222,25 @@ export default {
     convertPercentToMs(percent){
       return percent * this.dateRangeMs * 1000
     },
-    createDraggable(){
-      let draggable = null
-      const updateRangeDate = (event)=>{
-        let {x} = draggable[0] || {x:0}
-        
-        const percentPosition = (()=>{
-          let d = x / this.cursorWrapperWidth
-          if(d > 1) return 1
-          if(d < 0) return 0
-          return d
-        })()
+    onUpdateRangeDate(x){
+      // let {x} = this.draggable[0] || {x:0}
+      console.log('x', x, this.draggable);
+      
+      const percentPosition = (()=>{
+        let d = x / this.cursorWrapperWidth
+        if(d > 1) return 1
+        if(d < 0) return 0
+        return d
+      })()
 
-        const msToAdd = this.convertPercentToMs(percentPosition)
-        this.selectedRange = {
-          from: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').format('DD/MM/YY'),
-          to: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').add(this.timeRange, 's').format('DD/MM/YY')
-        }
+      const msToAdd = this.convertPercentToMs(percentPosition)
+      this.selectedRange = {
+        from: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').format('DD/MM/YY'),
+        to: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').add(this.timeRange, 's').format('DD/MM/YY')
       }
-      draggable = Draggable.create(this.$refs.Cursor, {
+    },
+    createDraggable(){
+      this.draggable = Draggable.create(this.$refs.Cursor, {
         type:"x",
         edgeResistance:0.65,
         bounds:this.$refs.CursorWrapper,
@@ -226,12 +254,20 @@ export default {
             return Math.round(endValue / gridHeight) * gridHeight;
           }
         },
-        onDrag:updateRangeDate.bind(this),
-        onDragInit:updateRangeDate.bind(this),
-        onDragEnd:updateRangeDate.bind(this)
+        onDrag:()=>{
+          this.onUpdateRangeDate(this.draggable[0].x)
+        },
+        onDragInit:()=>{
+          this.onUpdateRangeDate(this.draggable[0].x)
+        },
+        onDragEnd:()=>{
+          this.onUpdateRangeDate(this.draggable[0].x)
+        }
       });
 
-      this.$nextTick(updateRangeDate.bind(this))
+      this.$nextTick(()=>{
+        this.onUpdateRangeDate(this.draggable[0].x)
+      })
     }
   }
 };

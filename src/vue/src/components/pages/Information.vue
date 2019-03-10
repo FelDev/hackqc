@@ -16,6 +16,8 @@ import { mapGetters } from "vuex";
 import moment from 'moment'
 import { map } from 'lodash'
 
+import { Scene } from 'ScrollMagic';
+
 export default {
   name: "PageInfoSingle",
   // components: { UiPicture, PageBuilder },
@@ -36,6 +38,7 @@ export default {
   },
   data() {
     return {
+      isOnViewport:false,
       renderMap: false,
       dateRange: [],
       minDateB: "2018-01-12T00:00:00-05:00",
@@ -69,6 +72,25 @@ export default {
       //   this.renderMap = true
       // })
     })
+    this.initScrollMagic()
+  },
+  methods:{
+    initScrollMagic(){
+      const scene = new Scene({
+        triggerElement: this.$refs.ChartWrapper,
+        triggerHook: 1,
+      })
+      .addIndicators()
+      .on('enter', ()=>{
+        this.isOnViewport = true
+      })
+      .on('leave', ()=>{
+        this.isOnViewport = false
+      })
+      // scene.addTo(controller);
+      this.$store.dispatch('ScrollMagic/ADD_SCENE', { scene, indicators: false });
+
+    }
   }
 };
 </script>
@@ -76,7 +98,6 @@ export default {
 
 <template>
   <main class="PageInfoSingle">
-    <GoogleMap :minDate="dateRange[0]" :maxDate="dateRange[1]" :donnee="data" v-if="dateRange"/>
     <section id="top">
       <header class="header">
         <UiPicture class="picture" :src="page.image" cover="cover" :full="true" :overlay="true"/>
@@ -86,7 +107,9 @@ export default {
     </section>
     <section id="bottom-no-bg">
       <GoogleMap :minDate="dateRange[0]" :maxDate="dateRange[1]" :donnee="data" v-if="dateRange"/>
-      <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data" ref="Chart"/>
+      <div ref="ChartWrapper">
+        <Chart :display="isOnViewport" :minDate="minDate" :maxDate="maxDate" :donnee="data" ref="Chart"/>
+      </div>
     </section>
     
     <a class="button" :href="page.contact">Ressources en cas d'infestation</a>

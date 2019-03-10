@@ -66,7 +66,7 @@ export default {
       ({data}) => {
         if (isEmpty(data)) return;
 
-        console.warn('@TODO REMOVE MARKERS HERE', this.markers, data)
+        // console.warn('@TODO REMOVE MARKERS HERE', this.markers, data)
 
         let hasMarkers = false
         let bounds = new this.google.maps.LatLngBounds();
