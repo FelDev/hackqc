@@ -46,6 +46,10 @@ export default {
           label: 'Mon compte',
           route: '404',
         },
+        {
+          label : 'Portail des villes',
+          route : 'portail'
+        }
       ]
     }
   },
