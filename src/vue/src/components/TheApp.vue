@@ -72,7 +72,7 @@ export default {
       <main class="page">
         <router-view v-if="loaded"/>
       </main>
-      <TheFooter/>
+      <!-- <TheFooter/> -->
     </div>
 
     <TheLoader v-if="!loaded"/>
