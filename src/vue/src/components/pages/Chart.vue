@@ -1,7 +1,7 @@
 <template>
   <div class="component">
     <header class="header">
-      <h3 class="title">Tendances</h3>
+      <h3 class="title">Tendances <span class="predicted" v-if="isPredicted">Prédictives</span></h3>
       <p class="dates" v-text="`du ${selectedRange.from} au ${selectedRange.to}`" />
     </header>
     <div class="TheChart">
@@ -21,18 +21,20 @@
         smooth>
       </trend>
       <div class="cursorWrapper" ref="CursorWrapper">
-        <div class="cursor" ref="Cursor" :style="{width:`${cursorWidth}px`}" />
+        <div :data-predicted="isPredicted" class="cursor" ref="Cursor" :style="{width:`${cursorWidth}px`}" />
       </div>
 
       <!-- <GChart type="LineChart" :data="chartData" :options="chartOptions"/> -->
     </div>
     <div class="ranges">
-      <button class="range -day" @click.prevent="timeRange=SECOND_TO_DAYS">Days</button>
-      <button class="range -week" @click.prevent="timeRange=SECOND_TO_WEEK">Semaines</button>
-      <button class="range -month" @click.prevent="timeRange=SECOND_TO_MONTH">Mois</button>
-      <button class="range -year" @click.prevent="timeRange=SECOND_TO_YEAR">Année</button>
-      <button class="range -year" @click.prevent="tl.play(0)">Play</button>
-      <button class="range -year" @click.prevent="tl.pause()">Pause</button>
+      <button :data-selected="timeRange===SECOND_TO_DAYS" class="range -day" @click.prevent="timeRange=SECOND_TO_DAYS">Days</button>
+      <button :data-selected="timeRange===SECOND_TO_WEEK" class="range -week" @click.prevent="timeRange=SECOND_TO_WEEK">Semaines</button>
+      <button :data-selected="timeRange===SECOND_TO_MONTH" class="range -month" @click.prevent="timeRange=SECOND_TO_MONTH">Mois</button>
+      <button :data-selected="timeRange===SECOND_TO_YEAR" class="range -year" @click.prevent="timeRange=SECOND_TO_YEAR">Année</button>
+    </div>
+    <div class="controls">
+      <button class="range -play" @click.prevent="tl.play(0)">Play</button>
+      <button class="range -pause" @click.prevent="tl.pause()">Pause</button>
     </div>
   </div>
 </template>
@@ -59,6 +61,7 @@ export default {
     minDate: null,
     maxDate: null,
     display: false,
+    predictedStartDate: false,
     donnee: {
       type: Array,
       default() {
@@ -80,14 +83,19 @@ export default {
       chartDates: [],
       chartOptions: {},
       selectedRange:{
-        from:null,
-        to:null,
+        from:0,
+        to:0,
+        fromMs:0,
+        toMs:0,
       },
       draggable:null,
       tl:null,
     };
   },
   computed:{
+    isPredicted(){
+      return moment.unix(this.predictedStartDate).isBefore(moment.unix(this.selectedRange.toMS))
+    },
     ...mapGetters({
       viewport: 'Interface/viewport'
     }),
@@ -223,8 +231,6 @@ export default {
     },
     onUpdateRangeDate(x){
       // let {x} = this.draggable[0] || {x:0}
-      console.log('x', x, this.draggable);
-      
       const percentPosition = (()=>{
         let d = x / this.cursorWrapperWidth
         if(d > 1) return 1
@@ -235,7 +241,9 @@ export default {
       const msToAdd = this.convertPercentToMs(percentPosition)
       this.selectedRange = {
         from: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').format('DD/MM/YY'),
-        to: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').add(this.timeRange, 's').format('DD/MM/YY')
+        to: moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').add(this.timeRange, 's').format('DD/MM/YY'),
+        fromMS:moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').format('X'),
+        toMS:moment.unix(this.firstDate.toString()).add(msToAdd, 'ms').add(this.timeRange, 's').format('X'),
       }
     },
     createDraggable(){
@@ -273,23 +281,55 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  .predicted
+    color rgba(orange, 0.6)
   .cursorWrapper
     absolute top left 30px right 10px bottom
     // background-color rgba(blue, 0.2)
   .cursor
-    background-color rgba(red, 0.4)
+    background-color rgba(green, 0.4)
     absolute top left 0 bottom
     width 20px
     z-index 20
     transition width 0.4s easing('out-expo')
+    &[data-predicted]
+      background-color rgba(orange, 0.4)
   .ranges
-    padding 10px 20px 20px
+    padding 10px 20px 5px
+  .controls
+    padding 5px 20px 20px
   .TheChart
     position relative
     padding-bottom 20px
   
   .chart
     padding-left 20px
+
+  .range
+    background none 
+    border 1px solid 
+    &.-day
+      color #9acd32
+      border-color #9acd32
+    &.-week
+      color green
+      border-color green
+    &.-month
+      color orange
+      border-color orange
+    &.-year
+      color red
+      border-color red
+    &[data-selected]
+      color white
+      &.-day
+        background-color #9acd32
+      &.-week
+        background-color green
+      &.-month
+        background-color orange
+      &.-year
+        background-color red
 
   .axis
     font-size 1rem

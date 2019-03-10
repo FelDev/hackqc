@@ -14,7 +14,7 @@ import GoogleMap from "components/pages/GoogleMap";
 import Chart from "components/pages/Chart";
 import { mapGetters } from "vuex";
 import moment from 'moment'
-import { map } from 'lodash'
+import { map, filter } from 'lodash'
 
 import { Scene } from 'ScrollMagic';
 
@@ -38,6 +38,7 @@ export default {
   },
   data() {
     return {
+      predictedStartDate:null,
       isOnViewport:false,
       renderMap: false,
       dateRange: [],
@@ -73,6 +74,14 @@ export default {
       // })
     })
     this.initScrollMagic()
+
+    this.$watch('data', item=>{
+      let firstItemPredicted =  filter(item, data=>data.predicted)[0]
+      console.log('firstItemPredicted', firstItemPredicted);
+      if(firstItemPredicted){
+        this.predictedStartDate = moment(firstItemPredicted.date).format('X')
+      }
+    })
   },
   methods:{
     initScrollMagic(){
@@ -108,10 +117,9 @@ export default {
     <section id="bottom-no-bg">
       <GoogleMap :minDate="dateRange[0]" :maxDate="dateRange[1]" :donnee="data" v-if="dateRange"/>
       <div ref="ChartWrapper">
-        <Chart :display="isOnViewport" :minDate="minDate" :maxDate="maxDate" :donnee="data" ref="Chart"/>
+        <Chart :predictedStartDate="predictedStartDate" :display="isOnViewport" :minDate="minDate" :maxDate="maxDate" :donnee="data" ref="Chart"/>
       </div>
     </section>
-    
     <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
   </main>
 </template>
