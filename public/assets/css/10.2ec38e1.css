@@ -1,64 +1,64 @@
-.btnWrapper[data-v-ed6525fc] {
+.btnWrapper[data-v-0857e1f4] {
   text-align: center;
 }
-.btnWrapper .btn[data-v-ed6525fc] {
+.btnWrapper .btn[data-v-0857e1f4] {
   width: 80vw;
 }
-.criticite p[data-v-ed6525fc] {
+.criticite p[data-v-0857e1f4] {
   text-align: center;
   font-weight: bold;
 }
-.expand-enter-active[data-v-ed6525fc],
-.expand-leave-active[data-v-ed6525fc] {
+.expand-enter-active[data-v-0857e1f4],
+.expand-leave-active[data-v-0857e1f4] {
   transition: all 0.5s ease;
   max-height: 30em;
   background-color: #eee;
   overflow: hidden;
 }
-.expand-enter[data-v-ed6525fc],
-.expand-leave-to[data-v-ed6525fc] {
+.expand-enter[data-v-0857e1f4],
+.expand-leave-to[data-v-0857e1f4] {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
   opacity: 0;
   max-height: 0;
 }
-.fileConf[data-v-ed6525fc] {
+.fileConf[data-v-0857e1f4] {
   margin-top: 0.5em;
 }
-.sectionReport[data-v-ed6525fc] {
+.sectionReport[data-v-0857e1f4] {
   padding: 1em;
 }
-.subCat[data-v-ed6525fc],
-.subCatFlex[data-v-ed6525fc] {
+.subCat[data-v-0857e1f4],
+.subCatFlex[data-v-0857e1f4] {
   margin-top: 1em;
 }
-.subCatFlex[data-v-ed6525fc] {
+.subCatFlex[data-v-0857e1f4] {
   display: flex;
   -ms-justify-content: space-between;
   justify-content: space-between;
   flex-direction: column;
 }
-h1[data-v-ed6525fc] {
+h1[data-v-0857e1f4] {
   color: #101010;
   font-size: 5em;
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
   text-align: center;
 }
-input[type='file'][data-v-ed6525fc] {
+input[type='file'][data-v-0857e1f4] {
   color: #fff;
 }
-input[type="radio"][data-v-ed6525fc] {
+input[type="radio"][data-v-0857e1f4] {
   visibility: hidden;
   width: 0;
   height: 0;
 }
-label[data-v-ed6525fc] {
+label[data-v-0857e1f4] {
   font-size: 1.1em;
   font-weight: bold;
   min-width: 40vw;
 }
-select[data-v-ed6525fc] {
+select[data-v-0857e1f4] {
   background: #e7e7ef;
   border-radius: 0.75em;
   border: 2px solid #cbcbdc;
@@ -70,45 +70,45 @@ select[data-v-ed6525fc] {
   font-size: 1.1em;
   min-width: 10em;
 }
-textarea[data-v-ed6525fc] {
+textarea[data-v-0857e1f4] {
   width: 100%;
   min-height: 3em;
 }
-#suivitOptions[data-v-ed6525fc] {
+#suivitOptions[data-v-0857e1f4] {
   display: flex;
   -ms-justify-content: space-around;
   justify-content: space-around;
   display: flex;
 }
-#suivitOptions input[type="radio"][data-v-ed6525fc] {
+#suivitOptions input[type="radio"][data-v-0857e1f4] {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
   opacity: 0;
   height: 0;
   width: 0;
 }
-#suivitOptions input[type="radio"]:checked + label[data-v-ed6525fc] {
+#suivitOptions input[type="radio"]:checked + label[data-v-0857e1f4] {
   color: #000;
   background-color: #579341;
   border: 2px solid #333;
   box-shadow: 0px 0px 10px;
 }
-#suivitOptions input[type="radio"]:checked + label[data-v-ed6525fc]:after {
+#suivitOptions input[type="radio"]:checked + label[data-v-0857e1f4]:after {
   content: '\2705';
   position: absolute;
   right: 0.5em;
 }
-#suivitOptions label[data-v-ed6525fc] {
+#suivitOptions label[data-v-0857e1f4] {
   background-color: #427031;
   border-radius: 1em;
   color: #ccc;
   padding: 0.5em 1em 0.5em 0.5em;
   position: relative;
 }
-.slidecontainer[data-v-ed6525fc] {
+.slidecontainer[data-v-0857e1f4] {
   width: 100%;
 }
-.slider[data-v-ed6525fc] {
+.slider[data-v-0857e1f4] {
   -webkit-appearance: none;
   width: 100%;
   height: 15px;
@@ -118,13 +118,13 @@ textarea[data-v-ed6525fc] {
   outline: none;
   transition: opacity 0.2s;
 }
-.slider[data-v-ed6525fc]:hover {
+.slider[data-v-0857e1f4]:hover {
   -ms-filter: none;
   -webkit-filter: none;
           filter: none;
   opacity: 1;
 }
-.slider[data-v-ed6525fc]::-webkit-slider-thumb {
+.slider[data-v-0857e1f4]::-webkit-slider-thumb {
   -webkit-appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -136,7 +136,7 @@ textarea[data-v-ed6525fc] {
   background: #111;
   cursor: pointer;
 }
-.slider[data-v-ed6525fc]::-moz-range-thumb {
+.slider[data-v-0857e1f4]::-moz-range-thumb {
   width: 25px;
   height: 25px;
   border: 2px solid #e7e7ef;
