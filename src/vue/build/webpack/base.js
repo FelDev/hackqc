@@ -54,6 +54,7 @@ const config = {
       // to work with gsap, scrollmagic and our pro plugins
       gsapPro: `${DIRS.SRC}vendors/gsap`,
       gsapPlugins: `${DIRS.NODE_MODULES}gsap/src/uncompressed/plugins`,
+      gsapUtils: `${DIRS.NODE_MODULES}gsap/src/uncompressed/utils`,
       TweenLite: `${DIRS.NODE_MODULES}gsap/src/uncompressed/TweenLite.js`,
       TweenMax: `${DIRS.NODE_MODULES}gsap/src/uncompressed/TweenMax.js`,
       TimelineLite: `${DIRS.NODE_MODULES}gsap/src/uncompressed/TimelineLite.js`,
