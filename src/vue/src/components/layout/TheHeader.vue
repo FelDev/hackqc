@@ -62,8 +62,6 @@ export default {
   }
   
 };
-  console.log('@logoPng: ', logoPng);
-  // console.log('@ima: ', ima);
   
 </script>
 
@@ -75,7 +73,7 @@ export default {
         @click.native.prevent="$store.dispatch('Menu/TOGGLE')"/>
 
       <router-link class="logo" :to="{name: `home`}">
-        <img :src="ima" alt="logo"/>
+        <img  class="logo" :src="ima" alt="logo"/>
       </router-link>
 
       <router-link class="report" v-text="'Signaler'"
@@ -130,6 +128,10 @@ export default {
    */
 
   //  ===LAYOUT===
+
+  .logo
+    border-radius :50%
+  
   .TheHeader
     fixed top left right
     height $h-header

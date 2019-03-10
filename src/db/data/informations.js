@@ -26,6 +26,7 @@ export default [
       <br />Les scientifiques du Service canadien des forêts (SCF) estiment que les coûts des traitements, d’enlèvement et de remplacement des arbres affectés par l’agrile du frêne dans les municipalités canadiennes peuvent atteindre 2 milliards de dollars sur une période de 30 ans. Les importants impacts écologiques de la mortalité des frênes sur les organismes aquatiques, les oiseaux et la végétation du sous-bois attendus sont présentement à l'étude.</p>
       <a class="button" target="_blank" href="https://www.rncan.gc.ca/forets/feux-insectes-perturbations/principaux-insectes/13378">En savoir plus</a>`,
     shortDescription: "Véritable fléau en Amerique du nord, venez en apprendre plus sur ces bebettes et voir leur propagation dans votre quartier.",
+    contact: 'https://eliteextermination.com/insectes-parasites/exterminateur-frelon/'
   },
   {
     slug: "insects",
@@ -51,6 +52,7 @@ export default [
       </ul>
       <a class="button" target="_blank" href="https://www.ville.quebec.qc.ca/citoyens/propriete/arbres/arbres_entretien.aspx">En savoir plus</a>`,
     shortDescription: "La Ville investit plusieurs centaines de milliers de dollars par année dans son programme d’entretien des arbres publics. Aidez nous a controler ces fleaux.",
+    contact :'http://www.arbolab.ca/fr/inspection-arbre'
   },
   {
     slug: "rats",
@@ -71,6 +73,7 @@ export default [
       </ul>
       <a class="button" target="_blank" href="https://www.canada.ca/fr/sante-canada/services/conseils-pour-controle-parasites/rats-et-souris.html">En savoir plus</a>`,
     shortDescription: "Véritable fléau en Amerique du nord, venez en apprendre plus sur ces bebettes et voir leur propagation dans votre quartier.",
+    contact : 'https://eliteextermination.com/insectes-parasites/extermination-rat/'
   },
   {
     slug: "vermines",
@@ -82,6 +85,7 @@ export default [
       <br><br>Un logement en mauvais état d’habitabilité n’est pas automatiquement considéré comme impropre à l’habitation.</p>
       <a class="button" target="_blank" href="https://www.rdl.gouv.qc.ca/fr/le-logement/insalubrite">En savoir plus</a>`,
     shortDescription: "La gestion des espèces animales est complexe ; les interventions doivent être réfléchies, car certains gestes peuvent avoir de graves répercussions sur la faune, la flore, mais aussi les humains. Aidez nous a controler la vermine.",
+    contact: 'https://rivenordextermination.com/vermine/'
   },
   // {
   //   slug: "inondations",
