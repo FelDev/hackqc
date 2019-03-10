@@ -141,6 +141,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // remove all temp scenes
   store.dispatch('ScrollMagic/DESTROY_TEMP_SCENES');
+  window.scrollTo(0, 0);
 
   // retrieve locale (route's param or meta)
   const locale = get(to, 'params.locale') || get(to, 'meta.locale', defaultLocale);

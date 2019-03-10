@@ -46,7 +46,7 @@ export default {
           import('db/data/punaises/punaises.json').then(({ default: data }) => {
             commit('SET_DATA', data.map(singleData => ({
               amount: parseInt(singleData.NBR_EXTERMIN, 10) || 0,
-              date: new Date(singleData.DATE_DECLARATION).getDate(),
+              date: new Date(singleData.DATE_DECLARATION),
               position:
               {
                 lat: parseFloat(singleData.LATITUDE),
@@ -63,7 +63,7 @@ export default {
           import('db/data/inondations/inondations.json').then(({ default: data }) => {
             commit('SET_DATA', data.features.map(singleData => ({
               amount: 1,
-              date: new Date(singleData.properties.date_observation).getDate(),
+              date: new Date(singleData.properties.date_observation),
               position: { lat: singleData.geometry.coordinates[1], lng: singleData.geometry.coordinates[0] },
             })));
           });
@@ -72,6 +72,16 @@ export default {
           // import('db/data/punaises/punaises.json').then(({ default: data }) => {
           //   commit('SET_DATA', data);
           // });
+          break;
+        case 'agrile':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          import('db/data/agrile/agrile.json').then(({ default: data }) => {
+            commit('SET_DATA', data.map(singleData => ({
+              amount: 1,
+              date: new Date(singleData.date),
+              position: { lat: singleData.lat, lng: singleData.lng },
+            })));
+          });
           break;
         default:
         break;

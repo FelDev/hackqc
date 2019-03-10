@@ -7,7 +7,7 @@ import vermine from 'assets/images/vermine.jpg'
 
 export default [
   {
-    slug: "punaise",
+    slug: "punaises",
     title: "Punaises de lit",
     image:bedbugs,
     imageDev: "https://i.ytimg.com/vi/sB5kkRHdnLQ/hqdefault.jpg",
@@ -18,7 +18,7 @@ export default [
     contact: "https://www.quebec.ca/habitation-et-logement/milieu-de-vie-sain/proceder-a-l-extermination-de-punaises-de-lit/"
   },
   {
-    slug: "agrile",
+    slug: "agriles",
     title: "Agrile du frêne",
     image:agrile,
     description: `

@@ -1,12 +1,7 @@
 <template>
   <div>
     <div>
-      <h2>Search and add a pin</h2>
-      <label>
-        <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-      </label>
-      <br>
+      <input type="range" name="points" min="0" max="42">
     </div>
     <br>
     <gmap-map ref="mapRef" :center="center" :zoom="12" style="width:100%;  height: 400px;">
@@ -39,6 +34,8 @@ export default {
     google: gmapApi
   },
   props: {
+    minDate: null,
+    maxDate: null,
     donnee: {
       type: Array,
       default() {
@@ -70,7 +67,9 @@ export default {
 
         let bounds = new this.google.maps.LatLngBounds();
 
-        this.markers = data;
+        this.markers = data.filter((singleData) => {
+          return singleData.date >= new Date(this.minDate) && singleData.date <= new Date(this.maxDate)
+        });
         
         this.markers.forEach(marker => {
           bounds.extend(
