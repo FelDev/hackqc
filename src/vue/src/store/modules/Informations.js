@@ -11,6 +11,9 @@ import { find } from 'lodash';
 import punaises from 'db/data/punaises/page';
 import inondations from 'db/data/inondations/page';
 import secheresses from 'db/data/secheresses/page';
+import agrile from 'db/data/agrile/page';
+import insects from 'db/data/insects/page';
+import rats from 'db/data/rats/page';
 
 export default {
   namespaced: true,
@@ -30,9 +33,24 @@ export default {
           ...inondations,
         },
         {
-          slug: 'secheresse',
-          label: 'Secheresse',
+          slug: 'secheresses',
+          label: 'secheresses',
           ...secheresses,
+        },
+        {
+          slug: 'agrile',
+          label: 'agrile',
+          ...agrile,
+        },
+        {
+          slug: 'insects',
+          label: 'insects',
+          ...insects,
+        },
+        {
+          slug: 'rats',
+          label: 'rats',
+          ...rats,
         },
       ],
     };
@@ -59,7 +77,7 @@ export default {
           import('db/data/punaises/punaises.json').then(({ default: data }) => {
             commit('SET_DATA', data.map(singleData => ({
               amount: parseInt(singleData.NBR_EXTERMIN, 10) || 0,
-              date: new Date(singleData.DATE_DECLARATION).getDate(),
+              date: new Date(singleData.DATE_DECLARATION),
               position:
               {
                 lat: parseFloat(singleData.LATITUDE),
@@ -77,7 +95,7 @@ export default {
           import('db/data/inondations/inondations.json').then(({ default: data }) => {
             commit('SET_DATA', data.features.map(singleData => ({
               amount: 1,
-              date: new Date(singleData.properties.date_observation).getDate(),
+              date: new Date(singleData.properties.date_observation),
               position: { lat: singleData.geometry.coordinates[1], lng: singleData.geometry.coordinates[0] },
             })));
           });
@@ -87,6 +105,16 @@ export default {
           // import('db/data/punaises/punaises.json').then(({ default: data }) => {
           //   commit('SET_DATA', data);
           // });
+          break;
+        case 'agrile':
+          commit('SET_PAGE_DATA', find(state.sections, { slug }));
+          import('db/data/agrile/agrile.json').then(({ default: data }) => {
+            commit('SET_DATA', data.map(singleData => ({
+              amount: 1,
+              date: new Date(singleData.date),
+              position: { lat: singleData.lat, lng: singleData.lng },
+            })));
+          });
           break;
         default:
           console.log('WRONG SLUG', slug);
