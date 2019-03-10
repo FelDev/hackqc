@@ -12,11 +12,11 @@ export default {
   props: {},
   data(){
     return {
-      isLoggedIn : true,
+      isLoggedIn : false,
       email : "",
       password: '',
-      gridColumns: ['name', 'power'],
-      gridData: {}
+      gridColumns: ['Catégorie', 'Criticité','Date','Description','Lat','Lng','Nom','Telephone','Courrier'],
+      data : {}
     }
   },
   mounted() {
@@ -31,10 +31,8 @@ export default {
       
     },
     init(){
-      this.data = JSON.parse(localStorage.getItem("input")) || [];
-      console.log(localStorage)
+      this.data = JSON.parse(localStorage.getItem("userInputs")) || [];
       console.log(this.data)
-     
     }
   },
 };
@@ -50,20 +48,21 @@ export default {
       <button v-on:click="login()" >Entrer</button>
     </div>
     <div v-if="isLoggedIn">
-      <!-- component template -->
+      <div>BIENVENU DANS LE REPERTOIRE DE LA VILLE</div>
       <table>
         <thead>
           <tr>
-            <th>Hello
+            <th v-for="(header,index) in gridColumns" :key="index" >
+              {{header}}
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr >
-            <td>
-             hello
-            </td>
-          </tr>
+        <tr v-for="(input,index) in data" :key="index">
+          <td v-for="(i, index1) in gridColumns"  :key="index1">
+            {{input[index].i[index1]}}
+          </td>
+        </tr>
         </tbody>
       </table>
       <button v-on:click="test()" ></button>
@@ -79,6 +78,7 @@ export default {
   font-size: 14px;
   color: #444;
 }
+
 
 table {
   border: 2px solid #42b983;

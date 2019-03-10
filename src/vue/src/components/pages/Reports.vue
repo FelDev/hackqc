@@ -24,7 +24,7 @@ export default {
     return {
       report: {
         categorie: '',
-        espece : '',
+        entiter : '',
         date : moment().format('L'),
         criticite : 1,
         description: "",
@@ -55,31 +55,21 @@ export default {
       console.log(this.report)
       var userInputs = JSON.parse(localStorage.getItem("userInputs")) || [];
 
-      newInput = {
+      let newInput = {
         categorie: this.report.categorie,
         espece : this.report.espece,
         date :this.report.date,
         criticite : this.report.criticite,
         description: this.report.description,
-      
         lat: this.report.position.lat,
         lng : this.report.position.lng,
-        
-          email :this.report.infoCitoyen.email,
-          nom : this.report.infoCitoyen.nom,
-          telephone: this.report.infoCitoyen.telephone
-        
+        email :this.report.infoCitoyen.email,
+        nom : this.report.infoCitoyen.nom,
+        telephone: this.report.infoCitoyen.telephone
       }
 
-      console.log("new user")
-      console.log(newInput)
-      // customPositions.push({
-      //   category: this.report.categorie,
-      //   date: new Date(),
-      //   lat: this.report.position.lat,
-      //   lng: this.report.position.lng
-      // });
-      localStorage.setItem("addedPositions", JSON.stringify(customPositions));
+      userInputs.push(newInput);
+      localStorage.setItem("userInputs", JSON.stringify(userInputs));
     },
     photoSubmitted : function(){
       this.fileSubmitted = true
@@ -118,18 +108,25 @@ export default {
           <label>Catégorie de l'incident</label>
           <select v-model="report.categorie">
             <option disabled selected hidden>Faire un choix</option>
-            <option v-bind:value="categorie = 'inondations'">Inondations</option>
-            <option v-bind:value="categorie = 'crues'">crues</option>
-            <option v-bind:value="categorie = 'pluies'">pluies</option>
-            <option v-bind:value="categorie = 'insectes'">insectes</option>
+            <option v-bind:value="categorie = 'naturel'">Naturel</option>
+            <option v-bind:value="categorie = 'animal'">Animalier</option>
           </select>
         </div>
         <transition name="expand">
-          <div class="subCatFlex" v-if="report.categorie ==='insectes'" transition>
+          <div class="subCatFlex" v-if="report.categorie ==='animal'" transition>
             <label>Espèces</label>
-            <select v-model="report.especes">
-              <option v-bind:value="especes = 'punaises'">Punaises</option>
-              <option v-bind:value="especes = 'frelons'">Frelons</option>
+            <select v-model="report.entiter">
+              <option v-bind:value="entiter = 'punaises'">Punaises</option>
+              <option v-bind:value="entiter = 'vermine'">Vermine</option>
+              <option v-bind:value="entiter = 'agrile'">Agrile</option>
+              <option v-bind:value="entiter = 'rats'">Rats</option>
+              <option v-bind:value="entiter = 'insectes'">Insectes</option>
+            </select>
+          </div>
+          <div class="subCatFlex" v-if="report.categorie ==='naturel'" transition>
+            <label>Événement</label>
+            <select v-model="report.entiter">
+              <option v-bind:value="entiter = 'inondations'">Inondations</option>
             </select>
           </div>
         </transition>
