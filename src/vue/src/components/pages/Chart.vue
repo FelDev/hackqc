@@ -152,12 +152,12 @@ export default {
       this.$nextTick(this.createDraggable.bind(this))
     }, {immediate:true})
       
-    let unwatchAutoPlay = this.$watch('display', (display)=>{
-      if(display){
-        this.tl.play(0)
-        this.$nextTick(unwatchAutoPlay.bind(this))
-      }
-    })
+    // let unwatchAutoPlay = this.$watch('display', (display)=>{
+    //   if(display){
+    //     this.tl.play(0)
+    //     this.$nextTick(unwatchAutoPlay.bind(this))
+    //   }
+    // })
 
     // updateRangeDate()
     
