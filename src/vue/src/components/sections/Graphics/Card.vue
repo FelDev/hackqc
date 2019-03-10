@@ -57,6 +57,8 @@ export default {
     .content
       flex-grow 1
       padding-top 20px
+    .title
+      f-style(title, h3)
     +desktop()
       padding 20px
       .content
