@@ -14,9 +14,9 @@ export default {
   data(){
     return {
       isLoggedIn : false,
-      email : "",
+      email : "moncompte@moi.com",
       newdata : '',
-      password: '',
+      password: 'somepassword',
       gridColumns: ['Catégorie', 'Criticité','Date','Description','Lat','Lng','Nom','Telephone','Courrier'],
       data : []
     }
@@ -184,7 +184,11 @@ export default {
         </tr>
         </tbody>
       </table>
-
+      <div class="actions">
+        <a download href="export.json">Export JSON</a>
+        <a download href="export.csv">Export CSV</a>
+      </div>
+      
       <div class="descriptionTitle">Description des données :</div><br>
       <p class="description">Ces données sont des données fournis volontairement par les utilisations de l'application Fléo.<br></p>
     </div>
@@ -194,6 +198,26 @@ export default {
 </template>
 
 <style lang="stylus" scoped>
+  
+  .actions
+    margin-top 20px
+    a
+      color green
+      border 1px solid green 
+      padding 0.2em 0.5em
+
+  .portail-main
+    padding 20px
+  table
+    tr:nth-child(2n) td
+      background-color rgba(black, 0.1)
+  .title
+    f-style(title, h2)
+
+  input[type="text"]
+    width 100%
+    margin-bottom 1em
+
   body {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 16px;
