@@ -13,6 +13,7 @@ import UiPicture from "components/ui/Picture";
 import GoogleMap from "components/pages/GoogleMap";
 import Chart from "components/pages/Chart";
 import { mapGetters } from "vuex";
+import moment from 'moment'
 
 export default {
   name: "PageInfoSingle",
@@ -50,6 +51,11 @@ export default {
       },
       immediate: true
     }
+  },
+  methods:{
+    formatDate(date){
+      return moment(date).format('DD/MM/YYYY')
+    }
   }
 };
 </script>
@@ -70,6 +76,8 @@ export default {
       </div>
     </section>
     <div class="chart">
+      <h3 class="title">Tendances</h3>
+      <p class="dates" v-text="`du ${formatDate(minDate)} au ${formatDate(maxDate)}`" />
       <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
     </div>
     <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
@@ -77,6 +85,15 @@ export default {
 </template>
 
 <style lang="stylus" scoped>
+.chart
+  .title
+    padding 20px 0px 0 10px
+    margin 0 !important
+    f-style(title, h3)
+  .dates
+    padding 0 0 10px 10px
+    f-style()
+    font-size 1.3rem !important
 .header {
   ratio-box((16 / 9));
   position: relative;
@@ -88,6 +105,9 @@ export default {
     z-index: 10;
   }
 }
+
+.chart >.title
+  margin-bottom 20px
 
 .button{
   display: inline-block;
