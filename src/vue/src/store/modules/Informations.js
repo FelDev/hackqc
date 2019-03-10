@@ -92,7 +92,7 @@ export default {
           //   commit('SET_DATA', data);
           // });
           break;
-        case 'agrile':
+        case 'agriles':
           commit('SET_PAGE_DATA', find(state.sections, { slug }));
           import('db/data/agrile/agrile.json').then(({ default: data }) => {
             dataToSet = data.map(singleData => ({
