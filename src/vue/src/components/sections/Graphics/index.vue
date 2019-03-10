@@ -131,6 +131,7 @@ export default {
 
   //  ===LAYOUT===
   .SectionGraphics
+    padding-left 1em
     // height calc('100vh - '+($h-header+10px))
     flexbox(column)
     padding-bottom 20px

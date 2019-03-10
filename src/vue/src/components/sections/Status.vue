@@ -90,9 +90,16 @@ export default {
 </template>
 
 <style lang="stylus" scoped>
+.SectionStatus{
+  padding 1em  
+  >.title{
+    margin-bottom 0.3em
+  }
+}
 
   .alertes{
      border: 2px solid #ed4f3b;
+     background-color: #ed4f3b;
      padding : 3px
      margin-bottom: 5px
      border-radius: 10px;
@@ -101,7 +108,7 @@ export default {
   }
 
 .active{
-  background-color : #ffffff
+  background-color : rgba(#ed4f3b, 0.2)
 }
 
   /**
