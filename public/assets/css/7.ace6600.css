@@ -1,11 +1,11 @@
-.cursorWrapper[data-v-eae5a20a] {
+.cursorWrapper[data-v-441b1316] {
   position: absolute;
   top: 0;
   left: 30px;
   right: 10px;
   bottom: 0;
 }
-.cursor[data-v-eae5a20a] {
+.cursor[data-v-441b1316] {
   background-color: rgba(255,0,0,0.4);
   position: absolute;
   top: 0;
@@ -15,20 +15,20 @@
   z-index: 20;
   transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.ranges[data-v-eae5a20a] {
+.ranges[data-v-441b1316] {
   padding: 10px 20px 20px;
 }
-.TheChart[data-v-eae5a20a] {
+.TheChart[data-v-441b1316] {
   position: relative;
   padding-bottom: 20px;
 }
-.chart[data-v-eae5a20a] {
+.chart[data-v-441b1316] {
   padding-left: 20px;
 }
-.axis[data-v-eae5a20a] {
+.axis[data-v-441b1316] {
   font-size: 1rem;
 }
-.axis.-y[data-v-eae5a20a] {
+.axis.-y[data-v-441b1316] {
   position: absolute;
   top: 0;
   left: 0;
@@ -44,7 +44,7 @@
   height: 75%;
   text-align: right;
 }
-.axis.-y[data-v-eae5a20a]:before {
+.axis.-y[data-v-441b1316]:before {
   content: '';
   position: absolute;
   top: 0;
@@ -52,11 +52,11 @@
   bottom: -4px;
   border-right: 1px solid #2c3e50;
 }
-.axis.-y .data[data-v-eae5a20a] {
+.axis.-y .data[data-v-441b1316] {
   width: 10px;
   margin-left: 5px;
 }
-.axis.-x[data-v-eae5a20a] {
+.axis.-x[data-v-441b1316] {
   position: absolute;
   bottom: 0;
   left: 30px;
@@ -70,7 +70,7 @@
   justify-content: space-between;
   text-align: center;
 }
-.axis.-x[data-v-eae5a20a]:before {
+.axis.-x[data-v-441b1316]:before {
   content: '';
   position: absolute;
   right: 0;
@@ -78,11 +78,11 @@
   bottom: 23px;
   border-top: 1px solid #2c3e50;
 }
-.axis.-x .data[data-v-eae5a20a] {
+.axis.-x .data[data-v-441b1316] {
   height: 20px;
   position: relative;
 }
-.axis.-x .data[data-v-eae5a20a]:before {
+.axis.-x .data[data-v-441b1316]:before {
   content: '|';
   position: absolute;
   top: -50%;
@@ -90,43 +90,43 @@
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-.axis.-x .data[data-v-eae5a20a]:nth-child(1) {
+.axis.-x .data[data-v-441b1316]:nth-child(1) {
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-.axis.-x .data[data-v-eae5a20a]:nth-child(2) {
+.axis.-x .data[data-v-441b1316]:nth-child(2) {
   -webkit-transform: translateX(-25%);
   transform: translateX(-25%);
 }
-.axis.-x .data[data-v-eae5a20a]:nth-child(3) {
+.axis.-x .data[data-v-441b1316]:nth-child(3) {
   -webkit-transform: translateX(0%);
   transform: translateX(0%);
 }
-.axis.-x .data[data-v-eae5a20a]:nth-child(4) {
+.axis.-x .data[data-v-441b1316]:nth-child(4) {
   -webkit-transform: translateX(25%);
   transform: translateX(25%);
 }
-.axis.-x .data[data-v-eae5a20a]:nth-child(5) {
+.axis.-x .data[data-v-441b1316]:nth-child(5) {
   -webkit-transform: translateX(50%);
   transform: translateX(50%);
 }
-.title[data-v-eae5a20a] {
+.title[data-v-441b1316] {
   padding: 20px 0px 0 10px;
   margin: 0;
   font-family: 'FontTitle', Helvetica, Arial, sans-serif;
   font-size: 2.777777777777778vw;
 }
 @media only screen and (max-width: 768px) {
-.title[data-v-eae5a20a] {
+.title[data-v-441b1316] {
     font-size: 4rem;
 }
 }
 @media only screen and (max-width: 768px) {
-.title[data-v-eae5a20a] {
+.title[data-v-441b1316] {
     font-size: 2.6rem;
 }
 }
-.dates[data-v-eae5a20a] {
+.dates[data-v-441b1316] {
   padding: 0 0 10px 10px;
   font-family: 'FontText', Arial, Helvetica, sans-serif;
   line-height: 1.25;
@@ -134,7 +134,7 @@
   font-size: 1.3rem !important;
 }
 @media only screen and (max-width: 768px) {
-.dates[data-v-eae5a20a] {
+.dates[data-v-441b1316] {
     font-size: 1.6rem;
 }
 }

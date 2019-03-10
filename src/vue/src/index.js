@@ -103,7 +103,6 @@ export default new Vue({ // eslint-disable-line
       // add global loading to our preloader
       const preload = [
         this.$store.dispatch('I18n/LOAD_LOCALE_MESSAGES', this.locale), // local i18n
-        this.$store.dispatch('Global/LOAD', this.locale), // api global
       ];
       each(preload, (promise) => {
         this.$store.commit('Loader/PROMISE_PUSH', promise);
