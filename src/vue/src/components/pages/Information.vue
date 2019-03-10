@@ -70,14 +70,7 @@ export default {
       </header>
       <div class="content" v-html="page.description"/>
     </section>
-    <section id="middle">
-      <div class="d3Graph">
-        <!-- TODO: inclure un graph d3.js -->
-      </div>
-      <h1 v-text="'statsTitle'" class="title"/>
-    </section>
     <section id="bottom">
-      <h1 v-text="'mapTitle'" class="title"/>
       <div class="map">
         <GoogleMap :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
       </div>
@@ -87,7 +80,7 @@ export default {
       <p class="dates" v-text="`du ${formatDate(minDate)} au ${formatDate(maxDate)}`" />
       <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
     </div>
-    <a :href="page.contact">Ressources</a>
+    <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
   </main>
 </template>
 
@@ -108,6 +101,7 @@ export default {
   .title {
     absolute: bottom 20px left 20px;
     f-style(title, h1);
+    background-color : #ffffff
     z-index: 10;
   }
 }
@@ -115,6 +109,16 @@ export default {
 .chart >.title
   margin-bottom 20px
 
+.button{
+  display: inline-block;
+    display: inline-block;
+    margin-top: 20px;
+    border: 2px solid red;
+    color: red;
+    padding: 10px 20px;
+    background-color : #ffffff
+    margin-left : 1em
+}
 .content {
   padding: 20px;
   line-height: 1.4;
@@ -147,21 +151,21 @@ export default {
   background: white;
 }
 
-#middle {
-  background: #112;
-  display: flex;
+// #middle {
+//   background: #112;
+//   display: flex;
 
-  h1 {
-    color: red;
-    flex-grow: 2;
-  }
+//   h1 {
+//     color: red;
+//     flex-grow: 2;
+//   }
 
-  .d3Graph {
-    flex-grow: 8;
-    border: 2px solid black;
-    border-radius: 1em;
-  }
-}
+//   .d3Graph {
+//     flex-grow: 8;
+//     border: 2px solid black;
+//     border-radius: 1em;
+//   }
+// }
 
 #bottom {
   background: #123;

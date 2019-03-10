@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div>
-      <input type="range" name="points" min="0" max="42">
-    </div>
-    <br>
     <gmap-map ref="mapRef" :center="center" :zoom="12" style="width:100%;  height: 400px;">
       <gmap-cluster>
         <gmap-marker

@@ -154,11 +154,8 @@ export default {
 
 <i18n>
 {
-  "en": {
-    "title":"Graphics section"
-  },
   "fr": {
-    "title":"Section grapghics"
+    "title":"Section Graphiques"
   }
 }
 </i18n>
