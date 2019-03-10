@@ -28,13 +28,13 @@
       <!-- <GChart type="LineChart" :data="chartData" :options="chartOptions"/> -->
     </div>
     <div class="ranges">
-      <button :data-selected="timeRange===SECOND_TO_DAYS" class="range -day" @click.prevent="timeRange=SECOND_TO_DAYS">Days</button>
+      <button :data-selected="timeRange===SECOND_TO_DAYS" class="range -day" @click.prevent="timeRange=SECOND_TO_DAYS">Jours</button>
       <button :data-selected="timeRange===SECOND_TO_WEEK" class="range -week" @click.prevent="timeRange=SECOND_TO_WEEK">Semaines</button>
       <button :data-selected="timeRange===SECOND_TO_MONTH" class="range -month" @click.prevent="timeRange=SECOND_TO_MONTH">Mois</button>
-      <button :data-selected="timeRange===SECOND_TO_YEAR" class="range -year" @click.prevent="timeRange=SECOND_TO_YEAR">Année</button>
+      <button :data-selected="timeRange===SECOND_TO_YEAR" class="range -year" @click.prevent="timeRange=SECOND_TO_YEAR">Années</button>
     </div>
     <div class="controls">
-      <button class="range -play" @click.prevent="tl.play(0)">Play</button>
+      <button class="range -play" @click.prevent="tl.play(0)">Jouer</button>
       <button class="range -pause" @click.prevent="tl.pause()">Pause</button>
     </div>
   </div>
