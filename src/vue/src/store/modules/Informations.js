@@ -133,7 +133,7 @@ export default {
           import('db/data/vermines/vermines.json').then(({ default: data }) => {
             dataToSet = data.map(singleData => ({
               amount: 1,
-              date: new Date(singleData.DDS_DATE_CREATION),
+              date: new Date(singleData.DATE_DECLARATION),
               position: { lat: singleData.LOC_LAT, lng: singleData.LOC_LONG },
               predicted: singleData.predicted,
             })).concat(dataToSet);

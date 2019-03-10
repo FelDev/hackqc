@@ -1,5 +1,6 @@
 <template>
   <div class="component">
+    <pre>{{isPredicted}}</pre>
     <header class="header">
       <h3 class="title">Tendances <span class="predicted" v-if="isPredicted">Prédictives</span></h3>
       <p class="dates" v-text="`du ${selectedRange.from} au ${selectedRange.to}`" />
@@ -94,6 +95,8 @@ export default {
   },
   computed:{
     isPredicted(){
+
+      if(!this.predictedStartDate || !this.selectedRange.toMS || this.selectedRange.toMS === 0) return false
       return moment.unix(this.predictedStartDate).isBefore(moment.unix(this.selectedRange.toMS))
     },
     ...mapGetters({
