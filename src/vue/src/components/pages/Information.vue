@@ -57,6 +57,8 @@ export default {
 
 <template>
   <main class="PageInfoSingle">
+    <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
+    <GoogleMap :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
     <section id="top">
       <header class="header">
         <UiPicture class="picture" :src="page.image" cover="cover" :full="true" :overlay="true"/>
@@ -69,7 +71,6 @@ export default {
         <GoogleMap :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
       </div>
     </section>
-    <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
     
     <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
   </main>

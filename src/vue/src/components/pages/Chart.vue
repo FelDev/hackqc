@@ -1,18 +1,20 @@
 <template>
   <div class="component">
-
+    <pre>
+      {{debug}}
+    </pre>
     <!-- <pre>
-      {{dateDiffRange}}
-      {{(dateDiffRange/SECOND_TO_DAYS)}}
-      {{(dateDiffRange/SECOND_TO_WEEK)}}
-      {{(dateDiffRange/SECOND_TO_MONTH)}}
-      {{(dateDiffRange/SECOND_TO_YEAR)}}
-      {{(dateDiffRange/timeRange)}}
+      {{dateRangeMs}}
+      {{(dateRangeMs/SECOND_TO_DAYS)}}
+      {{(dateRangeMs/SECOND_TO_WEEK)}}
+      {{(dateRangeMs/SECOND_TO_MONTH)}}
+      {{(dateRangeMs/SECOND_TO_YEAR)}}
+      {{(dateRangeMs/timeRange)}}
 
     </pre> -->
     <header class="header">
       <h3 class="title">Tendances</h3>
-      <p class="dates" v-text="`du ${formatDate(minDate)} au ${formatDate(maxDate)}`" />
+      <p class="dates" v-text="`du ${formatUnixDate(firstDate)} au ${formatUnixDate(lastDate)}`" />
     </header>
     <div class="TheChart">
       <ul class="axis -y">
@@ -36,8 +38,10 @@
       <!-- <GChart type="LineChart" :data="chartData" :options="chartOptions"/> -->
     </div>
     <div class="ranges">
+      <button class="range -day" @click.prevent="timeRange=SECOND_TO_DAYS">Days</button>
       <button class="range -week" @click.prevent="timeRange=SECOND_TO_WEEK">Semaines</button>
       <button class="range -month" @click.prevent="timeRange=SECOND_TO_MONTH">Mois</button>
+      <button class="range -year" @click.prevent="timeRange=SECOND_TO_YEAR">Année</button>
     </div>
   </div>
 </template>
@@ -57,6 +61,7 @@ const SECOND_TO_WEEK = 604800
 const SECOND_TO_MONTH = (SECOND_TO_DAYS*30) 
 const SECOND_TO_YEAR = (SECOND_TO_DAYS*365) 
 
+window.moment = moment
 export default {
   name: "Chart",
   // components: {
@@ -79,7 +84,7 @@ export default {
       SECOND_TO_MONTH,
       SECOND_TO_YEAR,
       cursorWrapperWidth:0,
-      timeRange:SECOND_TO_WEEK,
+      timeRange:SECOND_TO_DAYS,
       datas:[],
       selectedDate: null,
       chartData: [],
@@ -93,9 +98,15 @@ export default {
     }),
     cursorWidth(){
       
-      const a = this.cursorWrapperWidth / (this.dateDiffRange/this.timeRange)
-      console.log(this.cursorWrapperWidth, this.dateDiffRange, this.timeRange, (this.dateDiffRange/this.timeRange), a);
+      const a = this.cursorWrapperWidth / (this.dateRangeMs/this.timeRange)
+      console.log(this.cursorWrapperWidth, this.dateRangeMs, this.timeRange, (this.dateRangeMs/this.timeRange), a);
       return a
+    },
+    firstDate(){
+      return min(this.chartDates || [])
+    },
+    lastDate(){
+      return max(this.chartDates || [])
     },
     axis(){
       let empty = isEmpty(this.chartData)
@@ -106,25 +117,46 @@ export default {
         }
       }
       
-      const someDates = [first(this.chartDates)]
+      const someDates = [
+        this.firstDate,
+        moment.unix(this.firstDate).add(this.convertPercentToMs(0.5)),
+        moment.unix(this.firstDate).add(this.convertPercentToMs(0.5)),
+        moment.unix(this.firstDate).add(this.convertPercentToMs(0.5)),
+        this.lastDate
+      ]//, date=>moment.unix(date).format('DD/MM/YY')
 
-      const middle = Math.round((this.chartDates.length - 1) / 2)
+      const middle = moment.unix(this.firstDate).add(this.convertPercentToMs(0.5))
       someDates.push(this.chartDates[middle])
       someDates.push(this.chartDates[Math.round(middle/2)])
       someDates.push(this.chartDates[Math.round(middle + (middle/2))])
       someDates.push(last(this.chartDates))
       return {
         x: map(someDates, date=>moment.unix(date).format('DD/MM/YY')),
+        // x: someDates,
         y: [max(this.chartData), min(this.chartData)],
       }
     },
-    dateDiffRange(){
-      if(isEmpty(this.chartDates)) return 0
-      const min = first(this.chartDates)
-      const max = last(this.chartDates)
-      console.log({min, max, d:this.chartDates});
-      
-      return max - min
+    dateRangeMs(){
+      if(this.chartDates.length < 2) return 0
+      return last(this.chartDates) - first(this.chartDates)
+    },
+    debug(){
+      const diff = this.lastDate-this.firstDate;
+
+      return {
+        first:this.firstDate,
+        last:this.lastDate,
+        diff,
+        dateRangeMs:this.dateRangeMs,
+        w:diff/SECOND_TO_WEEK,
+        m:diff/SECOND_TO_MONTH,
+        d:diff/SECOND_TO_DAYS,
+        y:diff/SECOND_TO_YEAR,
+        CURRENT:(diff/this.timeRange),
+        timeRange:this.timeRange,
+        mf:this.formatUnixDate(this.firstDate),
+        me:this.formatUnixDate(this.lastDate)
+      }
     }
   },
   mounted() {
@@ -150,16 +182,47 @@ export default {
           return Math.round(endValue / gridHeight) * gridHeight;
         }
       },
-      onDrag:(event)=>{
+      // onDrag:(event)=>{
+      //   let {x} = draggable[0]
+      //   if(x>this.cursorWrapperWidth){
+      //     x = this.cursorWrapperWidth
+      //   }else if(x<0){
+      //     x = 0
+      //   }
+      //   const msPeriode = (this.dateRangeMs/this.timeRange)
+      //   // console.log({event, draggable})
+      //   console.log({x, cursorWrapperWidth:this.cursorWrapperWidth, cursorWidth:this.cursorWidth, msPeriode, df:this.dateRangeMs});
+      //   // @todo guess witch periode is highlighted and reflect related points into the map
+      // },
+      onDragEnd:(event)=>{
         let {x} = draggable[0]
-        if(x>this.cursorWrapperWidth){
-          x = this.cursorWrapperWidth
-        }else if(x<0){
-          x = 0
-        }
-        const msPeriode = (this.dateDiffRange/this.timeRange)
+
+        const percentPosition = (()=>{
+          let d = x / this.cursorWrapperWidth
+          if(d > 1) return 1
+          if(d < 0) return 0
+          return d
+        })()
+
+        const msToAdd = this.convertPercentToMs(percentPosition)
+        
+
+        const msPeriode = (this.dateRangeMs/this.timeRange)
         // console.log({event, draggable})
-        console.log({x, cursorWrapperWidth:this.cursorWrapperWidth, cursorWidth:this.cursorWidth, msPeriode, df:this.dateDiffRange});
+        console.log('END',{x,max,percentPosition,msPeriode, df:this.dateRangeMs});
+        const d = this.firstDate + (percentPosition*this.dateRangeMs)
+        console.log({
+          f:this.firstDate,
+          mf:this.formatUnixDate(this.firstDate),
+          d,
+          m:this.formatUnixDate(d),
+          a:moment.unix(this.firstDate).add(msToAdd, 's'),
+          b:moment.unix(this.firstDate).add(msToAdd, 's').format('DD/MM/YY'),
+        })
+
+        const from = moment.unix(this.firstDate).add(msToAdd, 's').format('DD/MM/YY')
+        const to = moment.unix(this.firstDate).add(msToAdd, 's').add(this.timeRange, 's').format('DD/MM/YY')
+        console.log({from, to})
         // @todo guess witch periode is highlighted and reflect related points into the map
       }
     });
@@ -218,8 +281,11 @@ export default {
   },
 
   methods: {
-    formatDate(date){
-      return moment(date).format('DD/MM/YYYY')
+    formatUnixDate(date){
+      return moment.unix(date).format('DD/MM/YYYY')
+    },
+    convertPercentToMs(percent){
+      return percent * this.dateRangeMs
     }
   }
 };
