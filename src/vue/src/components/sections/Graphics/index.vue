@@ -155,11 +155,7 @@ export default {
 <i18n>
 {
   "fr": {
-<<<<<<< HEAD
     "title":"Section Graphiques"
-=======
-    "title":"Section graphics"
->>>>>>> 4000b1cc442c9baab9bed6b6eb0a6547dca80696
   }
 }
 </i18n>
