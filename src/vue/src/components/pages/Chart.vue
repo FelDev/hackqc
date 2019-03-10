@@ -14,6 +14,8 @@ export default {
     GChart
   },
   props: {
+    minDate: null,
+    maxDate: null,
     donnee: {
       type: Array,
       default() {
@@ -23,6 +25,7 @@ export default {
   },
   data() {
     return {
+      selectedDate: null,
       chartData: [],
       chartOptions: {}
     };
@@ -39,29 +42,38 @@ export default {
         this.chartData = [["Date", "Amount", "Moyenne"]];
         const mergedData = {};
         var average = 0;
+        var dataCount = 0;
 
         data.forEach(singleData => {
           if (!isNaN(singleData.amount)) {
-            if (mergedData[singleData.date]) {
-              mergedData[singleData.date] += singleData.amount;
-            } else {
-              mergedData[singleData.date] = singleData.amount;
-            }
+            var newDate = new Date(singleData.date);
+            newDate.setHours(0, 0, 0, 0);
+            if (newDate >= new Date(this.minDate) && newDate <= new Date(this.maxDate)) {
+              if (mergedData[newDate.toString()]) {
+                mergedData[newDate.toString()] += singleData.amount;
+              } else {
+                mergedData[newDate.toString()] = singleData.amount;
+                dataCount++;
+              }
 
-            average += singleData.amount;
+              average += singleData.amount;
+            }
           }
         });
 
-        average /= 31;
+        average /= dataCount
 
+        var i = 0;
         for (var date in mergedData) {
           if (mergedData.hasOwnProperty(date)) {
-            this.chartData.push([date, mergedData[date], average]);
+            // date
+            this.chartData.push([i, mergedData[date], average]);
+            i++;
           }
         }
 
         this.chartOptions = {
-          curveType: "function",
+          curveType: "function"
         };
       },
       { immediate: true }

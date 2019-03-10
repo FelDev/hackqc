@@ -32,6 +32,12 @@ export default {
       return this.$route.params.slug;
     }
   },
+  data() {
+    return {
+      minDate: "2018-11-05T10:41:26",
+      maxDate: "2019-11-18T10:41:26"
+    };
+  },
   watch: {
     /** watch slug from route to load datas
      * Note that we may stay on the same component within some other slug
@@ -53,17 +59,10 @@ export default {
   <main class="PageInfoSingle">
     <section id="top">
       <header class="header">
-        <UiPicture
-          class="picture"
-          :src="page.image"
-          cover="cover"
-          :full="true" 
-          :overlay="true" />
-        <h1
-          v-text="page.title"
-          class="title" />
+        <UiPicture class="picture" :src="page.image" cover="cover" :full="true" :overlay="true"/>
+        <h1 v-text="page.title" class="title"/>
       </header>
-      <div class="content" v-html="page.description" />
+      <div class="content" v-html="page.description"/>
     </section>
     <section id="middle">
       <div class="d3Graph">
@@ -74,60 +73,79 @@ export default {
     <section id="bottom">
       <h1 v-text="'mapTitle'" class="title"/>
       <div class="map">
-        <GoogleMap :donnee="data"/>
+        <GoogleMap :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
       </div>
     </section>
     <div class="chart">Chart :
-      <Chart :donnee="data"/>
+      <Chart :minDate="minDate" :maxDate="maxDate" :donnee="data"/>
     </div>
     <a :href="page.contact">Mais quoi faire ?!</a>
   </main>
 </template>
 
 <style lang="stylus" scoped>
+.header {
+  ratio-box((16 / 9));
+  position: relative;
 
-  .header
-    ratio-box(16/9)
-    position relative
-    .title
-      absolute bottom 20px left 20px
-      f-style(title, h1)
-      z-index 10
+  .title {
+    absolute: bottom 20px left 20px;
+    f-style(title, h1);
+    z-index: 10;
+  }
+}
 
-  .content
-    padding 20px
-    line-height 1.4
-    >>> ul
-      list-style outside disc
-      margin-left 20px
-    >>> h2
-      f-style(title, h2)
-      margin-top 20px
-    >>> h3
-      f-style(title, h3)
-      margin-top 10px
-    >>> a
-      display inline-block
-      margin-top 20px
-      border 2px solid red
-      color red
-      padding 10px 20px
+.content {
+  padding: 20px;
+  line-height: 1.4;
 
-  #top
-    background white
+  >>> ul {
+    list-style: outside disc;
+    margin-left: 20px;
+  }
 
-  #middle
-    background #112
-    display flex
-    h1
-      color:red
-      flex-grow 2
-    .d3Graph
-      flex-grow 8
-      border 2px solid black
-      border-radius 1em
-  #bottom
-    background #123
+  >>> h2 {
+    f-style(title, h2);
+    margin-top: 20px;
+  }
+
+  >>> h3 {
+    f-style(title, h3);
+    margin-top: 10px;
+  }
+
+  >>> a {
+    display: inline-block;
+    margin-top: 20px;
+    border: 2px solid red;
+    color: red;
+    padding: 10px 20px;
+  }
+}
+
+#top {
+  background: white;
+}
+
+#middle {
+  background: #112;
+  display: flex;
+
+  h1 {
+    color: red;
+    flex-grow: 2;
+  }
+
+  .d3Graph {
+    flex-grow: 8;
+    border: 2px solid black;
+    border-radius: 1em;
+  }
+}
+
+#bottom {
+  background: #123;
+}
 
 #middle {
   background: #112;
