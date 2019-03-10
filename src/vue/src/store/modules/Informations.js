@@ -78,7 +78,7 @@ export default {
           // import('db/data/punaises/punaises.json').then(({ default: data }) => {
           //   commit('SET_DATA', data);
           // });
-          import('db/data/inondations/inondations.json').then(({ default: data }) => {
+          import('db/data/newData/inondations.json').then(({ default: data }) => {
             dataToSet = data.features.map(singleData => ({
               amount: 1,
               date: new Date(singleData.properties.date_observation),
