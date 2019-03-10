@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       report: {
-        categorie: {},
+        categorie: '',
         espece : '',
         date : moment().format('L'),
         criticite : 1,
@@ -53,13 +53,32 @@ export default {
     submit: function() {
       this.sent = true;
       console.log(this.report)
-      var customPositions = JSON.parse(localStorage.getItem("addedPositions")) || [];
-      customPositions.push({
-        category: this.report.categorie,
-        date: new Date(),
+      var userInputs = JSON.parse(localStorage.getItem("userInputs")) || [];
+
+      newInput = {
+        categorie: this.report.categorie,
+        espece : this.report.espece,
+        date :this.report.date,
+        criticite : this.report.criticite,
+        description: this.report.description,
+      
         lat: this.report.position.lat,
-        lng: this.report.position.lng
-      });
+        lng : this.report.position.lng,
+        
+          email :this.report.infoCitoyen.email,
+          nom : this.report.infoCitoyen.nom,
+          telephone: this.report.infoCitoyen.telephone
+        
+      }
+
+      console.log("new user")
+      console.log(newInput)
+      // customPositions.push({
+      //   category: this.report.categorie,
+      //   date: new Date(),
+      //   lat: this.report.position.lat,
+      //   lng: this.report.position.lng
+      // });
       localStorage.setItem("addedPositions", JSON.stringify(customPositions));
     },
     photoSubmitted : function(){
