@@ -135,14 +135,14 @@ export default {
         </gmap-map>
       </div>
       <div class="description subCat">
-        <span>Informations supplémentaires</span>
-        <textarea type="text" v-model="report.description" />
+        <label for="moreInfo">Informations supplémentaires</label>
+        <textarea name="moreInfo" type="text" class="funkyInput" v-model="report.description" />
       </div>
-      <div class="camera subCat">
+      <div class="subCat">
         <label for="myFile">Ajouter un fichier (optionel)</label>
         <input class="funkyInput" type="file" name="myFile"
           v-on:change="photoSubmitted()">
-        <div v-if="fileSubmitted" class="fas fa-check">Votre photo à été enregistré avec succès
+        <div class="fileConf" v-if="fileSubmitted">✅ Votre photo à été enregistré avec succès
           <!-- TODO it'be nice to have a preview -->
           <!-- <div class="page" v-bind="filePreviews" :key="index" v-for="img in filePreviews">
             <img :src="`/static/img/${pic}`">
@@ -150,7 +150,7 @@ export default {
         </div>
       </div>
       <div class="suivitOrNot subCat">
-        <h2>Je veux un suivi sur mon incident</h2>
+        <label for="suivit">Je veux un suivi sur mon incident</label>
         <div id="suivitOptions">
           <input type="radio" id="suivitOui" name="suivit" value="oui" v-model="suivit">
           <label for="suivitOui" >Oui svp!</label>
@@ -161,26 +161,26 @@ export default {
         <transition name="expand">
           <div v-if="suivit=='oui'" class="suivit">
             <div class="nom subCatFlex">
-              <label for="name">Votre Nom</label>
+              <label for="name">Nom</label>
               <input class="funkyInput" name="name" type="text" v-model="report.infoCitoyen.nom" >
             </div>
             <div class="email subCatFlex">
-              <label for="email">Votre Email</label>
+              <label for="email">Email</label>
               <input class="funkyInput" name="email" type="text subCatFlex" v-model="report.infoCitoyen.email" >
             </div>
             <div class="emailconf subCatFlex">
-              <label for="emailConf">Votre Email (Confirmation)</label>
+              <label for="emailConf">Email (Confirmation)</label>
               <input class="funkyInput" name="emailConf" type="text" v-model="report.infoCitoyen.emailConf" >
             </div>
             <div class="telephone subCatFlex">
-              <label for="phone">Votre Telephone</label>
+              <label for="phone">Telephone</label>
               <input class="funkyInput" name="phone" type="text" v-model="report.infoCitoyen.telephone" >
             </div>
           </div>
         </transition>
       </div>
       <div class="btnWrapper subCat">
-        <button v-if="!sent" class="btn" v-on:click="submit()">Envoyé</button>
+        <button v-if="!sent" class="btn" v-on:click="submit()">Envoyer</button>
       </div>
       <div v-if="sent">Merci beaucoup de votre collaboration! Vos élus sont impatient de lire vos messages. En attendant vous pouvez aller
         faire un tour sur le site de portail de données québec!
@@ -201,16 +201,23 @@ export default {
     .btn
       width 80vw
 
+  .criticite p
+    text-align: center;
+    font-weight: bold;
+
   .expand-enter-active, .expand-leave-active {
-    transition: all .3s ease
-    height: inherit
-    // padding: 10px
+    transition: all .5s ease
+    max-height: 30em
     background-color: #eee
     overflow: hidden
   }
   .expand-enter, .expand-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
+    opacity 0
+    max-height 0
   }
+
+  .fileConf
+    margin-top 0.5em
 
   .sectionReport
     padding 1em
@@ -222,7 +229,7 @@ export default {
     justify-content space-between
     flex-direction column
   h1
-    color: red
+    color: $c-alizarin-crimson
     font-size: 5em
     font-family: "Times New Roman", Times, serif
     font-weight: bold
@@ -238,6 +245,8 @@ export default {
 
   label
     font-size 1.1em
+    font-weight bold
+    min-width 40vw
 
   select
     background: $c-inputColor
@@ -255,26 +264,29 @@ export default {
     width: 100%
     min-height: 3em
 
-  .suivitOrNot 
+  #suivitOptions
+    display flex
+    justify-content: space-around
+    display flex
     & input[type="radio"]
-      position: absolute
       opacity: 0
       height: 0
       width: 0
       &:checked + label
         color black
         background-color $c-success
+        border 2px solid #333
+        box-shadow: 0px 0px 10px;
         &:after
-          content '√'
-    & #suivitOptions
-      display flex
-      justify-content: space-around
-      display flex
+          content '✅'
+          position absolute
+          right 0.5em
     & label
       background-color: darken($c-success,10)
       border-radius 1em
       color #CCC
       padding 0.5em 1em 0.5em 0.5em
+      position: relative;
   
   .slidecontainer
     width: 100%;
