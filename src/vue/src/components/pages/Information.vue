@@ -112,7 +112,7 @@ export default {
       </div>
     </section>
     
-    <a class="button" :href="page.contact">Ressources en cas d'infestation</a>
+    <a class="button" :href="page.contact" v-text="page.helpButtonText"></a>
   </main>
 </template>
 
