@@ -7,13 +7,13 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import LogoSvg from 'assets/svg/logo.svg?vue';
+import logoPng from 'assets/images/logo.png';
 import TheBurger from 'components/misc/Burger';
 
 export default {
   name: 'TheHeader',
   components: {
-    LogoSvg, TheBurger
+    TheBurger
   },
   props: {
     state: {
@@ -23,6 +23,7 @@ export default {
   },
   data(){
     return {
+      ima: logoPng,
       subjectsOpen:false,
       menu:[
         {
@@ -48,7 +49,7 @@ export default {
     ...mapGetters({
       open: 'Menu/open',
       subjects: 'Informations/sections',
-    }),
+    })
   },
   mounted(){
     this.$watch('open', (open)=>{
@@ -59,7 +60,11 @@ export default {
       next()
     })
   }
+  
 };
+  console.log('@logoPng: ', logoPng);
+  // console.log('@ima: ', ima);
+  
 </script>
 
 <template>
@@ -70,7 +75,7 @@ export default {
         @click.native.prevent="$store.dispatch('Menu/TOGGLE')"/>
 
       <router-link class="logo" :to="{name: `home`}">
-        <LogoSvg />
+        <img :src="ima" alt="logo"/>
       </router-link>
 
       <router-link class="report" v-text="'Signaler'"
