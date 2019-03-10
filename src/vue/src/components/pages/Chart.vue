@@ -11,7 +11,6 @@
       <ul class="axis -x">
         <li v-for="(item, index) in axis.x" :key="`x-${index}`" class="data" v-text="item" />
       </ul>
-      <pre>{{display}}</pre>
       <trend
         class="chart"
         ref="Trend"
